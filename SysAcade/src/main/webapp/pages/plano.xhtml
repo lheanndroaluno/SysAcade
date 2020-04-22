@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+
+
+	<ui:define name="conteudo">
+
+		<h:form id="formLista">
+
+			<p:toolbar style="margin-top: 5px">
+
+				<p:toolbarGroup>
+
+					<h:panelGrid columns="2">
+
+						<p:commandButton value="Novo Plano" icon="ui-icon-plusthick"
+							oncomplete="PF('dialogo').show();"
+							actionListener="#{planoBean.novo}" update=":formCadastro:painel">
+
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+
+					</h:panelGrid>
+
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:panel header="Lista - Planos" style="text-align: center">
+
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					paginator="true" value="#{planoBean.planos}" var="cursorPlano"
+					rows="10">
+
+					<p:column headerText="Código" filterBy="#{cursorPlano.codigo}"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorPlano.codigo}" />
+					</p:column>
+
+					<p:column headerText="Descrição do Plano"
+						sortBy="#{cursorPlano.descricao}"
+						filterBy="#{cursorPlano.descricao}">
+						<h:outputText value="#{cursorPlano.descricao}" />
+					</p:column>
+
+					<p:column headerText="Quantidade de Meses"
+						style="text-align: center; width: 190px">
+						<h:outputText value="#{cursorPlano.quantMeses.toString()}" />
+					</p:column>
+
+					<p:column headerText="Valor Plano"
+						style="text-align: center; width: 120px">
+						<h:outputText value="#{cursorPlano.valor}">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2"
+								currencySymbol="R$" type="currency" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Ações"
+						style="text-align: center; width: 180px">
+
+						<!-- Botão excluir -->
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{planoBean.excluir}"
+							update=":mensagem :formLista:tabela">
+
+							<p:confirm header="Atenção"
+								message="Deseja excluir o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorPlano}" />
+						</p:commandButton>
+
+						<!-- Botão editar -->
+						<p:commandButton icon="ui-icon-pencil"
+							oncomplete="PF('dialogo').show();"
+							actionListener="#{planoBean.editar}"
+							update=":formCadastro:painel">
+							<p:confirm header="Atenção"
+								message="Deseja atualizar o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorPlano}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<!-- Janela de confirmação -->
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" ícone="ui-icon-check" />
+
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" ícone="ui-icon-times" />
+				</p:confirmDialog>
+
+			</p:panel>
+		</h:form>
+
+		<!-- Janela de flutuação -->
+		<p:dialog header="Cadastro de Planos" widgetVar="dialogo"
+			draggable="false" resizable="false" modal="true" closable="false">
+			<h:form id="formCadastro">
+
+				<h:panelGrid id="painel" columns="2">
+
+					<p:outputLabel for="descricao" value="Descrição:" />
+					<p:inputText id="descricao" maxlength="30" size="30"
+						value="#{planoBean.plano.descricao}" required="true"
+						requiredMessage="O campo 'Descrição' é obrigatório"
+						converter="converterUpperCase">
+
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+
+					<p:outputLabel for="parcelas" value="Quantd. Meses:" />
+					<p:selectOneMenu id="parcelas" required="true"
+						requiredMessage="O campo 'Quantd. Meses' é obrigatório"
+						value="#{planoBean.plano.quantMeses}">
+
+						<f:selectItem itemValue="" itemLabel="" />
+						<f:selectItem itemValue="UM_MES" itemLabel="1 - Mês" />
+						<f:selectItem itemValue="DOIS_MESES" itemLabel="2 - Meses" />
+						<f:selectItem itemValue="TRES_MESES" itemLabel="3 - Meses" />
+						<f:selectItem itemValue="QUATRO_MESES" itemLabel="4 - Meses" />
+						<f:selectItem itemValue="CINCO_MESES" itemLabel="5 - Meses" />
+						<f:selectItem itemValue="SEIS_MESES" itemLabel="6 - Meses" />
+						<f:selectItem itemValue="SETE_MESES" itemLabel="7 - Meses" />
+						<f:selectItem itemValue="OITO_MESES" itemLabel="8 - Meses" />
+						<f:selectItem itemValue="NOVE_MESES" itemLabel="9 - Meses" />
+						<f:selectItem itemValue="DEZ_MESES" itemLabel="10 - Meses" />
+						<f:selectItem itemValue="ONZE_MESES" itemLabel="11 - Meses" />
+						<f:selectItem itemValue="DOZE_MESES" itemLabel="12 - Meses" />
+						<f:selectItem itemValue="UM_ANO" itemLabel="1 - Ano" />
+						<f:selectItem itemValue="DOIS_ANOS" itemLabel="2 - Anos" />
+
+					</p:selectOneMenu>
+
+
+					<p:outputLabel for="preco" value="Valor do Plano:" />
+					<p:inputText id="preco" maxlength="12" size="10"
+						value="#{planoBean.plano.valor}" required="true"
+						currencySymbol="R$" type="currency"
+						requiredMessage="O campo 'Preço' é obrigatório"
+						converterMessage="Informe um valor válido no campo 'Preço'"
+						validatorMessage="Informe um valor entre 0,01 e 9.999.999.999,99 para o campo 'Valor do Plano'">
+
+						<f:validateDoubleRange minimum="0.01" maximum="9999999999.99" />
+
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+
+					</p:inputText>
+
+				</h:panelGrid>
+
+				<br />
+				<br />
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" icon="ui-icon-disk"
+						actionListener="#{planoBean.salvar}"
+						update=":mensagem :formCadastro:painel :formLista:tabela" />
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						oncomplete="PF('dialogo').hide();" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

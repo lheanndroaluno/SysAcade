@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+
+
+	<ui:define name="conteudo">
+
+		<h:form id="formLista">
+
+			<p:toolbar style="margin-top: 5px">
+
+				<p:toolbarGroup>
+
+					<p:commandButton value="Novo Logradouro" icon="ui-icon-plusthick"
+						oncomplete="PF('dialogo').show();"
+						actionListener="#{logradouroBean.novo}"
+						update=":formCadastro:painel" />
+
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:panel header="Lista - Logradouros" style="text-align: center">
+
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					paginator="true" value="#{logradouroBean.logradouros}"
+					var="cursorLogradouro" rows="10">
+
+					<p:column headerText="Código" filterBy="#{cursorLogradouro.codigo}"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorLogradouro.codigo}" />
+					</p:column>
+
+					<p:column headerText="Descrição"
+						sortBy="#{cursorLogradouro.descricao}"
+						filterBy="#{cursorLogradouro.descricao}">
+
+						<h:outputText value="#{cursorLogradouro.descricao}" />
+
+					</p:column>
+
+					<p:column headerText="Ações"
+						style="text-align: center; width: 180px">
+
+						<!-- Botão excluir -->
+						<p:commandButton value="Excluir"
+							actionListener="#{logradouroBean.excluir}"
+							update=":mensagem :formLista:tabela">
+
+							<p:confirm header="Atenção"
+								message="Deseja excluir o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorLogradouro}" />
+
+						</p:commandButton>
+
+						<!-- Botão editar -->
+						<p:commandButton value="Editar" oncomplete="PF('dialogo').show();"
+							actionListener="#{logradouroBean.editar}"
+							update=":formCadastro:painel">
+
+							<p:confirm header="Atenção"
+								message="Deseja atualizar o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorLogradouro}" />
+
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<!-- Janela de confirmação -->
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" ícone="ui-icon-check" />
+
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" ícone="ui-icon-times" />
+
+				</p:confirmDialog>
+
+			</p:panel>
+
+		</h:form>
+
+		<!-- Janela de flutuação -->
+		<p:dialog header="Cadastro de Logradouros" widgetVar="dialogo"
+			draggable="false" resizable="false" modal="true" closable="false">
+
+			<h:form id="formCadastro">
+
+				<h:panelGrid id="painel" columns="2">
+
+					<p:outputLabel for="descricao" value="Descrição:" />
+					<p:inputText id="descricao" maxlength="30" size="25"
+						value="#{logradouroBean.logradouro.descricao}" required="true"
+						requiredMessage="O campo 'Descrição' é obrigatório"
+						converter="converterUpperCase">
+
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+
+				</h:panelGrid>
+
+				<br />
+				<br />
+				<h:panelGrid columns="2">
+
+					<p:commandButton value="Salvar"
+						actionListener="#{logradouroBean.salvar}"
+						update=":mensagem :formCadastro:painel :formLista:tabela" />
+
+					<p:commandButton value="Cancelar"
+						oncomplete="PF('dialogo').hide();" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

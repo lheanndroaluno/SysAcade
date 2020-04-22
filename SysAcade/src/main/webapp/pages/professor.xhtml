@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+
+
+	<ui:define name="conteudo">
+
+		<!-- Tela de Listagem -->
+		<h:form id="formLista">
+
+			<p:toolbar style="margin-top: 5px">
+
+				<p:toolbarGroup>
+
+					<p:commandButton value="Novo Professor" icon="ui-icon-plusthick"
+						oncomplete="PF('dialogo').show();"
+						actionListener="#{professorBean.novo}"
+						update=":mensagem :formCadastro:painel">
+
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+					</p:commandButton>
+
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:panel header="Lista - Professores" style="text-align: center">
+
+				<p:dataTable id="tabela" widgetVar="tabela"
+					emptyMessage="Nenhum registro encontrado." paginator="true"
+					value="#{professorBean.professores}" var="cursorProfessor"
+					rows="10">
+
+					<p:column headerText="Código" filterBy="#{cursorProfessor.codigo}"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorProfessor.codigo}" />
+					</p:column>
+
+					<p:column headerText="Nome" sortBy="#{cursorProfessor.pessoa.nome}"
+						filterBy="#{cursorProfessor.pessoa.nome}"
+						style="text-align: center; width: 300px">
+						<h:outputText value="#{cursorProfessor.pessoa.nome}" />
+					</p:column>
+
+					<p:column headerText="CPF" sortBy="#{cursorProfessor.pessoa.cpf}"
+						filterBy="#{cursorProfessor.pessoa.cpf}"
+						style="text-align: center; width: 180px">
+						<h:outputText value="#{cursorProfessor.pessoa.cpf}" />
+					</p:column>
+
+					<p:column headerText="CREF" sortBy="#{cursorProfessor.cref}"
+						filterBy="#{cursorProfessor.cref}"
+						style="text-align: center; width: 160px">
+						<h:outputText value="#{cursorProfessor.cref}" />
+					</p:column>
+
+					<p:column headerText="Data de Cadastro"
+						style="text-align: center; width: 100px">
+						<h:outputText value="#{cursorProfessor.dataCadastro}">
+
+							<f:convertDateTime locale="pt_BR" />
+
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Status"
+						sortBy="#{cursorProfessor.tipoStatusProf}"
+						filterBy="#{cursorProfessor.tipoStatusProf}"
+						style="text-align: center; width: 240px">
+
+						<f:facet name="filter">
+							<p:selectOneButton onchange="PF('tabela').filter()">
+								<f:selectItem itemValue="" itemLabel="Todos" />
+								<f:selectItem itemValue="ATIVO" itemLabel="Ativo" />
+								<f:selectItem itemValue="INATIVO" itemLabel="Inativo" />
+							</p:selectOneButton>
+
+						</f:facet>
+						<h:outputText value="#{cursorProfessor.tipoStatusProf}" />
+					</p:column>
+
+					<p:column headerText="Ações"
+						style="text-align: center; width: 120px">
+
+						<!-- Botão excluir -->
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{professorBean.excluir}"
+							update=":mensagem :formLista:tabela">
+
+							<p:confirm header="Atenção"
+								message="Deseja excluir o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorProfessor}" />
+
+						</p:commandButton>
+
+						<!-- Botão editar -->
+						<p:commandButton icon="ui-icon-pencil" oncomplete="PF('dialogo').show();"
+							actionListener="#{professorBean.editar}"
+							update=":mensagem :formCadastro:painel">
+
+							<p:confirm header="Atenção"
+								message="Deseja atualizar o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorProfessor}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<!-- Janela de confirmação -->
+				<p:confirmDialog global="true">
+
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" ícone="ui-icon-check" />
+
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" ícone="ui-icon-times" />
+
+				</p:confirmDialog>
+
+			</p:panel>
+
+		</h:form>
+
+		<!-- Janela de flutuação -->
+		<p:dialog header="Cadastro de Professores" widgetVar="dialogo"
+			draggable="false" resizable="false" modal="true" closable="false">
+
+			<h:form id="formCadastro">
+
+				<h:panelGrid id="painel" columns="2">
+
+					<p:outputLabel for="pessoa" value="Pessoa: " />
+					<p:selectOneMenu id="pessoa" filter="true"
+						converter="omnifaces.SelectItemsConverter"
+						value="#{professorBean.professor.pessoa}" required="true"
+						requiredMessage="O campo 'Pessoa' é obrigatório">
+
+						<f:selectItem noSelectionOption="true" itemValue=""
+							itemLabel="Selecione uma pessoa" />
+
+						<f:selectItems value="#{professorBean.pessoas}" var="pessoa"
+							itemValue="#{pessoa}" itemLabel="#{pessoa.nome} - #{pessoa.cpf}" />
+
+					</p:selectOneMenu>
+
+					<p:outputLabel for="genero" value="Gênero: " />
+					<p:selectOneRadio id="genero"
+						value="#{professorBean.professor.genero}" required="true"
+						requiredMessage="O campo 'Gênero' é obrigatório">
+
+						<f:selectItem itemValue="MASCULINO" itemLabel="Masculino" />
+						<f:selectItem itemValue="FEMININO" itemLabel="Feminino" />
+						<f:selectItem itemValue="OUTRO" itemLabel="Outro" />
+
+						<p:ajax event="blur" update="@this" />
+					</p:selectOneRadio>
+
+					<p:outputLabel for="dataCadastro" value="Data de Cadastro: " />
+					<p:calendar id="dataCadastro" pattern="dd/MM/yyyy"
+						value="#{professorBean.professor.dataCadastro}" required="true"
+						requiredMessage="O campo 'Data de Cadastro' é obrigatório" />
+
+					<p:outputLabel for="datanascimento" value="Data de Nascimento: " />
+					<p:calendar id="datanascimento" pattern="dd/MM/yyyy"
+						value="#{professorBean.professor.dataNascimento}" required="true"
+						requiredMessage="O campo 'Data de Nascimento' é obrigatório"
+						size="10" locale="pt_BR" timeZone="America/Recife" mask="true" />
+
+					<p:outputLabel for="cref" value="CREF:" />
+					<p:inputMask mask="999999-*/**" id="cref" size="15"
+						value="#{professorBean.professor.cref}" required="true"
+						requiredMessage="O campo 'CREF' é obrigatório"
+						converter="converterUpperCase">
+
+						<p:ajax event="blur" update="@this" />
+					</p:inputMask>
+
+					<p:outputLabel for="status" value="Status " />
+					<p:selectOneRadio id="status"
+						value="#{professorBean.professor.tipoStatusProf}" required="true"
+						requiredMessage="O campo 'Status' é obrigatório">
+
+						<f:selectItem itemValue="ATIVO" itemLabel="Ativo" />
+						<f:selectItem itemValue="INATIVO" itemLabel="Inativo" />
+
+						<p:ajax event="blur" update="@this" />
+					</p:selectOneRadio>
+
+				</h:panelGrid>
+
+				<br />
+				<br />
+				<h:panelGrid columns="2">
+
+					<p:commandButton value="Salvar" icon="ui-icon-disk"
+						actionListener="#{professorBean.salvar}"
+						update=":mensagem :formCadastro:painel :formLista:tabela" />
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						oncomplete="PF('dialogo').hide();" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

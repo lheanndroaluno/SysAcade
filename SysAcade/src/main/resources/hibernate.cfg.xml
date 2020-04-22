@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- Configurações de Conexão com o Banco de Dados -->
+		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="connection.url">jdbc:postgresql://localhost:5432/db_app_sysacade</property>
+		<property name="connection.username">postgres</property>
+		<property name="connection.password">admin</property>
+
+		<!-- Pool de Conexões -->
+		<property name="connection.pool_size">1</property>
+
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
+
+		<!-- Gerenciamento do Contexto das Sessões -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- Cache de Segundo Nível -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+		<!-- Mostra as SQLs Geradas -->
+		<property name="show_sql">true</property>
+
+		<!-- Cria as tabelas do banco de dados -->
+		<property name="hbm2ddl.auto">update</property>
+
+		<!-- Mapeando as entidades -->
+		<mapping class="br.com.app.sysacade.domain.Estado" />
+		<mapping class="br.com.app.sysacade.domain.Logradouro" />
+		<mapping class="br.com.app.sysacade.domain.Cidade" />
+		<mapping class="br.com.app.sysacade.domain.Endereco" />
+		<mapping class="br.com.app.sysacade.domain.Pessoa" />
+		<mapping class="br.com.app.sysacade.domain.Fornecedor" />
+		<mapping class="br.com.app.sysacade.domain.Cliente" />
+		<mapping class="br.com.app.sysacade.domain.Funcionario" />
+		<mapping class="br.com.app.sysacade.domain.Usuario" />
+		<mapping class="br.com.app.sysacade.domain.Produto" />
+		<mapping class="br.com.app.sysacade.domain.Venda" />
+		<mapping class="br.com.app.sysacade.domain.ItemVenda" />
+		<mapping class="br.com.app.sysacade.domain.Personal" />
+		<mapping class="br.com.app.sysacade.domain.Plano" />
+		<mapping class="br.com.app.sysacade.domain.Exercicio" />
+		<mapping class="br.com.app.sysacade.domain.Aluno" />
+		<mapping class="br.com.app.sysacade.domain.Treino" />
+		<mapping class="br.com.app.sysacade.domain.Avaliacao" />
+		<mapping class="br.com.app.sysacade.domain.Pagamento" />
+		<mapping class="br.com.app.sysacade.domain.Historico" />
+		<mapping class="br.com.app.sysacade.domain.Caixa" />
+		<mapping class="br.com.app.sysacade.domain.Movimentacao" />
+		<mapping class="br.com.app.sysacade.domain.Menu" />
+		<mapping class="br.com.app.sysacade.domain.Personal" />
+		<mapping class="br.com.app.sysacade.domain.Professor" />
+
+	</session-factory>
+
+</hibernate-configuration>

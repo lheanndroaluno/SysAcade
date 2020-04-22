@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+
+
+	<ui:define name="conteudo">
+
+		<!-- Tela de Listagem -->
+		<h:form id="formLista">
+
+			<p:panel header="Lista - Avaliações">
+
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					paginator="true" value="#{avaliacaoBean.avaliacoes}"
+					var="cursorAvaliacao" rows="10">
+
+					<f:facet name="header">
+
+						<p:commandButton value="Nova Avaliação"
+							oncomplete="PF('dialogo').show();"
+							actionListener="#{avaliacaoBean.novo}"
+							update=":mensagem :formCadastro:painel">
+
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+
+					</f:facet>
+
+					<p:column headerText="Código" filterBy="#{cursorAvaliacao.codigo}"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorCliente.codigo}" />
+					</p:column>
+
+
+
+					<p:column headerText="Data da Avaliação"
+						style="text-align: center; width: 150px">
+						<h:outputText value="#{cursorAvaliacao.dataAvaliacao}">
+
+							<f:convertDateTime locale="pt_BR" />
+
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Idade"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorAvaliacao.idade}" />
+					</p:column>
+
+					<p:column headerText="Gênero"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorAvaliacao.genero}" />
+					</p:column>
+
+					<p:column headerText="Peso" style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorAvaliacao.peso}" />
+					</p:column>
+
+					<p:column headerText="Altura"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorAvaliacao.altura}" />
+					</p:column>
+
+					<p:column headerText="IMC" style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorAvaliacao.imc}" />
+					</p:column>
+
+					<p:column headerText="Ações"
+						style="text-align: center; width: 180px">
+
+						<!-- Botão excluir -->
+						<p:commandButton value="Excluir"
+							actionListener="#{avaliacaoBean.excluir}"
+							update=":mensagem :formLista:tabela">
+
+							<p:confirm header="Atenção"
+								message="Deseja excluir o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorAvaliacao}" />
+
+						</p:commandButton>
+
+						<!-- Botão editar -->
+						<p:commandButton value="Editar" oncomplete="PF('dialogo').show();"
+							actionListener="#{avaliacaoBean.editar}"
+							update=":mensagem :formCadastro:painel">
+
+							<p:confirm header="Atenção"
+								message="Deseja atualizar o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorAvaliacao}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<!-- Janela de confirmação -->
+				<p:confirmDialog global="true">
+
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" ícone="ui-icon-check" />
+
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" ícone="ui-icon-times" />
+
+				</p:confirmDialog>
+
+			</p:panel>
+
+		</h:form>
+
+		<!-- Janela de flutuação -->
+		<p:dialog header="Avaliação Física" style="text-align: center;"
+			widgetVar="dialogo" draggable="false" resizable="false" modal="true"
+			closable="true">
+
+			<h:form id="formCadastro">
+
+				<p:panel header="TESTE">
+
+					<h:panelGrid id="painel" columns="10">
+
+
+
+						<p:outputLabel for="dataavaliacao" value="Data da Avaliação:" />
+						<p:calendar id="dataavaliacao" pattern="dd/MM/yyyy"
+							value="#{avaliacaoBean.avaliacao.dataAvaliacao}" required="true"
+							requiredMessage="O campo 'Data da Avaliação' é obrigatório"
+							size="10" locale="pt_BR" timeZone="America/Recife" mask="true" />
+
+
+
+						<p:outputLabel for="idade" value="Idade: " />
+						<p:inputText id="idade" value="#{avaliacaoBean.avaliacao.idade}"
+							required="true" requiredMessage="O campo 'Idade' é obrigatório"
+							size="3" maxlength="3" />
+
+
+						<p:outputLabel for="genero" value="Gênero: " />
+						<p:selectOneMenu id="genero"
+							value="#{avaliacaoBean.avaliacao.genero}" required="true"
+							requiredMessage="O campo 'Gênero' é obrigatório">
+
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione uma opção" />
+
+							<f:selectItem itemValue="M" itemLabel="Masculino" />
+							<f:selectItem itemValue="F" itemLabel="Feminino" />
+
+						</p:selectOneMenu>
+
+
+
+
+
+						<p:outputLabel for="altura" value="Altura: " />
+						<p:inputText id="altura" value="#{avaliacaoBean.avaliacao.altura}"
+							required="true" requiredMessage="O campo 'Altura' é obrigatório"
+							size="10" maxlength="10" />
+
+						<p:outputLabel value="Peso: " />
+
+
+						<p:outputLabel for="imc" value="IMC: " />
+						<p:inputText id="imc" value="#{avaliacaoBean.avaliacao.imc}"
+							required="true" requiredMessage="O campo 'IMC' é obrigatório"
+							size="10" maxlength="10" />
+
+
+
+
+
+
+
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+
+						<p:commandButton value="Salvar" icon="ui-icon-disk"
+							actionListener="#{clienteBean.salvar}"
+							update=":mensagem :formCadastro:painel :formLista:tabela" />
+
+						<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+							oncomplete="PF('dialogo').hide();" />
+
+					</h:panelGrid>
+
+				</p:panel>
+
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+
+
+	<ui:define name="conteudo">
+
+		<h:form id="formLista">
+
+			<p:toolbar style="margin-top: 5px">
+
+				<p:toolbarGroup>
+
+					<p:commandButton value="Novo Estado" icon="ui-icon-plusthick"
+						oncomplete="PF('dialogo').show();"
+						actionListener="#{estadoBean.novo}"
+						update=":formCadastro:panelGrid">
+
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+					</p:commandButton>
+
+					<p:separator />
+					<p:commandButton value="Imprimir" icon="ui-icon-print"
+						actionListener="#{estadoBean.imprimir}" />
+
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:panel header="Lista - Estados">
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					paginator="true" value="#{estadoBean.estados}" var="cursorEstado"
+					rows="10">
+
+					<p:column headerText="Código" filterBy="#{cursorEstado.codigo}"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorEstado.codigo}" />
+					</p:column>
+
+					<p:column headerText="Nome" sortBy="#{cursorEstado.nome}"
+						filterBy="#{cursorEstado.nome}">
+						<h:outputText value="#{cursorEstado.nome}" />
+					</p:column>
+
+					<p:column headerText="Sigla" sortBy="#{cursorEstado.sigla}"
+						filterBy="#{cursorEstado.sigla}">
+						<h:outputText value="#{cursorEstado.sigla}" />
+					</p:column>
+
+					<p:column headerText="Ações"
+						style="text-align: center; width: 180px">
+
+						<!-- Botão excluir -->
+						<p:commandButton value="Excluir"
+							actionListener="#{estadoBean.excluir}"
+							update=":mensagem :formLista:tabela">
+							<p:confirm header="Atenção"
+								message="Deseja excluir o registro selecionado?" />
+							<f:attribute name="linhaSelecionada" value="#{cursorEstado}" />
+						</p:commandButton>
+
+						<!-- Botão editar -->
+						<p:commandButton value="Editar" oncomplete="PF('dialogo').show();"
+							actionListener="#{estadoBean.editar}"
+							update=":formCadastro:panelGrid">
+							<p:confirm header="Atenção"
+								message="Deseja atualizar o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorEstado}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<!-- Janela de confirmação -->
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" ícone="ui-icon-check" />
+
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" ícone="ui-icon-times" />
+				</p:confirmDialog>
+
+			</p:panel>
+
+		</h:form>
+
+		<!-- Janela de flutuação -->
+		<p:dialog header="Cadastro de Estados" widgetVar="dialogo"
+			draggable="false" resizable="false" modal="true" closable="false">
+
+			<h:form id="formCadastro">
+
+				<h:panelGrid id="panelGrid" columns="2">
+
+					<p:outputLabel for="nome" value="Nome: " />
+					<p:inputText id="nome" size="30" maxlength="50"
+						value="#{estadoBean.estado.nome}" required="true"
+						requiredMessage="O campo 'Nome' é obrigatório!"
+						converter="converterUpperCase">
+
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+
+					<p:outputLabel for="sigla" value="Sigla: " />
+					<p:inputText id="sigla" size="4" maxlength="2"
+						value="#{estadoBean.estado.sigla}" required="true"
+						requiredMessage="O campo 'Sigla' é obrigatório!"
+						converter="converterUpperCase">
+
+						<p:ajax event="blur" update="@this" />
+					</p:inputText>
+				</h:panelGrid>
+
+				<br />
+				<br />
+				<h:panelGrid columns="2">
+
+					<p:commandButton value="Salvar" icon="ui-icon-disk"
+						actionListener="#{estadoBean.salvar}"
+						update=":mensagem :formCadastro:panelGrid :formLista:tabela" />
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						oncomplete="PF('dialogo').hide();" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>
