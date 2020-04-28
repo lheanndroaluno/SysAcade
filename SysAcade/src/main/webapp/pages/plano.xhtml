@@ -65,10 +65,10 @@
 					</p:column>
 
 					<p:column headerText="Ações"
-						style="text-align: center; width: 180px">
+						style="text-align: center; width: 120px">
 
 						<!-- Botão excluir -->
-						<p:commandButton icon="ui-icon-trash"
+						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
 							actionListener="#{planoBean.excluir}"
 							update=":mensagem :formLista:tabela">
 
@@ -77,9 +77,10 @@
 
 							<f:attribute name="linhaSelecionada" value="#{cursorPlano}" />
 						</p:commandButton>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir" position="top"/>
 
 						<!-- Botão editar -->
-						<p:commandButton icon="ui-icon-pencil"
+						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{planoBean.editar}"
 							update=":formCadastro:painel">
@@ -91,6 +92,7 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 						</p:commandButton>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
 
 					</p:column>
 

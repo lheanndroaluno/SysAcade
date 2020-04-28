@@ -63,10 +63,10 @@
 						<h:outputText value="#{cursorPessoa.email}" />
 					</p:column>
 					<p:column headerText="Ações"
-						style="text-align: center; width: 180px">
+						style="text-align: center; width: 120px">
 
 						<!-- Botão excluir -->
-						<p:commandButton value="Excluir"
+						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
 							actionListener="#{pessoaBean.excluir}"
 							update=":mensagem :formLista:tabela">
 
@@ -76,9 +76,12 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorPessoa}" />
 
 						</p:commandButton>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton value="Editar" oncomplete="PF('dialogo').show();"
+						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+							oncomplete="PF('dialogo').show();"
 							actionListener="#{pessoaBean.editar}"
 							update=":formCadastro:painel">
 
@@ -90,6 +93,8 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 						</p:commandButton>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
 
 					</p:column>
 

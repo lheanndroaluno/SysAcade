@@ -248,7 +248,6 @@ public class FornecedorBean implements Serializable {
 			if (cidade != null) {
 				EnderecoDAO enderecoDAO = new EnderecoDAO();
 				enderecos = enderecoDAO.buscarPorCidade(cidade.getCodigo());
-
 			} else {
 				enderecos = new ArrayList<>();
 			}
