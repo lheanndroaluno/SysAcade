@@ -38,17 +38,53 @@
 					paginator="true" value="#{treinoBean.treinos}" var="cursorTreino"
 					rows="10">
 
-					<p:column headerText="Código" filterBy="#{cursorUsuario.codigo}"
+					<p:column headerText="Código" filterBy="#{cursorTreino.codigo}"
 						style="text-align: center; width: 80px">
-						<h:outputText value="#{cursorUsuario.codigo}" />
+						<h:outputText value="#{cursorTreino.codigo}" />
 					</p:column>
 
+					<p:column headerText="Professor"
+						filterBy="#{cursorTreino.professor.pessoa.nome}"
+						sortBy="#{cursorTreino.professor.pessoa.nome}"
+						style="text-align: center">
+						<h:outputText value="#{cursorTreino.professor.pessoa.nome}" />
+					</p:column>
+
+					<p:column headerText="Aluno"
+						filterBy="#{cursorTreino.aluno.pessoa.nome}"
+						sortBy="#{cursorTreino.aluno.pessoa.nome}"
+						style="text-align: center">
+						<h:outputText value="#{cursorTreino.aluno.pessoa.nome}" />
+					</p:column>
+					
+					<p:column headerText="Aeróbico"
+						filterBy="#{cursorTreino.aerobico}"
+						sortBy="#{cursorTreino.aerobico}"
+						style="text-align: center; width: 100px">
+						<h:outputText value="#{cursorTreino.aerobico}" />
+					</p:column>
+					
+					<p:column headerText="Objetivo"
+						filterBy="#{cursorTreino.objetivo}"
+						sortBy="#{cursorTreino.objetivo}"
+						style="text-align: center; width: 100px">
+						<h:outputText value="#{cursorTreino.objetivo}" />
+					</p:column>
+					
+					<p:column headerText="Data de Início"
+						style="text-align: center; width: 120px">
+						<h:outputText value="#{cursorTreino.dataInicio}">
+
+							<f:convertDateTime locale="pt_BR" />
+
+						</h:outputText>
+					</p:column>
 
 					<p:column headerText="Ações"
-						style="text-align: center; width: 180px">
+						style="text-align: center; width: 120px">
 
 						<!-- Botão excluir -->
-						<p:commandButton value="Excluir"
+						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
 							actionListener="#{treinoBean.excluir}"
 							update=":mensagem :formLista:tabela">
 
@@ -58,9 +94,11 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorTreino}" />
 
 						</p:commandButton>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton value="Editar" oncomplete="PF('dialogo').show();"
+						<p:commandButton id="botaoEditar" icon="ui-icon-pencil" oncomplete="PF('dialogo').show();"
 							actionListener="#{treinoBean.editar}"
 							update=":mensagem :formCadastro:painel">
 
@@ -72,6 +110,8 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 						</p:commandButton>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
 
 					</p:column>
 
@@ -148,11 +188,11 @@
 
 					</p:selectOneMenu>
 
-					<h:outputLabel value="Anamnse: " />
+					<h:outputLabel for="anamnse" value="Anamnse: " />
 					<p:inputTextarea rows="3" cols="40" autoResize="false"
 						value="#{treinoBean.treino.anamnese}" />
 
-					<h:outputLabel value="Observaçoes: " />
+					<h:outputLabel for="observacoes" value="Observaçoes: " />
 					<p:inputTextarea rows="3" cols="40" autoResize="false"
 						value="#{treinoBean.treino.observacao}" />
 
@@ -180,58 +220,6 @@
 					</p:selectOneRadio>
 
 				</h:panelGrid>
-
-				<p:tabView id="view">
-					<p:tab title="Peitoral">
-						<h:panelGrid id="painel1" columns="2">
-
-							<p:outputLabel value="Exercício: " />
-							<p:selectManyCheckbox layout="grid" columns="3"
-								value="#{treinoBean.treino.peitoral}"
-								converter="${tipoPeitoralConverter}" required="true"
-								requiredMessage="O campo 'Exercício' é obrigatório">
-
-								<f:selectItem itemValue="SUPINO_RETO" itemLabel="Supino Reto" />
-								<f:selectItem itemValue="SUPINO_45GRAUS" itemLabel="Supino 45º" />
-								<f:selectItem itemValue="SUPINO_VERTICAL"
-									itemLabel="Supino Vertical" />
-								<f:selectItem itemValue="SUPINO_DECLINADO"
-									itemLabel="Supino Declinado" />
-								<f:selectItem itemValue="CRUCIFIXO" itemLabel="Crucifixo" />
-								<f:selectItem itemValue="CROSS_OVER" itemLabel="Cross Over" />
-								<f:selectItem itemValue="PULL_OVER" itemLabel="Pull Over" />
-								<f:selectItem itemValue="VOADOR" itemLabel="Voador" />
-								<f:selectItem itemValue="SUPINO_COM_ALTERES"
-									itemLabel="Supino Com Alteres" />
-
-								<f:selectItems value="#{treinoBean.peitorais}" var="peitoral"
-									itemValue="#{peitoral}" itemLabel="#{peitoral.descricao}" />
-
-
-								<f:attribute name="collectionType" value="java.util.ArrayList" />
-								
-							</p:selectManyCheckbox>
-
-							<p:outputLabel value="Peso Kg: " />
-							<p:spinner min="0" max="1000" size="3"
-								value="#{treinoBean.treino.peso}" required="true"
-								requiredMessage="O campo 'Peso' é obrigatório" />
-
-							<p:outputLabel value="Nº de Séries" />
-							<p:spinner min="0" max="1000" size="3"
-								value="#{treinoBean.treino.serie}" required="true"
-								requiredMessage="O campo 'Nº de Séries' é obrigatório" />
-
-							<p:outputLabel value="Nº de Repetições" />
-							<p:spinner min="0" max="1000" size="3"
-								value="#{treinoBean.treino.repeticao}" required="true"
-								requiredMessage="O campo 'Nº de Repetições' é obrigatório" />
-						</h:panelGrid>
-					</p:tab>
-
-				</p:tabView>
-
-
 
 				<br />
 				<br />

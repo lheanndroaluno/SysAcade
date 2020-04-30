@@ -1,6 +1,6 @@
 package br.com.app.sysacade.enums;
 
-public enum Peitoral {
+public enum TiposDeExerciciosPeitoral {
 	SUPINO_RETO ("SUPINO RETO"),
 	SUPINO_45GRAUS("SUPINO 45º"),
 	SUPINO_VERTICAL("SUPINO VERTICAL"),
@@ -13,7 +13,7 @@ public enum Peitoral {
 	
 	private String descricao;
 
-	private Peitoral(String descricao) {
+	private TiposDeExerciciosPeitoral(String descricao) {
 		this.descricao = descricao;
 	}
 

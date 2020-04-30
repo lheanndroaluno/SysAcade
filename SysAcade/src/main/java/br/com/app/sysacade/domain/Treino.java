@@ -3,6 +3,7 @@ package br.com.app.sysacade.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -15,16 +16,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.app.sysacade.enums.Abdominal;
 import br.com.app.sysacade.enums.Aerobico;
-import br.com.app.sysacade.enums.Biceps;
-import br.com.app.sysacade.enums.Dorsal;
-import br.com.app.sysacade.enums.Gluteos;
-import br.com.app.sysacade.enums.MembrosInferiores;
-import br.com.app.sysacade.enums.Ombro;
-import br.com.app.sysacade.enums.Peitoral;
+import br.com.app.sysacade.enums.TiposDeExerciciosPeitoral;
 import br.com.app.sysacade.enums.TiposDeTreino;
-import br.com.app.sysacade.enums.Triceps;
 
 @SuppressWarnings("serial")
 @Entity
@@ -53,22 +47,8 @@ public class Treino extends GenericDomain {
 	@Enumerated(EnumType.STRING)
 	private Aerobico aerobico;
 
-	@Column(nullable = false)
-	@ElementCollection(targetClass = Peitoral.class)
-	@Enumerated(EnumType.STRING)
-	private List<Peitoral> peitoral;
-
 	@Column(length = 200, nullable = true)
 	private String observacao;
-
-	@Column(nullable = false)
-	private Short peso;
-
-	@Column(nullable = false)
-	private Short repeticao;
-
-	@Column(nullable = false)
-	private Short serie;
 
 	/**
 	 * Métodos Getters e Setters
@@ -123,44 +103,12 @@ public class Treino extends GenericDomain {
 		this.aerobico = aerobico;
 	}
 
-	public List<Peitoral> getPeitoral() {
-		return peitoral;
-	}
-
-	public void setPeitoral(List<Peitoral> peitoral) {
-		this.peitoral = peitoral;
-	}
-
 	public String getObservacao() {
 		return observacao;
 	}
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
-	}
-
-	public Short getPeso() {
-		return peso;
-	}
-
-	public void setPeso(Short peso) {
-		this.peso = peso;
-	}
-
-	public Short getRepeticao() {
-		return repeticao;
-	}
-
-	public void setRepeticao(Short repeticao) {
-		this.repeticao = repeticao;
-	}
-
-	public Short getSerie() {
-		return serie;
-	}
-
-	public void setSerie(Short serie) {
-		this.serie = serie;
 	}
 
 }

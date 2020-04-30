@@ -29,75 +29,91 @@
 
 		<div id="cabecalho" class="divCabecalho">
 			<h:form id="formMenu">
-				<p:menubar>
+				<p:menubar >
 					<p:submenu label="Arquivo" icon="ui-icon-document">
 						<p:menuitem value="Página Inicial" url="/pages/principal.xhtml"
 							icon="ui-icon-home" />
+						<p:separator />
 						<p:menuitem value="Sair" url="/pages/autenticação.xhtml"
-							icon="ui-icon ui-icon-power" ajax="false" />
+							icon="ui-icon ui-icon-power" ajax="true" />
 					</p:submenu>
 
 					<p:submenu label="Cadastros" icon="ui-icon-folder-open">
-						<p:menuitem value="Estado" url="/pages/estado.xhtml" icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Estado" url="/pages/estado.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Cidade" url="/pages/cidade.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Cidade" url="/pages/cidade.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Logradouro" url="/pages/logradouro.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Logradouro" url="/pages/logradouro.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Endereço" url="/pages/endereco.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Endereço" url="/pages/endereco.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
 						<p:menuitem value="Fornecedor" url="/pages/fornecedor.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e"/>
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Pessoa" url="/pages/pessoa.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Pessoa" url="/pages/pessoa.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Cliente" url="/pages/cliente.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Cliente" url="/pages/cliente.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Funcionário" url="/pages/funcionario.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Funcionário" url="/pages/funcionario.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
 						<p:menuitem value="Usuário" url="/pages/usuario.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e"/>
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
 						<p:menuitem value="Produto" url="/pages/produto.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e"/>
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Plano" url="/pages/plano.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Plano" url="/pages/plano.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Aluno" url="/pages/aluno.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Aluno" url="/pages/aluno.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Professor" url="/pages/professor.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Professor" url="/pages/professor.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Personal" url="/pages/personal.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Personal" url="/pages/personal.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						<p:menuitem value="Treino" url="/pages/treino.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Treino" url="/pages/treino.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 						<p:separator />
-						
+
 					</p:submenu>
-					
+
 					<p:submenu label="Consultas" icon="ui-icon-search">
 						<p:menuitem value="Lista de Vendas"
-							url="/pages/vendasListagem.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+							url="/pages/vendasListagem.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 					</p:submenu>
 
 					<p:submenu label="Venda" icon="ui-icon-cart">
-						<p:menuitem value="Nova Venda" url="/pages/venda.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Nova Venda" url="/pages/venda.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 					</p:submenu>
 
-					<p:submenu label="Pagamento Mensalidade" icon="ui-icon-attach-money">
+					<p:submenu label="Pagamento Mensalidade" icon="ui-icon-dollar">
 						<p:menuitem value="Novo Pagamento" url="/pages/pagamento.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e"/>
+							icon="ui-icon-arrowreturnthick-1-e" />
 					</p:submenu>
 
 					<p:submenu label="Movimentações" icon="ui-icon-transferthick-e-w">
-						<p:menuitem value="Caixa" url="/pages/caixa.xhtml" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Caixa" url="/pages/caixa.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
 					</p:submenu>
-					
-					<p:submenu label="Gráficos" icon="ui-icon-equalizer">
-						
+
+					<p:submenu label="Gráficos" icon="ui-icon-chat-bar">
+
 					</p:submenu>
 
 					<p:submenu label="Ajuda" icon="ui-icon-help">
-						<p:menuitem value="Sobre" icon="ui-icon-arrowreturnthick-1-e"/>
+						<p:menuitem value="Sobre" icon="ui-icon-arrowreturnthick-1-e" />
 					</p:submenu>
 				</p:menubar>
 			</h:form>

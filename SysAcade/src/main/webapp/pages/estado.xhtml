@@ -35,7 +35,7 @@
 
 			</p:toolbar>
 
-			<p:panel header="Lista - Estados">
+			<p:panel header="Lista - Estados" style="text-align: center">
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 					paginator="true" value="#{estadoBean.estados}" var="cursorEstado"
 					rows="10">
@@ -46,12 +46,12 @@
 					</p:column>
 
 					<p:column headerText="Nome" sortBy="#{cursorEstado.nome}"
-						filterBy="#{cursorEstado.nome}">
+						filterBy="#{cursorEstado.nome}" style="text-align: center;">
 						<h:outputText value="#{cursorEstado.nome}" />
 					</p:column>
 
 					<p:column headerText="Sigla" sortBy="#{cursorEstado.sigla}"
-						filterBy="#{cursorEstado.sigla}">
+						filterBy="#{cursorEstado.sigla}" style="text-align: center;">
 						<h:outputText value="#{cursorEstado.sigla}" />
 					</p:column>
 

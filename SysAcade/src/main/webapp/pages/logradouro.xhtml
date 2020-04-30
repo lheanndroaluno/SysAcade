@@ -59,7 +59,8 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorLogradouro}" />
 
 						</p:commandButton>
-						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir" position="top"/>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
 
 						<!-- Botão editar -->
 						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
@@ -73,7 +74,8 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorLogradouro}" />
 
 						</p:commandButton>
-						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
 
 					</p:column>
 
@@ -117,10 +119,10 @@
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar"
-						actionListener="#{logradouroBean.salvar}"
+						actionListener="#{logradouroBean.salvar}" icon="ui-icon-disk"
 						update=":mensagem :formCadastro:painel :formLista:tabela" />
 
-					<p:commandButton value="Cancelar"
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
 						oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>

@@ -11,8 +11,12 @@
 
 	<ui:define name="conteudo">
 
-		<h:outputText value="Bem Vindo #{autenticacaoBean.usuarioLogado.pessoa.nome}"/>
-
+		<h:form>
+			<p:panelGrid style="font-size: 18px" width="100%">
+				<h:outputText
+					value="Bem Vindo #{autenticacaoBean.usuarioLogado.pessoa.nome}" />
+			</p:panelGrid>
+		</h:form>
 	</ui:define>
 
 </ui:composition>

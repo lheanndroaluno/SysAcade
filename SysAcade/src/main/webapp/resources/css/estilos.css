@@ -1,14 +1,12 @@
 @charset "UTF-8";
 
 .divTopo {
-	padding: 5px;
+	padding: 0px;
+	background-color: #C0C0C0;
 }
 
 .divCabecalho {
 	padding-bottom: 5px;
-	background-color: blue;
-	
-	
 }
 
 .imagemCentralizada {
@@ -21,10 +19,51 @@
 	font-size: 98% !important;
 }
 
-.ui-datatable .ui-datatable-data .ui-datatable-odd td{  
-	background-color: #FFFFFF;
+.ui-outputlabel {
+	font-weight: bold;
+	font-size: 30px;
 }
 
-.ui-datatable .ui-datatable-data .ui-datatable-even td{  
-	background-color: #F2F5F9;
+.ui-orderlist .ui-orderlist-list {
+	height: auto;
+}
+
+.ui-button {
+	background: #A9A9A9 !important;
+	font-weight: bold;
+}
+
+.ui-custompanelgrid, .ui-custompanelgrid td {
+	font-size: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	background-color: blue !important;
+}
+
+body {
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+}
+
+header {
+	padding: 5px 0px;
+	margin-bottom: 20px;
+	height: 30px;
+	background-color: #B0C4DE;
+	color: #808080;
+	box-shadow: 0px 2px 2px #ccc;
+}
+
+.ui-datatable .ui-datatable-data .ui-datatable-odd td {
+	background-color: #87CEFA;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.ui-datatable .ui-datatable-data .ui-datatable-even td {
+	background-color: #87CEEB;
+	font-weight: bold;
+	font-size: 13px;
 }

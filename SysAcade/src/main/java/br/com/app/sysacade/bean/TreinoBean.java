@@ -18,7 +18,7 @@ import br.com.app.sysacade.dao.TreinoDAO;
 import br.com.app.sysacade.domain.Aluno;
 import br.com.app.sysacade.domain.Professor;
 import br.com.app.sysacade.domain.Treino;
-import br.com.app.sysacade.enums.Peitoral;
+import br.com.app.sysacade.enums.TiposDeExerciciosPeitoral;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -29,9 +29,6 @@ public class TreinoBean implements Serializable {
 	private List<Treino> treinos;
 	private List<Aluno> alunos;
 	private List<Professor> professores;
-
-	private Peitoral peitoral;
-	private List<Peitoral> peitorais;
 
 	/**
 	 * Métodos Getters e Setters
@@ -68,26 +65,6 @@ public class TreinoBean implements Serializable {
 
 	public void setProfessores(List<Professor> professores) {
 		this.professores = professores;
-	}
-
-	public void setPeitoral(Peitoral peitoral) {
-		this.peitoral = peitoral;
-	}
-
-	public List<Peitoral> getPeitorais() {
-		return peitorais;
-	}
-
-	public void setPeitorais(List<Peitoral> peitorais) {
-		this.peitorais = peitorais;
-	}
-
-	public List<SelectItem> getPeitoral() {
-		List<SelectItem> listaDeExercicioPeitoral = new ArrayList<SelectItem>();
-		for (Peitoral peitoral : Peitoral.values()) {
-			listaDeExercicioPeitoral.add(new SelectItem(peitoral, peitoral.getDescricao()));
-		}
-		return listaDeExercicioPeitoral;
 	}
 
 	public void novo() {
