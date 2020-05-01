@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import br.com.app.sysacade.enums.TipoDeMusculo;
 import br.com.app.sysacade.enums.TipoDeTreino;
@@ -32,6 +34,10 @@ public class Exercicio extends GenericDomain {
 
 	@Column(length = 20, nullable = false)
 	private String repeticoes;
+
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Treino treino;
 
 	/**
 	 * Métodos Getters e Setters

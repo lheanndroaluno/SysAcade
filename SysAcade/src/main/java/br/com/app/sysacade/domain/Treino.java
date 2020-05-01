@@ -49,7 +49,7 @@ public class Treino extends GenericDomain {
 
 	@Column(length = 200, nullable = true)
 	private String observacao;
-
+	
 	/**
 	 * Métodos Getters e Setters
 	 * 

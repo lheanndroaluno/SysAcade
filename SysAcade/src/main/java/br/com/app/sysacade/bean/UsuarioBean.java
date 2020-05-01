@@ -52,6 +52,7 @@ public class UsuarioBean implements Serializable {
 	public void setPessoas(List<Pessoa> pessoas) {
 		this.pessoas = pessoas;
 	}
+	
 
 	public void novo() {
 		try {
@@ -69,6 +70,7 @@ public class UsuarioBean implements Serializable {
 	public void salvar() {
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			usuario.setSenha(org.apache.commons.codec.digest.DigestUtils.md5Hex(usuario.getSenha()));
 			usuarioDAO.merge(usuario);
 
 			usuario = new Usuario();
@@ -99,10 +101,12 @@ public class UsuarioBean implements Serializable {
 	public void editar(ActionEvent evento) {
 		try {
 			usuario = (Usuario) evento.getComponent().getAttributes().get("linhaSelecionada");
-
+			
 			// populando a lista de pessoas
 			PessoaDAO pessoaDAO = new PessoaDAO();
 			pessoas = pessoaDAO.listarPorCampoOrdenacao("nome");
+			
+			
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar atualizar o usuário");
 			erro.printStackTrace();

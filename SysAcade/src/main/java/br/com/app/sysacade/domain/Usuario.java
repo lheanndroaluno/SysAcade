@@ -80,9 +80,9 @@ public class Usuario extends GenericDomain {
 		String ativoFormatado = null;
 
 		if (ativo) {
-			ativoFormatado = "Sim";
+			ativoFormatado = "SIM";
 		} else {
-			ativoFormatado = "Não";
+			ativoFormatado = "NÃO";
 		}
 
 		return ativoFormatado;

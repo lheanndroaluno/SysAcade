@@ -2,7 +2,6 @@ package br.com.app.sysacade.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -50,20 +49,33 @@ public class AutenticacaoBean implements Serializable {
 		usuario.setPessoa(new Pessoa());
 	}
 
+	public void autenticar() {
+		try {
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			
+			usuarioLogado = usuarioDAO.autenticar(usuario.getPessoa().getCpf(), usuario.getSenha());
+
+			if (usuarioLogado == null) {
+				Messages.addGlobalError("CPF e/ou Senha incorretos!");
+				return;
+			}
+
+			Faces.redirect("./pages/principal.xhtml");
+		} catch (IOException erro) {
+			erro.printStackTrace();
+			Messages.addFlashGlobalError(erro.getMessage());
+		}
+	}
+	
 	/*
-	 * public void autenticar() { try { UsuarioDAO usuarioDAO = new UsuarioDAO();
-	 * usuarioLogado = usuarioDAO.autenticar(usuario.getPessoa().getCpf(),
-	 * usuario.getSenha());
-	 * 
-	 * if (usuarioLogado == null) {
-	 * Messages.addGlobalError("CPF e/ou Senha incorretos!"); return; }
-	 * 
-	 * Faces.redirect("./pages/principal.xhtml"); } catch (IOException erro) {
-	 * erro.printStackTrace(); Messages.addFlashGlobalError(erro.getMessage()); } }
-	 * 
-	 * public boolean temPermissoes(List<String> permissoes) { for (String permissao
-	 * : permissoes) { if (usuarioLogado.getTipo() == permissao.charAt(0)) { return
-	 * true; } } return false; }
-	 */
+	public boolean temPermissoes(List<String> permissoes) {
+		for (String permissao : permissoes) {
+			if (usuarioLogado.getTipoUsuario() == permissao.concat(permissao)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	*/
 
 }
