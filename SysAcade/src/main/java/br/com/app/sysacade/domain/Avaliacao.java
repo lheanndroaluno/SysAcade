@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+
+import br.com.app.sysacade.enums.TipoGenero;
 
 @SuppressWarnings("serial")
 @Entity
@@ -17,13 +20,14 @@ public class Avaliacao extends GenericDomain {
 	private Date dataAvaliacao;
 
 	@Column(nullable = false)
-	private Character genero;
+	@Enumerated(EnumType.STRING)
+	private TipoGenero genero;
 
 	@Column(nullable = false)
 	private Integer idade;
 
 	@Column(nullable = false, precision = 4, scale = 2)
-	private Integer altura;
+	private Float altura;
 
 	@Column(nullable = false, precision = 8, scale = 3)
 	private Float peso;
@@ -45,24 +49,11 @@ public class Avaliacao extends GenericDomain {
 		this.dataAvaliacao = dataAvaliacao;
 	}
 
-	public Character getGenero() {
+	public TipoGenero getGenero() {
 		return genero;
 	}
 
-	@Transient
-	public String getGeneroFormatado() {
-		String generoFormatado = null;
-
-		if (genero == 'M') {
-			generoFormatado = "Masculino";
-		} else if (genero == 'F') {
-			generoFormatado = "Feminino";
-		}
-
-		return generoFormatado;
-	}
-
-	public void setGenero(Character genero) {
+	public void setGenero(TipoGenero genero) {
 		this.genero = genero;
 	}
 
@@ -74,11 +65,11 @@ public class Avaliacao extends GenericDomain {
 		this.idade = idade;
 	}
 
-	public Integer getAltura() {
+	public Float getAltura() {
 		return altura;
 	}
 
-	public void setAltura(Integer altura) {
+	public void setAltura(Float altura) {
 		this.altura = altura;
 	}
 

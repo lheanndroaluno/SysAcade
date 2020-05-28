@@ -3,8 +3,6 @@ package br.com.app.sysacade.dao;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,7 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.app.sysacade.util.HibernateUtil;
 
 public class GenericDAO<Entidade> {
-	
+
 	private Class<Entidade> classe;
 
 	// criando um construtor
@@ -121,6 +119,22 @@ public class GenericDAO<Entidade> {
 		try {
 			Criteria consulta = sessao.createCriteria(classe);
 			consulta.add(Restrictions.idEq(codigo));
+			Entidade resultado = (Entidade) consulta.uniqueResult();
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public Entidade buscarD(String descricao) {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+
+		try {
+			Criteria consulta = sessao.createCriteria(classe);
+			consulta.add(Restrictions.idEq(descricao));
 			Entidade resultado = (Entidade) consulta.uniqueResult();
 			return resultado;
 		} catch (RuntimeException erro) {

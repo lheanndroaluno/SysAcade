@@ -20,13 +20,13 @@ public class Personal extends GenericDomain {
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	private Date dataCadastro;
+	private Date dataAdmissao;
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private TipoStatusProf tipoStatusProf;
 
-	@Column(length = 8, nullable = true, unique = true)
+	@Column(length = 12, nullable = true)
 	private String cref;
 
 	@Column(nullable = false)
@@ -40,22 +40,31 @@ public class Personal extends GenericDomain {
 	@OneToOne
 	@JoinColumn(nullable = false)
 	private Pessoa pessoa;
-	
+
 	/**
 	 * Métodos Getters e Setters
 	 * 
 	 * @return
 	 */
-	public Date getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
 
 	public TipoStatusProf getTipoStatusProf() {
 		return tipoStatusProf;
+	}
+
+	public Date getDataAdmissao() {
+		return dataAdmissao;
+	}
+
+	public void setDataAdmissao(Date dataAdmissao) {
+		this.dataAdmissao = dataAdmissao;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public void setTipoStatusProf(TipoStatusProf tipoStatusProf) {
@@ -68,14 +77,6 @@ public class Personal extends GenericDomain {
 
 	public void setCref(String cref) {
 		this.cref = cref;
-	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
 	}
 
 	public TipoGenero getGenero() {

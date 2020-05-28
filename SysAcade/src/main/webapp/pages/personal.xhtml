@@ -14,7 +14,7 @@
 		<!-- Tela de Listagem -->
 		<h:form id="formLista">
 
-			<p:toolbar style="margin-top: 5px">
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px">
 
 				<p:toolbarGroup>
 
@@ -36,8 +36,7 @@
 
 				<p:dataTable id="tabela" widgetVar="tabela"
 					emptyMessage="Nenhum registro encontrado." paginator="true"
-					value="#{personalBean.personals}" var="cursorPersonal"
-					rows="10">
+					value="#{personalBean.personals}" var="cursorPersonal" rows="10">
 
 					<p:column headerText="Código" filterBy="#{cursorPersonal.codigo}"
 						style="text-align: center; width: 80px">
@@ -62,9 +61,9 @@
 						<h:outputText value="#{cursorPersonal.cref}" />
 					</p:column>
 
-					<p:column headerText="Data de Cadastro"
+					<p:column headerText="Data de Admissão"
 						style="text-align: center; width: 100px">
-						<h:outputText value="#{cursorPersonal.dataCadastro}">
+						<h:outputText value="#{cursorPersonal.dataAdmissao}">
 
 							<f:convertDateTime locale="pt_BR" />
 
@@ -101,10 +100,12 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorPersonal}" />
 
 						</p:commandButton>
-						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir" position="top"/>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton id="botaoEditar" icon="ui-icon-pencil" oncomplete="PF('dialogo').show();"
+						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+							oncomplete="PF('dialogo').show();"
 							actionListener="#{personalBean.editar}"
 							update=":mensagem :formCadastro:painel">
 
@@ -116,7 +117,22 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 						</p:commandButton>
-						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
+
+						<!-- Botão dados do personal-->
+						<p:commandButton id="botaoDados" icon="ui-icon-search"
+							oncomplete="PF('dadosDialogo').show();"
+							actionListener="#{personalBean.mostrarDadospersonal}"
+							update=":formDadosPersonal:painelDadosPersonal">
+
+							<f:attribute name="linhaSelecionada" value="#{cursorPersonal}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+						<p:tooltip id="dados" for="botaoDados" value="Dados do Personal"
+							position="top" />
 
 					</p:column>
 
@@ -172,9 +188,10 @@
 					</p:selectOneRadio>
 
 					<p:outputLabel for="dataCadastro" value="Data de Cadastro: " />
-					<p:calendar id="dataCadastro"
-						value="#{personalBean.personal.dataCadastro}" required="true"
-						requiredMessage="O campo 'Data de Cadastro' é obrigatório" />
+					<p:calendar id="dataCadastro" pattern="dd/MM/yyyy"
+						value="#{personalBean.personal.dataAdmissao}" required="true"
+						requiredMessage="O campo 'Data de Cadastro' é obrigatório"
+						size="10" locale="pt_BR" timeZone="America/Recife" mask="true" />
 
 					<p:outputLabel for="datanascimento" value="Data de Nascimento: " />
 					<p:calendar id="datanascimento" pattern="dd/MM/yyyy"
@@ -183,7 +200,7 @@
 						size="10" locale="pt_BR" timeZone="America/Recife" mask="true" />
 
 					<p:outputLabel for="cref" value="CREF:" />
-					<p:inputMask mask="999999-*/**" id="cref" size="15"
+					<p:inputMask mask="999999-a/aa" id="cref" size="15"
 						value="#{personalBean.personal.cref}" required="true"
 						requiredMessage="O campo 'CREF' é obrigatório"
 						converter="converterUpperCase">
@@ -206,6 +223,7 @@
 
 				<br />
 				<br />
+				<p:separator />
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"
@@ -214,6 +232,84 @@
 
 					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
 						oncomplete="PF('dialogo').hide();" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog widgetVar="dadosDialogo" header="Dados Pessoais do Aluno"
+			draggable="false" resizable="false" modal="true">
+
+			<h:form id="formDadosPersonal">
+
+				<h:panelGrid id="painelDadosPersonal" columns="2">
+
+					<h:outputLabel value="Código: " />
+					<h:outputText value="#{personalBean.personal.codigo}" />
+
+					<h:outputLabel value="Nome: " />
+					<h:outputText value="#{personalBean.personal.pessoa.nome}" />
+
+					<h:outputLabel value="CPF: " />
+					<h:outputText value="#{personalBean.personal.pessoa.cpf}" />
+
+					<h:outputLabel value="RG: " />
+					<h:outputText value="#{personalBean.personal.pessoa.rg}" />
+
+					<h:outputLabel value="Orgão Expeditor: " />
+					<h:outputText
+						value="#{personalBean.personal.pessoa.orgaoExpeditor}" />
+
+					<h:outputLabel value="Data de Admissão: " />
+					<h:outputText value="#{personalBean.personal.dataAdmissao}">
+
+						<f:convertDateTime locale="pt_BR" />
+
+					</h:outputText>
+
+					<h:outputLabel value="Data de Nascimento: " />
+					<h:outputText value="#{personalBean.personal.dataNascimento}">
+
+						<f:convertDateTime locale="pt_BR" />
+
+					</h:outputText>
+
+					<h:outputLabel value="Gênero: " />
+					<h:outputText value="#{personalBean.personal.genero}" />
+
+					<h:outputLabel value="Tel. Fixo: " />
+					<h:outputText value="#{personalBean.personal.pessoa.telFixo}" />
+
+					<h:outputLabel value="Tel. celular: " />
+					<h:outputText value="#{personalBean.personal.pessoa.telCelular}" />
+
+					<h:outputLabel value="E-mail: " />
+					<h:outputText value="#{personalBean.personal.pessoa.email}" />
+
+					<h:outputLabel value="Endereço: " />
+					<h:outputText
+						value="#{personalBean.personal.pessoa.endereco.logradouro.descricao} #{personalBean.personal.pessoa.endereco.nomeEnd}" />
+
+					<h:outputLabel value="Número: " />
+					<h:outputText
+						value="#{personalBean.personal.pessoa.endereco.numero}" />
+
+					<h:outputLabel value="Bairro: " />
+					<h:outputText
+						value="#{personalBean.personal.pessoa.endereco.bairro}" />
+
+					<h:outputLabel value="Cidade: " />
+					<h:outputText
+						value="#{personalBean.personal.pessoa.endereco.cidade.nome} - #{personalBean.personal.pessoa.endereco.cidade.estado.sigla}" />
+
+					<h:outputLabel value="CEP: " />
+					<h:outputText value="#{personalBean.personal.pessoa.endereco.cep}" />
+
+					<h:outputLabel value="Complemento: " />
+					<h:outputText
+						value="#{personalBean.personal.pessoa.endereco.complemento}" />
 
 				</h:panelGrid>
 

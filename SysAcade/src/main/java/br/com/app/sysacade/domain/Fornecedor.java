@@ -4,39 +4,54 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.app.sysacade.enums.TipoStatusProf;
+
 @SuppressWarnings("serial")
 @Entity
 public class Fornecedor extends GenericDomain {
+
 	@Column(length = 100, nullable = false)
 	private String razaoSocial;
+
 	@Column(length = 100, nullable = false)
 	private String nomeFantasia;
+
 	@Column(length = 25, nullable = false)
 	private String cnpj;
+
 	@Column(length = 30)
 	private String inscricaoEstadual;
+
 	@Column(length = 30)
 	private String inscricaoMunicipal;
+
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataCadastro;
+
 	@Column(nullable = false)
-	private Boolean ativo;
+	@Enumerated(EnumType.STRING)
+	private TipoStatusProf status;
+
 	@Column(length = 16, nullable = false)
 	private String telFixo;
+
 	@Column(length = 16, nullable = false)
 	private String telCelular;
+
 	@Column(length = 50, nullable = false)
 	private String email;
+
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Endereco endereco;
-	
 
 	/**
 	 * Métodos Getters e Setters
@@ -91,12 +106,12 @@ public class Fornecedor extends GenericDomain {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
+	public TipoStatusProf getStatus() {
+		return status;
 	}
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+	public void setStatus(TipoStatusProf status) {
+		this.status = status;
 	}
 
 	public String getTelFixo() {
@@ -131,5 +146,4 @@ public class Fornecedor extends GenericDomain {
 		this.endereco = endereco;
 	}
 
-	
 }

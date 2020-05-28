@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.value{
+	width: auto;
+	height: auto;
+	
+}
+
+.ui-widget, .ui-widget .ui-widget {
+	font-size: 98% !important;
+}
+
+.emp1 .fc-content {
+	background-color: #006600;
+}
+
+.emp2 .fc-content {
+	background-color: #003399;
+}
+
+.ui-button {
+	background: #0000ff!important;
+	font-weight: bold;
+	border-bottom-radius: 1px;
+}
+

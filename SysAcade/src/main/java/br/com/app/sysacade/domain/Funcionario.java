@@ -17,7 +17,7 @@ import br.com.app.sysacade.enums.TipoFuncao;
 @Entity
 public class Funcionario extends GenericDomain {
 
-	@Column(length = 12, nullable = false, unique = true) // exemplo: MATRIZ01****
+	@Column(length = 12, nullable = false) // exemplo: MATRIZ01****
 	private String matricula;
 
 	@Column(nullable = false)
@@ -30,6 +30,10 @@ public class Funcionario extends GenericDomain {
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataAdmissao;
+
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
 
 	@Column(length = 25, nullable = false)
 	private String numeroReservista;
@@ -89,6 +93,14 @@ public class Funcionario extends GenericDomain {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 }

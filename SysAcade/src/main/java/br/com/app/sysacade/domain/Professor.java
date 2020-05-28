@@ -20,13 +20,13 @@ public class Professor extends GenericDomain {
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	private Date dataCadastro;
+	private Date dataAdmissao;
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private TipoStatusProf tipoStatusProf;
 
-	@Column(length = 12, nullable = true, unique = true)
+	@Column(length = 12, nullable = true)
 	private String cref;
 
 	@Column(nullable = false)
@@ -46,16 +46,17 @@ public class Professor extends GenericDomain {
 	 * 
 	 * @return
 	 */
-	public Date getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
 
 	public TipoStatusProf getTipoStatusProf() {
 		return tipoStatusProf;
+	}
+
+	public Date getDataAdmissao() {
+		return dataAdmissao;
+	}
+
+	public void setDataAdmissao(Date dataAdmissao) {
+		this.dataAdmissao = dataAdmissao;
 	}
 
 	public void setTipoStatusProf(TipoStatusProf tipoStatusProf) {

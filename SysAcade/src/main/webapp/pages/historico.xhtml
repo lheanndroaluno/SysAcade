@@ -17,7 +17,7 @@
 
 	<h:form id="formulario">
 
-		<p:panel header="Histórico">
+		<p:panel id="painel" header="Histórico">
 
 			<h:panelGrid columns="3">
 
@@ -34,11 +34,12 @@
 
 				<p:commandButton value="Pesquisar" icon="ui-icon-search"
 					actionListener="#{historicoBean.buscar}"
-					update=":mensagem :formulario:painelDados"
+					update=":mensagem :formulario:painelDados :formulario:painel"
 					process="@this :formulario:codigo" />
 
 			</h:panelGrid>
 
+			<p:separator/>
 			<h:panelGroup id="painelDados" layout="block">
 				<h:panelGrid columns="2"
 					rendered="#{historicoBean.exibePainelDados}">

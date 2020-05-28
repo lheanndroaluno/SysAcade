@@ -1,8 +1,27 @@
 @charset "UTF-8";
 
+.ui-layout-north {
+	z-index: 25 !important;
+	overflow: visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+body {
+	background-color: #808080;
+}
+
+.panelgrid{
+	padding: 5px;
+	background-color: #408080;
+	margin-bottom: 3px;
+}
+
 .divTopo {
-	padding: 0px;
-	background-color: #C0C0C0;
+	padding: 5px;
+	margin-bottom: 3px;
 }
 
 .divCabecalho {
@@ -11,8 +30,14 @@
 
 .imagemCentralizada {
 	display: block;
-	margin-left: auto;
+	margin-left: 0px;
 	margin-right: auto;
+}
+
+.ui-schedule {
+	border: medium; !important;
+	border-style: hidden !important;
+	background-color: #0080ff important;
 }
 
 .ui-widget, .ui-widget .ui-widget {
@@ -29,41 +54,44 @@
 }
 
 .ui-button {
-	background: #A9A9A9 !important;
+	background: #0000ff!important;
 	font-weight: bold;
+	border-bottom-radius: 1px;
 }
 
 .ui-custompanelgrid, .ui-custompanelgrid td {
-	font-size: 20px;
+	font-size: 23px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	background-color: blue !important;
 }
 
-body {
+.body {
 	font-size: 16px;
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0px;
-	font-weight: normal;
+	font-weight: bold;
 }
 
-header {
+.header {
 	padding: 5px 0px;
 	margin-bottom: 20px;
 	height: 30px;
 	background-color: #B0C4DE;
-	color: #808080;
+	color: #ADD8E6;
 	box-shadow: 0px 2px 2px #ccc;
 }
 
 .ui-datatable .ui-datatable-data .ui-datatable-odd td {
-	background-color: #87CEFA;
+	background-color: #B5B5B5;
 	font-weight: bold;
 	font-size: 13px;
+	color: #0000FF;
 }
 
 .ui-datatable .ui-datatable-data .ui-datatable-even td {
-	background-color: #87CEEB;
+	background-color: #CFCFCF;
 	font-weight: bold;
 	font-size: 13px;
+	color: #0000FF;
 }

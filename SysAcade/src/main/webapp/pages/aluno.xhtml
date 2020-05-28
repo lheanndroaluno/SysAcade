@@ -14,7 +14,7 @@
 		<!-- Tela de Listagem -->
 		<h:form id="formLista">
 
-			<p:toolbar style="margin-top: 5px">
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px">
 
 				<p:toolbarGroup>
 
@@ -110,6 +110,20 @@
 
 						</p:commandButton>
 						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
+
+						<!-- Botão dados do aluno-->
+						<p:commandButton id="botaoDados" icon="ui-icon-search"
+							oncomplete="PF('dadosDialogo').show();"
+							actionListener="#{alunoBean.mostrarDadosAluno}"
+							update=":formDadosAluno:painelDadosAluno">
+
+							<f:attribute name="linhaSelecionada" value="#{cursorAluno}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+						<p:tooltip id="dados" for="botaoDados" value="Dados do Aluno"
 							position="top" />
 
 					</p:column>
@@ -224,9 +238,11 @@
 
 					<p:outputLabel for="etnia" value="Etnia: " />
 					<p:selectOneMenu id="etnia" value="#{alunoBean.aluno.etnia}"
-						required="true" requiredMessage="O campo 'Função' é obrigatório">
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="O campo 'Etnia' é obrigatório">
 
-						<f:selectItem itemValue="" itemLabel="" />
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione uma etnia" />
 						<f:selectItem itemValue="BRANCO" itemLabel="Branco" />
 						<f:selectItem itemValue="NEGRO" itemLabel="Negro" />
 						<f:selectItem itemValue="INDIGENA" itemLabel="Indígena" />
@@ -234,8 +250,7 @@
 						<f:selectItem itemValue="MULATO" itemLabel="Mulato" />
 						<f:selectItem itemValue="CABOCLO" itemLabel="Caboclo" />
 
-						<f:selectItem noSelectionOption="true" itemValue=""
-							itemLabel="Selecione uma etnia" />
+
 
 					</p:selectOneMenu>
 
@@ -270,6 +285,7 @@
 
 				<br />
 				<br />
+				<p:separator />
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"
@@ -278,6 +294,76 @@
 
 					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
 						oncomplete="PF('dialogo').hide();" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog widgetVar="dadosDialogo" header="Dados Pessoais do Aluno"
+			draggable="false" resizable="false" modal="true">
+
+			<h:form id="formDadosAluno">
+
+				<h:panelGrid id="painelDadosAluno" columns="2">
+
+					<h:outputLabel value="Código: " />
+					<h:outputText value="#{alunoBean.aluno.codigo}" />
+
+					<h:outputLabel value="Nome: " />
+					<h:outputText value="#{alunoBean.aluno.pessoa.nome}" />
+
+					<h:outputLabel value="CPF: " />
+					<h:outputText value="#{alunoBean.aluno.pessoa.cpf}" />
+
+					<h:outputLabel value="RG: " />
+					<h:outputText value="#{alunoBean.aluno.pessoa.rg}" />
+
+					<h:outputLabel value="Orgão Expeditor: " />
+					<h:outputText value="#{alunoBean.aluno.pessoa.orgaoExpeditor}" />
+
+					<h:outputLabel value="Data de Nascimento: " />
+					<h:outputText value="#{alunoBean.aluno.dataNascimento}">
+
+						<f:convertDateTime locale="pt_BR" />
+
+					</h:outputText>
+
+					<h:outputLabel value="Sexo: " />
+					<h:outputText value="#{alunoBean.aluno.sexo}" />
+
+					<h:outputLabel value="Tel. Fixo: " />
+					<h:outputText value="#{alunoBean.aluno.pessoa.telFixo}" />
+
+					<h:outputLabel value="Tel. celular: " />
+					<h:outputText value="#{alunoBean.aluno.pessoa.telCelular}" />
+
+					<h:outputLabel value="E-mail: " />
+					<h:outputText value="#{alunoBean.aluno.pessoa.email}" />
+
+
+
+					<h:outputLabel value="Endereço: " />
+					<h:outputText
+						value="#{alunoBean.aluno.pessoa.endereco.logradouro.descricao} #{alunoBean.aluno.pessoa.endereco.nomeEnd}" />
+
+					<h:outputLabel value="Número: " />
+					<h:outputText value="#{alunoBean.aluno.pessoa.endereco.numero}" />
+
+					<h:outputLabel value="Bairro: " />
+					<h:outputText value="#{alunoBean.aluno.pessoa.endereco.bairro}" />
+
+					<h:outputLabel value="Cidade: " />
+					<h:outputText
+						value="#{alunoBean.aluno.pessoa.endereco.cidade.nome} - #{alunoBean.aluno.pessoa.endereco.cidade.estado.sigla}" />
+
+					<h:outputLabel value="CEP: " />
+					<h:outputText value="#{alunoBean.aluno.pessoa.endereco.cep}" />
+
+					<h:outputLabel value="Complemento: " />
+					<h:outputText
+						value="#{alunoBean.aluno.pessoa.endereco.complemento}" />
 
 				</h:panelGrid>
 

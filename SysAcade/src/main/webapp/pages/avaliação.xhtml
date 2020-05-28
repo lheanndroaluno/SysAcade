@@ -148,22 +148,17 @@
 							size="3" maxlength="3" />
 
 
-						<p:outputLabel for="genero" value="Gênero: " />
-						<p:selectOneMenu id="genero"
-							value="#{avaliacaoBean.avaliacao.genero}" required="true"
-							requiredMessage="O campo 'Gênero' é obrigatório">
+						<p:outputLabel for="sexo" value="Gênero: " />
+						<p:selectOneRadio id="sexo" value="#{avaliacaoBean.avaliacao.genero}"
+							required="true" requiredMessage="O campo 'Gênero' é obrigatório"
+							converter="converterUpperCase">
 
-							<f:selectItem noSelectionOption="true"
-								itemLabel="Selecione uma opção" />
+							<f:selectItem itemValue="MASCULINO" itemLabel="Masculino" />
+							<f:selectItem itemValue="FEMININO" itemLabel="Feminino" />
+							<f:selectItem itemValue="OUTRO" itemLabel="Outro" />
 
-							<f:selectItem itemValue="M" itemLabel="Masculino" />
-							<f:selectItem itemValue="F" itemLabel="Feminino" />
-
-						</p:selectOneMenu>
-
-
-
-
+							<p:ajax event="blur" update="@this" />
+						</p:selectOneRadio>
 
 						<p:outputLabel for="altura" value="Altura: " />
 						<p:inputText id="altura" value="#{avaliacaoBean.avaliacao.altura}"

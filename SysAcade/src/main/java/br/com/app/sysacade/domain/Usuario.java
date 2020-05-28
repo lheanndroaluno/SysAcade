@@ -38,23 +38,6 @@ public class Usuario extends GenericDomain {
 	 * 
 	 * @return
 	 */
-
-	/*
-	 * public Character getTipo() { return tipo; }
-	 * 
-	 * @Transient public String getTipoFormatado() { String tipoFormatado = null;
-	 * 
-	 * if (tipo == 'A') { tipoFormatado = "Administrador"; } else if (tipo == 'B') {
-	 * tipoFormatado = "Balconista"; } else if (tipo == 'D') { tipoFormatado =
-	 * "Diretor"; } else if (tipo == 'G') { tipoFormatado = "Gerente"; } else if
-	 * (tipo == 'U') { tipoFormatado = "Usuario"; } else if (tipo == 'P') {
-	 * tipoFormatado = "Personal"; }
-	 * 
-	 * return tipoFormatado; }
-	 * 
-	 * public void setTipo(Character tipo) { this.tipo = tipo; }
-	 */
-
 	public TipoUsuario getTipoUsuario() {
 		return tipoUsuario;
 	}

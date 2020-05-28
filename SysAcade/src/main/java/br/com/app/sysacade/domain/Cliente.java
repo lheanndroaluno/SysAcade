@@ -4,23 +4,27 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+
+import br.com.app.sysacade.enums.TipoLiberado;
 
 @SuppressWarnings("serial")
 @Entity
 public class Cliente extends GenericDomain {
-	
+
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataCadastro;
-	
+
 	@Column(nullable = false)
-	private Boolean liberado;
-	
+	@Enumerated(EnumType.STRING)
+	private TipoLiberado liberado;
+
 	@OneToOne
 	@JoinColumn(nullable = false)
 	private Pessoa pessoa;
@@ -30,33 +34,21 @@ public class Cliente extends GenericDomain {
 	 * 
 	 * @return
 	 */
+
 	public Date getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-	public Boolean getLiberado() {
+	public TipoLiberado getLiberado() {
 		return liberado;
 	}
 
-	public void setLiberado(Boolean liberado) {
+	public void setLiberado(TipoLiberado liberado) {
 		this.liberado = liberado;
 	}
 
-	@Transient
-	public String getLiberadoFormatado() {
-		String liberadoFormatado = null;
-
-		if (liberado) {
-			liberadoFormatado = "Sim";
-		} else {
-			liberadoFormatado = "Não";
-		}
-
-		return liberadoFormatado;
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	public Pessoa getPessoa() {

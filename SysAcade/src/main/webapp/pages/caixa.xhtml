@@ -13,22 +13,24 @@
 
 		<h:form>
 
-			<p:schedule value="#{caixaBean.listagemCaixas}" displayEventEnd="true" timeZone="GMT-3">
+			<p:schedule value="#{caixaBean.listagemCaixas}" timeZone="GMT-3"
+				locale="pt_BR" view="agendaWeek" timeFormat="HH:mm" minTime="05:00"
+				maxTime="22:00" displayEventEnd="true">
 
 				<p:ajax event="dateSelect" listener="#{caixaBean.novo}"
 					oncomplete="PF('dialogo').show();" update=":formulario:painel" />
 
-				
 			</p:schedule>
 
 		</h:form>
 
-		<p:dialog header="Caixa" resizable="false" draggable="false"
-			modal="true" closable="true" widgetVar="dialogo">
+		<p:dialog header="Abertura de Caixa" resizable="false"
+			draggable="false" modal="true" closable="false" widgetVar="dialogo">
 
 			<h:form id="formulario">
 
-				<h:panelGrid id="painel" columns="2">
+				<h:panelGrid id="painel" columns="2" styleClass="ui-panelgrid-black"
+					columnClasses="ui-grid-col-12">
 
 					<p:outputLabel value="Data de Abertura: " />
 					<p:inputText value="#{caixaBean.caixa.dataAbertura}">
@@ -59,10 +61,14 @@
 
 				<br />
 				<br />
-				<h:panelGrid columns="1">
+				<p:separator />
+				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar"
-						actionListener="#{caixaBean.salvar}"
+						actionListener="#{caixaBean.salvar}" icon="ui-icon-disk"
 						oncomplete="PF('dialogo').hide();" update=":mensagem" />
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						oncomplete="PF('dialogo').hide();" />
 				</h:panelGrid>
 
 			</h:form>

@@ -62,12 +62,12 @@ public class HistoricoBean implements Serializable {
 
 	public void salvar() {
 		try {
-			historico.setHorario(new Date());//pega o horário do servidor
-			historico.setProduto(produto);//pega a chave estrangeira se tiver o produto no bd
-			
+			historico.setHorario(new Date());// pega o horário do servidor
+			historico.setProduto(produto);// pega a chave estrangeira se tiver o produto no bd
+
 			HistoricoDAO historicoDAO = new HistoricoDAO();
 			historicoDAO.salvar(historico);
-			
+
 			Messages.addGlobalInfo("Histórico salvo com sucesso!");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar salvar histórico");
@@ -83,6 +83,24 @@ public class HistoricoBean implements Serializable {
 			if (resultado == null) {
 				exibePainelDados = false;
 				Messages.addGlobalWarn("Não existe produto cadastrado para o código informado!");
+			} else {
+				exibePainelDados = true;
+				produto = resultado;
+			}
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar buscar o produto");
+			erro.printStackTrace();
+		}
+	}
+
+	public void buscarPelaDescricao() {
+		try {
+			ProdutoDAO produtoDAO = new ProdutoDAO();
+			Produto resultado = produtoDAO.buscarD(produto.getDescricao());
+
+			if (resultado == null) {
+				exibePainelDados = false;
+				Messages.addGlobalWarn("Não existe produto cadastrado para a descrição informada!");
 			} else {
 				exibePainelDados = true;
 				produto = resultado;

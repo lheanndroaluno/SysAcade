@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset= UTF-8" />
+	<title>Teste PrimeFaces</title>
+</h:head>
+
+<h:body>
+
+	<p:growl id="mensagem" />
+
+	<h:form id="formLista">
+
+		<p:toolbar style="margin-top: 5px">
+
+			<p:toolbarGroup>
+
+				<p:commandButton value="Novo Teste" icon="ui-icon-plusthick"
+					oncomplete="PF('dialogo').show();"
+					actionListener="#{testeBean.novo}"
+					update=":mensagem :formCadastro:panelGrid">
+
+					<f:actionListener
+						type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+				</p:commandButton>
+
+				<p:separator />
+				<p:commandButton value="Imprimir" icon="ui-icon-print" />
+
+			</p:toolbarGroup>
+
+		</p:toolbar>
+
+		<p:panel header="Lista - Teste" style="text-align: center">
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{testeBean.testes}" var="cursorTeste"
+				rows="10">
+
+				<p:column headerText="Código" filterBy="#{cursorTeste.codigo}"
+					style="text-align: center; width: 80px">
+					<h:outputText value="#{cursorTeste.codigo}" />
+				</p:column>
+
+				<p:column headerText="Data Nascimento"
+					style="text-align: center; width: 140px">
+					<h:outputText value="#{cursorAluno.dataNascimento}">
+
+						<f:convertDateTime locale="pt_BR" />
+
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Idade"
+					style="text-align: center; width: 100px">
+					<h:outputText />
+				</p:column>
+
+				<p:column headerText="Ações"
+					style="text-align: center; width: 120px">
+
+					<!-- Botão excluir -->
+					<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
+						actionListener="#{testeBean.excluir}"
+						update=":mensagem :formLista:tabela">
+						<p:confirm header="Atenção"
+							message="Deseja excluir o registro selecionado?" />
+						<f:attribute name="linhaSelecionada" value="#{cursorTeste}" />
+
+					</p:commandButton>
+					<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+						position="top" />
+
+					<!-- Botão editar -->
+					<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+						oncomplete="PF('dialogo').show();"
+						actionListener="#{testeBean.editar}"
+						update=":formCadastro:panelGrid">
+						<p:confirm header="Atenção"
+							message="Deseja atualizar o registro selecionado?" />
+
+						<f:attribute name="linhaSelecionada" value="#{cursorTeste}" />
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+					</p:commandButton>
+					<p:tooltip id="editar" for="botaoEditar" value="Editar"
+						position="top" />
+
+				</p:column>
+
+			</p:dataTable>
+
+			<!-- Janela de confirmação -->
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" ícone="ui-icon-check" />
+
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" ícone="ui-icon-times" />
+			</p:confirmDialog>
+
+		</p:panel>
+
+	</h:form>
+
+	<!-- Janela de flutuação -->
+	<p:dialog header="Cadastro de Tetes" widgetVar="dialogo"
+		draggable="false" resizable="false" modal="true" closable="false">
+
+		<h:form id="formCadastro">
+
+			<h:panelGrid id="panelGrid" columns="2">
+
+				<p:outputLabel for="datamatricula" value="Data de Nascimento: " />
+				<p:calendar id="datamatricula" pattern="dd/MM/yyyy"
+					value="#{testeBean.teste.dataDeNascimento}" required="true"
+					requiredMessage="O campo 'Data de Nascimento' é obrigatório"
+					size="10" locale="pt_BR" timeZone="America/Recife" mask="true" />
+
+				<p:outputLabel for="idade" value="Idade " />
+				<p:inputNumber id="idade" size="4" maxlength="2"
+					value="#{testeBean.teste.getIdade}" required="true"
+					requiredMessage="O campo 'Teste' é obrigatório!">
+
+
+				</p:inputNumber>
+
+
+			</h:panelGrid>
+
+			<br />
+			<br />
+			<h:panelGrid columns="2">
+
+				<p:commandButton value="Salvar" icon="ui-icon-disk"
+					actionListener="#{testeBean.salvar}"
+					update=":mensagem :formCadastro:panelGrid :formLista:tabela" />
+
+				<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+					oncomplete="PF('dialogo').hide();" />
+
+			</h:panelGrid>
+
+		</h:form>
+
+	</p:dialog>
+
+</h:body>
+</html>

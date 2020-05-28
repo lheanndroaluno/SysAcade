@@ -72,7 +72,7 @@ public class ProfessorBean implements Serializable {
 	public void listarPorCampoOrdenacao() {
 		try {
 			ProfessorDAO professorDAO = new ProfessorDAO();
-			professores = professorDAO.listarPorCampoOrdenacao("dataCadastro");
+			professores = professorDAO.listarPorCampoOrdenacao("dataAdmissao");
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar listar os professores!");
 			erro.printStackTrace();
@@ -113,6 +113,20 @@ public class ProfessorBean implements Serializable {
 			pessoas = pessoaDAO.listarPorCampoOrdenacao("nome");
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar atualizar o professor!");
+			erro.printStackTrace();
+		}
+	}
+
+	/**
+	 * Método para mostrar os daddos pessoais
+	 * 
+	 * @param evento
+	 */
+	public void mostrarDadosProfessor(ActionEvent evento) {
+		try {
+			professor = (Professor) evento.getComponent().getAttributes().get("linhaSelecionada");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar mostrar dados do cliente!");
 			erro.printStackTrace();
 		}
 	}

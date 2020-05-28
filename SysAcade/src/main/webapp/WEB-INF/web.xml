@@ -21,7 +21,7 @@
 	<!-- Configuração do thema do primefaces -->
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>bootstrap</param-value>
+		<param-value>overcast</param-value>
 	</context-param>
 	
 	<!-- Definição do mecanismo do Upload -->

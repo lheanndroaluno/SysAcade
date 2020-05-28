@@ -1,5 +1,8 @@
 package br.com.app.sysacade.grafico;
 
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartSeries;
@@ -8,11 +11,17 @@ import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.LinearAxis;
 
-public class LineChartBean {
+@ManagedBean
+public class ChartBean {
 
 	private LineChartModel model;
+	
+	@PostConstruct
+	public void init() {
+		this.criarChartBean();
+	}
 
-	public LineChartBean() {
+	private void criarChartBean() {
 
 		model = new LineChartModel();
 

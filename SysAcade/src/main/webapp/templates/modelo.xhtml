@@ -9,12 +9,16 @@
 <ui:insert name="metadata" />
 
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset= UTF-8" />
-	<title>SysAcade</title>
-	<h:outputStylesheet library="css" name="estilos.css" />
-	<h:outputScript library="js" name="scripts.js" />
-</h:head>
 
+	<meta http-equiv="Content-Type" content="text/html; charset= UTF-8" />
+
+	<title>SysAcade</title>
+
+	<h:outputStylesheet library="css" name="estilos.css" />
+
+	<h:outputScript library="js" name="scripts.js" />
+
+</h:head>
 
 <h:body>
 
@@ -23,107 +27,179 @@
 	<div id="geral">
 
 		<div id="topo" class="divTopo">
-			<p:graphicImage library="images" name="logo.png"
+
+			<p:graphicImage library="images" name="logoR.png"
 				styleClass="imagemCentralizada" />
+
 		</div>
 
 		<div id="cabecalho" class="divCabecalho">
+
 			<h:form id="formMenu">
+
 				<p:menubar>
+
 					<p:submenu label="Arquivo" icon="ui-icon-document">
+
 						<p:menuitem value="Página Inicial" url="/pages/principal.xhtml"
 							icon="ui-icon-home" />
+
 						<p:separator />
+
 						<p:menuitem value="Sair" url="/pages/autenticacao.xhtml"
-							icon="ui-icon ui-icon-power" />
+							icon="ui-icon-closethick" />
+
 					</p:submenu>
 
 					<p:submenu label="Cadastros" icon="ui-icon-folder-open">
+
 						<p:menuitem value="Estado" url="/pages/estado.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
 						<p:separator />
+
 						<p:menuitem value="Cidade" url="/pages/cidade.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
 						<p:separator />
+
 						<p:menuitem value="Logradouro" url="/pages/logradouro.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
 						<p:separator />
+
 						<p:menuitem value="Endereço" url="/pages/endereco.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
 						<p:separator />
+
 						<p:menuitem value="Fornecedor" url="/pages/fornecedor.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
 						<p:separator />
-						<p:menuitem value="Pessoa" url="/pages/pessoa.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+
+						<p:submenu label="Pessoa" icon="ui-icon-arrowreturnthick-1-e">
+
+							<p:menuitem value="Pessoa" url="/pages/pessoa.xhtml"
+								icon="ui-icon-arrowreturnthick-1-e" />
+
+							<p:separator />
+
+							<p:menuitem value="Cliente" url="/pages/cliente.xhtml"
+								icon="ui-icon-arrowreturnthick-1-e" />
+
+							<p:separator />
+
+							<p:menuitem value="Funcionário" url="/pages/funcionario.xhtml"
+								icon="ui-icon-arrowreturnthick-1-e" />
+
+							<p:separator />
+
+							<p:menuitem value="Usuário" url="/pages/usuario.xhtml"
+								icon="ui-icon-arrowreturnthick-1-e" />
+
+							<p:separator />
+
+							<p:menuitem value="Aluno" url="/pages/aluno.xhtml"
+								icon="ui-icon-arrowreturnthick-1-e" />
+
+							<p:separator />
+
+							<p:menuitem value="Professor" url="/pages/professor.xhtml"
+								icon="ui-icon-arrowreturnthick-1-e" />
+
+							<p:separator />
+
+							<p:menuitem value="Personal" url="/pages/personal.xhtml"
+								icon="ui-icon-arrowreturnthick-1-e" />
+
+						</p:submenu>
+
 						<p:separator />
-						<p:menuitem value="Cliente" url="/pages/cliente.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
-						<p:separator />
-						<p:menuitem value="Funcionário" url="/pages/funcionario.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
-						<p:separator />
-						<p:menuitem value="Usuário" url="/pages/usuario.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
-						<p:separator />
+
 						<p:menuitem value="Produto" url="/pages/produto.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
 						<p:separator />
+
 						<p:menuitem value="Plano" url="/pages/plano.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
 						<p:separator />
-						<p:menuitem value="Aluno" url="/pages/aluno.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
-						<p:separator />
-						<p:menuitem value="Professor" url="/pages/professor.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
-						<p:separator />
-						<p:menuitem value="Personal" url="/pages/personal.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
-						<p:separator />
+
 						<p:menuitem value="Treino" url="/pages/treino.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
 						<p:separator />
+
 						<p:menuitem value="Exercício" url="/pages/exercicio.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
 						<p:separator />
 
 					</p:submenu>
 
 					<p:submenu label="Consultas" icon="ui-icon-search">
+
 						<p:menuitem value="Lista de Vendas"
 							url="/pages/vendasListagem.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
+						<p:menuitem value="Lista de Pag. Mens."
+							url="/pages/pagamentoMensListagem.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
+
 					</p:submenu>
 
 					<p:submenu label="Venda" icon="ui-icon-cart">
+
 						<p:menuitem value="Nova Venda" url="/pages/venda.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+							icon="ui-icon-plusthick" />
+
 					</p:submenu>
 
 					<p:submenu label="Pagamento Mensalidade" icon="ui-icon-dollar">
+
 						<p:menuitem value="Novo Pagamento" url="/pages/pagamento.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+							icon="ui-icon-plusthick" />
+
 					</p:submenu>
 
 					<p:submenu label="Movimentações" icon="ui-icon-transferthick-e-w">
+
 						<p:menuitem value="Caixa" url="/pages/caixa.xhtml"
 							icon="ui-icon-arrowreturnthick-1-e" />
+
 					</p:submenu>
 
-					<p:submenu label="Gráficos" icon="ui-icon-chat-bar">
+					<p:submenu label="Gráficos" icon="ui-icon-chart-bar">
+
+					</p:submenu>
+
+					<p:submenu label="Agenda" icon="ui-icon-calendar">
+
+						<p:menuitem value="Criar Evento" icon="ui-icon-plusthick"
+							url="/pages/agenda.xhtml" />
 
 					</p:submenu>
 
 					<p:submenu label="Ajuda" icon="ui-icon-help">
-						<p:menuitem value="Sobre" icon="ui-icon-arrowreturnthick-1-e" />
+
+						<p:menuitem value="Sobre" url="/pages/agenda.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
+
 					</p:submenu>
+
 				</p:menubar>
+
 			</h:form>
+
 		</div>
 
 		<div id="conteudo">
+
 			<ui:insert name="conteudo" />
+
 		</div>
 
 	</div>

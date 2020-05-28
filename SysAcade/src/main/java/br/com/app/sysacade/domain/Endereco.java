@@ -8,20 +8,27 @@ import javax.persistence.ManyToOne;
 @SuppressWarnings("serial")
 @Entity
 public class Endereco extends GenericDomain {
+	
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Logradouro logradouro;
+	
 	@Column(length = 80, nullable = false)
 	private String nomeEnd;
+	
 	@Column(nullable = false)
 	private Short numero;
+	
 	@Column(length = 50, nullable = false)
 	private String bairro;
+	
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Cidade cidade;
+	
 	@Column(length = 10, nullable = false)
 	private String cep;
+	
 	@Column(length = 30, nullable = true)
 	private String complemento;
 

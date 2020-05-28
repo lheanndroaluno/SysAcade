@@ -1,7 +1,5 @@
 package br.com.app.sysacade.domain;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import br.com.app.sysacade.enums.TipoEtnia;
 import br.com.app.sysacade.enums.TipoGenero;
@@ -83,6 +80,19 @@ public class Aluno extends GenericDomain {
 	 * 
 	 * @return
 	 */
+
+	public Plano getPlano() {
+		return plano;
+	}
+
+	public Date getDataMatricula() {
+		return dataMatricula;
+	}
+
+	public void setDataMatricula(Date dataMatricula) {
+		this.dataMatricula = dataMatricula;
+	}
+
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -91,15 +101,12 @@ public class Aluno extends GenericDomain {
 		this.dataNascimento = dataNascimento;
 	}
 
-	@Transient
-	public static Short getIdadeFormatada(final LocalDate dataNascimento) {
-		final LocalDate dataAtual = LocalDate.now();
-		final Period idade = Period.between(dataNascimento, dataAtual);
-		return (short) idade.getYears();
+	public void setHorarioInicial(Date horarioInicial) {
+		this.horarioInicial = horarioInicial;
 	}
 
-	public Plano getPlano() {
-		return plano;
+	public void setHorarioFinal(Date horarioFinal) {
+		this.horarioFinal = horarioFinal;
 	}
 
 	public void setPlano(Plano plano) {
@@ -114,14 +121,6 @@ public class Aluno extends GenericDomain {
 		this.pessoa = pessoa;
 	}
 
-	public Date getDataMatricula() {
-		return dataMatricula;
-	}
-
-	public void setDataMatricula(Date dataMatricula) {
-		this.dataMatricula = dataMatricula;
-	}
-
 	public String getObervacao() {
 		return obervacao;
 	}
@@ -134,16 +133,8 @@ public class Aluno extends GenericDomain {
 		return horarioInicial;
 	}
 
-	public void setHorarioInicial(Date horarioInicial) {
-		this.horarioInicial = horarioInicial;
-	}
-
 	public Date getHorarioFinal() {
 		return horarioFinal;
-	}
-
-	public void setHorarioFinal(Date horarioFinal) {
-		this.horarioFinal = horarioFinal;
 	}
 
 	public Date getVencimentoPlano() {

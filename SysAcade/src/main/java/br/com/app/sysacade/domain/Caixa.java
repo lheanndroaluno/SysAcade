@@ -13,7 +13,8 @@ import javax.persistence.TemporalType;
 @SuppressWarnings("serial")
 @Entity
 public class Caixa extends GenericDomain {
-	@Column(nullable = false, unique = true)
+	
+	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAbertura;
 

@@ -14,7 +14,7 @@
 		<!-- Tela de Listagem -->
 		<h:form id="formLista">
 
-			<p:toolbar style="margin-top: 5px">
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px">
 
 				<p:toolbarGroup>
 
@@ -97,7 +97,8 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorFuncionario}" />
 
 						</p:commandButton>
-						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir" position="top"/>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
 
 						<!-- Botão editar -->
 						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
@@ -113,7 +114,22 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 						</p:commandButton>
-						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
+
+						<!-- Botão dados do funcionário-->
+						<p:commandButton id="botaoDados" icon="ui-icon-search"
+							oncomplete="PF('dadosDialogo').show();"
+							actionListener="#{funcionarioBean.mostrarDadosFuncionario}"
+							update=":formDadosFuncionario:painelDadosFuncionario">
+
+							<f:attribute name="linhaSelecionada" value="#{cursorFuncionario}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+						<p:tooltip id="dados" for="botaoDados"
+							value="Dados do Funcionário" position="top" />
 
 					</p:column>
 
@@ -166,7 +182,8 @@
 						value="#{funcionarioBean.funcionario.funcao}" required="true"
 						requiredMessage="O campo 'Função' é obrigatório">
 
-						<f:selectItem itemValue="" itemLabel="" />
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione uma função" />
 						<f:selectItem itemValue="DIRETOR" itemLabel="Diretor" />
 						<f:selectItem itemValue="GERENTE" itemLabel="Gerente" />
 						<f:selectItem itemValue="COORDENADOR" itemLabel="Coordenador" />
@@ -177,8 +194,7 @@
 						<f:selectItem itemValue="PERSONAL" itemLabel="Personal" />
 						<f:selectItem itemValue="ESTAGIARIO" itemLabel="Estagiário" />
 
-						<f:selectItem noSelectionOption="true" itemValue=""
-							itemLabel="Selecione uma função" />
+
 
 					</p:selectOneMenu>
 
@@ -186,6 +202,13 @@
 					<p:calendar id="dataAdmissao" locale="pt_BR"
 						timeZone="America/Recife" mask="true" pattern="dd/MM/yyyy"
 						value="#{funcionarioBean.funcionario.dataAdmissao}"
+						required="true"
+						requiredMessage="O campo 'Data de Admissão' é obrigatório" />
+
+					<p:outputLabel for="datanascimento" value="Data de Nascimento:" />
+					<p:calendar id="datanascimento" locale="pt_BR"
+						timeZone="America/Recife" mask="true" pattern="dd/MM/yyyy"
+						value="#{funcionarioBean.funcionario.dataNascimento}"
 						required="true"
 						requiredMessage="O campo 'Data de Admissão' é obrigatório" />
 
@@ -204,6 +227,7 @@
 
 				<br />
 				<br />
+				<p:separator />
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"
@@ -212,6 +236,97 @@
 
 					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
 						oncomplete="PF('dialogo').hide();" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog widgetVar="dadosDialogo"
+			header="Dados Pessoais do Funcionário" draggable="false"
+			resizable="false" modal="true">
+
+			<h:form id="formDadosFuncionario">
+
+				<h:panelGrid id="painelDadosFuncionario" columns="2">
+
+					<h:outputLabel value="Código: " />
+					<h:outputText value="#{funcionarioBean.funcionario.codigo}" />
+
+					<h:outputLabel value="Nome: " />
+					<h:outputText value="#{funcionarioBean.funcionario.pessoa.nome}" />
+
+					<h:outputLabel value="CPF: " />
+					<h:outputText value="#{funcionarioBean.funcionario.pessoa.cpf}" />
+
+					<h:outputLabel value="RG: " />
+					<h:outputText value="#{funcionarioBean.funcionario.pessoa.rg}" />
+
+					<h:outputLabel value="Orgão Expeditor: " />
+					<h:outputText
+						value="#{funcionarioBean.funcionario.pessoa.orgaoExpeditor}" />
+
+					<h:outputLabel value="Data de Admissão: " />
+					<h:outputText value="#{funcionarioBean.funcionario.dataAdmissao}">
+
+						<f:convertDateTime locale="pt_BR" />
+
+					</h:outputText>
+					
+					<h:outputLabel value="Data de Nascimento: " />
+					<h:outputText value="#{funcionarioBean.funcionario.dataNascimento}">
+
+						<f:convertDateTime locale="pt_BR" />
+
+					</h:outputText>
+
+					<h:outputLabel value="Matrícula: " />
+					<h:outputText value="#{funcionarioBean.funcionario.matricula}" />
+
+					<h:outputLabel value="Função: " />
+					<h:outputText value="#{funcionarioBean.funcionario.funcao}" />
+
+					<h:outputLabel value="Nº CT: " />
+					<h:outputText value="#{funcionarioBean.funcionario.numeroCT}" />
+
+					<h:outputLabel value="Nº Reservista: " />
+					<h:outputText
+						value="#{funcionarioBean.funcionario.numeroReservista}" />
+
+					<h:outputLabel value="Tel. Fixo: " />
+					<h:outputText value="#{funcionarioBean.funcionario.pessoa.telFixo}" />
+
+					<h:outputLabel value="Tel. celular: " />
+					<h:outputText
+						value="#{funcionarioBean.funcionario.pessoa.telCelular}" />
+
+					<h:outputLabel value="E-mail: " />
+					<h:outputText value="#{funcionarioBean.funcionario.pessoa.email}" />
+
+					<h:outputLabel value="Endereço: " />
+					<h:outputText
+						value="#{funcionarioBean.funcionario.pessoa.endereco.logradouro.descricao} #{funcionarioBean.funcionario.pessoa.endereco.nomeEnd}" />
+
+					<h:outputLabel value="Número: " />
+					<h:outputText
+						value="#{funcionarioBean.funcionario.pessoa.endereco.numero}" />
+
+					<h:outputLabel value="Bairro: " />
+					<h:outputText
+						value="#{funcionarioBean.funcionario.pessoa.endereco.bairro}" />
+
+					<h:outputLabel value="Cidade: " />
+					<h:outputText
+						value="#{funcionarioBean.funcionario.pessoa.endereco.cidade.nome} - #{funcionarioBean.funcionario.pessoa.endereco.cidade.estado.nome}" />
+
+					<h:outputLabel value="CEP: " />
+					<h:outputText
+						value="#{funcionarioBean.funcionario.pessoa.endereco.cep}" />
+
+					<h:outputLabel value="Complemento: " />
+					<h:outputText
+						value="#{funcionarioBean.funcionario.pessoa.endereco.complemento}" />
 
 				</h:panelGrid>
 

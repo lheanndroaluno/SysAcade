@@ -11,7 +11,7 @@
 
 		<f:metadata>
 
-			<f:viewAction action="#{vendaBean.listar}" />
+			<f:viewAction action="#{pagamentoBean.listar}" />
 
 		</f:metadata>
 
@@ -22,64 +22,67 @@
 		<!-- Tela de Listagem -->
 		<h:form id="formLista">
 
-			<p:panel header="Lista - Vendas">
+			<p:panel header="Lista - Pagamentos de Mensalidades">
 
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
-					paginator="true" value="#{vendaBean.vendas}" var="cursorVenda"
-					rows="10">
+					paginator="true" value="#{pagamentoBean.pagamentos}"
+					var="cursorPagamento" rows="10">
 
 					<p:column style="width: 16px;">
 						<p:rowToggler />
 					</p:column>
 
-					<p:column headerText="Código" filterBy="#{cursorVenda.codigo}"
+					<p:column headerText="Código" filterBy="#{cursorPagamento.codigo}"
 						style="text-align: center; width: 80px">
-						<h:outputText value="#{cursorVenda.codigo}" />
+						<h:outputText value="#{cursorPagamento.codigo}" />
 					</p:column>
 
 					<p:column headerText="Horário"
 						style="text-align: center; width: 200px">
 
-						<h:outputText value="#{cursorVenda.horarioVenda}">
+						<h:outputText value="#{cursorPagamento.horario}">
 							<f:convertDateTime pattern="dd/MM/yyyy - HH:mm" locale="pt_BR"
 								timeZone="America/Fortaleza" />
 						</h:outputText>
 
 					</p:column>
 
-					<p:column headerText="Preço Total"
+					<p:column headerText="Valor Pago"
 						style="text-align: center; width: 140px">
-						<h:outputText value="#{cursorVenda.valorTotal}">
+						<h:outputText value="#{cursorPagamento.valor}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2"
 								currencySymbol="R$" type="currency" />
 						</h:outputText>
 
 					</p:column>
 
-					<p:column headerText="Cliente"
-						sortBy="#{cursorVenda.cliente.pessoa.nome}"
-						filterBy="#{cursorVenda.cliente.pessoa.nome}"
-						style="text-align: center">
-
+					<p:column headerText="Forma Pag."
+						filterBy="#{cursorPagamento.formaDePagamento.toString()}"
+						style="text-align: center; width: 100px">
 						<h:outputText
-							value="#{cursorVenda.cliente.pessoa.nome} - #{cursorVenda.cliente.pessoa.cpf}" />
-
+							value="#{cursorPagamento.formaDePagamento.toString()}" />
 					</p:column>
 
+					<p:column headerText="Mês de Referência"
+						filterBy="#{cursorPagamento.mesDeReferencia}"
+						style="text-align: center; width: 140px">
+						<h:outputText value="#{cursorPagamento.mesDeReferencia}" />
+					</p:column>
+
+
 					<p:column headerText="Funcionário"
-						sortBy="#{cursorVenda.funcionario.pessoa.nome}"
-						filterBy="#{cursorVenda.funcionario.pessoa.nome}"
+						sortBy="#{cursorPagamento.funcionario.pessoa.nome}"
+						filterBy="#{cursorPagamento.funcionario.pessoa.nome}"
 						style="text-align: center">
 
-						<h:outputText value="#{cursorVenda.funcionario.pessoa.nome}" />
+						<h:outputText value="#{cursorPagamento.funcionario.pessoa.nome}" />
 
 					</p:column>
 
 					<p:column headerText="Ações"
 						style="text-align: center; width: 60px">
 
-						<p:commandButton  icon="ui-icon-print"
-							actionListener="#{produtoBean.imprimir}">
+						<p:commandButton icon="ui-icon-print">
 
 						</p:commandButton>
 
@@ -88,37 +91,36 @@
 					<p:rowExpansion>
 
 						<p:dataTable emptyMessage="Nenhum registro encontrado."
-							value="#{cursorVenda.itensDaVenda}" var="cursorItemVenda">
+							value="#{cursorPagamento.aluno}" var="cursorAluno">
 
-							<p:column headerText="Código Prod."
+							<p:column headerText="Código Aluno"
 								style="text-align: center; width: 120px">
-								<h:outputText value="#{cursorItemVenda.produto.codigo}" />
+								<h:outputText value="#{cursorAluno.codigo}" />
 							</p:column>
 
-							<p:column headerText="Descrição do Produto"
-								style="text-align: left">
-								<h:outputText value="#{cursorItemVenda.produto.descricao}" />
+							<p:column headerText="Nome" style="text-align: center">
+								<h:outputText value="#{cursorAluno.pessoa.nome}" />
 							</p:column>
 
-							<p:column headerText="Preço Unitário"
+							<p:column headerText="CPF" style="text-align: center">
+								<h:outputText value="#{cursorAluno.pessoa.cpf}" />
+							</p:column>
+
+							<p:column headerText="Plano" style="text-align: center">
+								<h:outputText value="#{cursorAluno.plano.descricao}" />
+							</p:column>
+
+							<p:column headerText="Qtd Meses" style="text-align: center">
+								<h:outputText value="#{cursorAluno.plano.quantMeses.toString()}" />
+							</p:column>
+
+							<p:column headerText="Valor Plano"
 								style="text-align: center; width: 140px">
-								<h:outputText value="#{cursorItemVenda.produto.preco}">
+								<h:outputText value="#{cursorAluno.plano.valor}">
 									<f:convertNumber locale="pt_BR" minFractionDigits="2"
 										currencySymbol="R$" type="currency" />
 								</h:outputText>
-							</p:column>
 
-							<p:column headerText="Quantidade"
-								style="text-align: center; width: 100px">
-								<h:outputText value="#{cursorItemVenda.quantidade}" />
-							</p:column>
-
-							<p:column headerText="Valor Total"
-								style="text-align: center; width: 160px">
-								<h:outputText value="#{cursorItemVenda.valorUnitario}">
-									<f:convertNumber locale="pt_BR" minFractionDigits="2"
-										currencySymbol="R$" type="currency" />
-								</h:outputText>
 							</p:column>
 
 						</p:dataTable>

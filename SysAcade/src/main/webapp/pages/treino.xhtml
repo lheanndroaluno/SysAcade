@@ -13,7 +13,7 @@
 
 		<h:form id="formLista">
 
-			<p:toolbar style="margin-top: 5px">
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px">
 
 				<p:toolbarGroup>
 
@@ -189,11 +189,11 @@
 					</p:selectOneMenu>
 
 					<h:outputLabel for="anamnse" value="Anamnse: " />
-					<p:inputTextarea rows="3" cols="40" autoResize="false"
+					<p:inputTextarea id="anamnse" rows="3" cols="40" autoResize="false"
 						value="#{treinoBean.treino.anamnese}" />
 
 					<h:outputLabel for="observacoes" value="Observaçoes: " />
-					<p:inputTextarea rows="3" cols="40" autoResize="false"
+					<p:inputTextarea id="observacoes" rows="3" cols="40" autoResize="false"
 						value="#{treinoBean.treino.observacao}" />
 
 

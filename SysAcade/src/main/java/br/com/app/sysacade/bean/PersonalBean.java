@@ -72,7 +72,7 @@ public class PersonalBean implements Serializable {
 	public void listarPorCampoOrdenacao() {
 		try {
 			PersonalDAO personalDAO = new PersonalDAO();
-			personals = personalDAO.listarPorCampoOrdenacao("dataCadastro");
+			personals = personalDAO.listarPorCampoOrdenacao("dataAdmissao");
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar listar os professores!");
 			erro.printStackTrace();
@@ -113,6 +113,19 @@ public class PersonalBean implements Serializable {
 			pessoas = pessoaDAO.listarPorCampoOrdenacao("nome");
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar atualizar o professor!");
+			erro.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Método para mostrar os daddos pessoais
+	 * @param evento
+	 */
+	public void mostrarDadospersonal(ActionEvent evento) {
+		try {
+			personal = (Personal) evento.getComponent().getAttributes().get("linhaSelecionada");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar mostrar dados do cliente!");
 			erro.printStackTrace();
 		}
 	}

@@ -1,14 +1,12 @@
 package br.com.app.sysacade.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-import javax.faces.model.SelectItem;
 
 import org.omnifaces.util.Messages;
 
@@ -18,7 +16,6 @@ import br.com.app.sysacade.dao.TreinoDAO;
 import br.com.app.sysacade.domain.Aluno;
 import br.com.app.sysacade.domain.Professor;
 import br.com.app.sysacade.domain.Treino;
-import br.com.app.sysacade.enums.TiposDeExerciciosPeitoral;
 
 @SuppressWarnings("serial")
 @ManagedBean

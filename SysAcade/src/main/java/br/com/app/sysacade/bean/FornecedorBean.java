@@ -206,6 +206,15 @@ public class FornecedorBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
+	
+	public void mostrarDadosFornecedor(ActionEvent evento) {
+		try {
+			fornecedor = (Fornecedor) evento.getComponent().getAttributes().get("linhaSelecionada");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar mostrar os dados do fornecedor!");
+			erro.printStackTrace();
+		}
+	}
 
 	/**
 	 * Método para excluir um registro do banco de dados

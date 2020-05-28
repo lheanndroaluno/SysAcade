@@ -14,7 +14,7 @@
 		<!-- Tela de Listagem -->
 		<h:form id="formLista">
 
-			<p:toolbar style="margin-top: 5px">
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px">
 
 				<p:toolbarGroup>
 
@@ -52,23 +52,24 @@
 
 					<p:column headerText="CNPJ" sortBy="#{fornecedor.cnpj}"
 						filterBy="#{fornecedor.cnpj}"
-						style="text-align: center; width: 180px">
+						style="text-align: center; width: 160px">
 						<h:outputText value="#{cursorFornecedor.cnpj}" />
 					</p:column>
 
 					<p:column headerText="Data Cadastro"
-						style="text-align: center; width: 120px">
+						style="text-align: center; width: 110px">
 						<h:outputText value="#{cursorFornecedor.dataCadastro}">
 							<f:convertDateTime locale="pt_BR" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Tel. Celular"
-						style="text-align: center; width: 140px">
+						style="text-align: center; width: 120px">
 						<h:outputText value="#{cursorFornecedor.telCelular}" />
 					</p:column>
 
-					<p:column headerText="E-mail">
+					<p:column headerText="E-mail"
+						style="text-align: center; width: 250px">
 						<h:outputText value="#{cursorFornecedor.email}" />
 					</p:column>
 
@@ -86,7 +87,8 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorFornecedor}" />
 
 						</p:commandButton>
-						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir" position="top"/>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
 
 						<!-- Botão editar -->
 						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
@@ -102,7 +104,22 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 						</p:commandButton>
-						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
+
+						<!-- Botão dados do fornecedor-->
+						<p:commandButton id="botaoDados" icon="ui-icon-search"
+							oncomplete="PF('dadosDialogo').show();"
+							actionListener="#{fornecedorBean.mostrarDadosFornecedor}"
+							update=":formDadosFornecedor:painelDadosFornecedor">
+
+							<f:attribute name="linhaSelecionada" value="#{cursorFornecedor}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+						<p:tooltip id="dados" for="botaoDados" value="Dados do Fornecedor"
+							position="top" />
 
 					</p:column>
 
@@ -132,7 +149,7 @@
 				<h:panelGrid id="painel" columns="2">
 
 					<p:outputLabel for="razaosocial" value="Razão Social:" />
-					<p:inputText id="razaosocial" maxlength="100" size="30"
+					<p:inputText id="razaosocial" maxlength="100" size="50"
 						value="#{fornecedorBean.fornecedor.razaoSocial}" required="true"
 						requiredMessage="O campo 'Razão Social' é obrigatório"
 						converter="converterUpperCase">
@@ -141,7 +158,7 @@
 					</p:inputText>
 
 					<p:outputLabel for="nomefantasia" value="Nome Fantasia:" />
-					<p:inputText id="nomefantasia" maxlength="100" size="30"
+					<p:inputText id="nomefantasia" maxlength="100" size="50"
 						value="#{fornecedorBean.fornecedor.nomeFantasia}" required="true"
 						requiredMessage="O campo 'Nome Fantasia' é obrigatório"
 						converter="converterUpperCase">
@@ -169,10 +186,16 @@
 						value="#{fornecedorBean.fornecedor.dataCadastro}" required="true"
 						requiredMessage="O campo 'Data de Cadastro' é obrigatório" />
 
-					<p:outputLabel for="ativo" value="Ativo:" />
-					<p:selectBooleanCheckbox id="ativo"
-						value="#{fornecedorBean.fornecedor.ativo}" required="true"
-						requiredMessage="O campo 'Ativo' é obrigatório" />
+					<p:outputLabel for="status" value="Status " />
+					<p:selectOneRadio id="status"
+						value="#{fornecedorBean.fornecedor.status}" required="true"
+						requiredMessage="O campo 'Status' é obrigatório">
+
+						<f:selectItem itemValue="ATIVO" itemLabel="Ativo" />
+						<f:selectItem itemValue="INATIVO" itemLabel="Inativo" />
+
+						<p:ajax event="blur" update="@this" />
+					</p:selectOneRadio>
 
 					<p:outputLabel for="fixo" value="Telefone Fixo:" />
 					<p:inputMask mask="(99) 9999-9999" id="fixo" size="15"
@@ -247,6 +270,7 @@
 
 				<br />
 				<br />
+				<p:separator />
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"
@@ -255,6 +279,81 @@
 
 					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
 						oncomplete="PF('dialogo').hide();" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog widgetVar="dadosDialogo"
+			header="Dados Pessoais do Fornecedor" draggable="false"
+			resizable="false" modal="true">
+
+			<h:form id="formDadosFornecedor">
+
+				<h:panelGrid id="painelDadosFornecedor" columns="2">
+
+					<h:outputLabel value="Código: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.codigo}" />
+
+					<h:outputLabel value="Razão Social: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.razaoSocial}" />
+
+					<h:outputLabel value="Nome Fantasia: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.nomeFantasia}" />
+
+					<h:outputLabel value="CNPJ: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.cnpj}" />
+
+					<h:outputLabel value="Inscrição Estadual: " />
+					<h:outputText
+						value="#{fornecedorBean.fornecedor.inscricaoEstadual}" />
+
+					<h:outputLabel value="Inscrição Municipal: " />
+					<h:outputText
+						value="#{fornecedorBean.fornecedor.inscricaoMunicipal}" />
+
+					<h:outputLabel value="Data de Cadastro: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.dataCadastro}">
+
+						<f:convertDateTime locale="pt_BR" />
+
+					</h:outputText>
+
+					<h:outputLabel value="Status: " />
+					<h:outputText
+						value="#{fornecedorBean.fornecedor.ativo.booleanValue()}" />
+
+					<h:outputLabel value="Tel. Fixo: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.telFixo}" />
+
+					<h:outputLabel value="Tel. celular: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.telCelular}" />
+
+					<h:outputLabel value="E-mail: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.email}" />
+
+					<h:outputLabel value="Endereço: " />
+					<h:outputText
+						value="#{fornecedorBean.fornecedor.endereco.logradouro.descricao} #{fornecedorBean.fornecedor.endereco.nomeEnd}" />
+
+					<h:outputLabel value="Número: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.endereco.numero}" />
+
+					<h:outputLabel value="Bairro: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.endereco.bairro}" />
+
+					<h:outputLabel value="Cidade: " />
+					<h:outputText
+						value="#{fornecedorBean.fornecedor.endereco.cidade.nome} - #{fornecedorBean.fornecedor.endereco.cidade.estado.sigla}" />
+
+					<h:outputLabel value="CEP: " />
+					<h:outputText value="#{fornecedorBean.fornecedor.endereco.cep}" />
+
+					<h:outputLabel value="Complemento: " />
+					<h:outputText
+						value="#{fornecedorBean.fornecedor.endereco.complemento}" />
 
 				</h:panelGrid>
 

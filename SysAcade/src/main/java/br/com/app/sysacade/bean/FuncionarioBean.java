@@ -123,6 +123,19 @@ public class FuncionarioBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Método para mostrar os daddos pessoais
+	 * @param evento
+	 */
+	public void mostrarDadosFuncionario(ActionEvent evento) {
+		try {
+			funcionario = (Funcionario) evento.getComponent().getAttributes().get("linhaSelecionada");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar mostrar dados do cliente!");
+			erro.printStackTrace();
+		}
+	}
 
 	/**
 	 * Método para excluir um registro do banco de dados
@@ -146,7 +159,7 @@ public class FuncionarioBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
+
 	@SuppressWarnings("unused")
 	public void gerarMatrícula() {
 		Random aleatorio = new Random();

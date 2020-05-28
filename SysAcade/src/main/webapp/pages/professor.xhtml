@@ -14,7 +14,7 @@
 		<!-- Tela de Listagem -->
 		<h:form id="formLista">
 
-			<p:toolbar style="margin-top: 5px">
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px">
 
 				<p:toolbarGroup>
 
@@ -62,9 +62,9 @@
 						<h:outputText value="#{cursorProfessor.cref}" />
 					</p:column>
 
-					<p:column headerText="Data de Cadastro"
+					<p:column headerText="Data de Admissão"
 						style="text-align: center; width: 100px">
-						<h:outputText value="#{cursorProfessor.dataCadastro}">
+						<h:outputText value="#{cursorProfessor.dataAdmissao}">
 
 							<f:convertDateTime locale="pt_BR" />
 
@@ -101,7 +101,8 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorProfessor}" />
 
 						</p:commandButton>
-						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir" position="top"/>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
 
 						<!-- Botão editar -->
 						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
@@ -117,7 +118,22 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 						</p:commandButton>
-						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
+
+						<!-- Botão dados do aluno-->
+						<p:commandButton id="botaoDados" icon="ui-icon-search"
+							oncomplete="PF('dadosDialogo').show();"
+							actionListener="#{professorBean.mostrarDadosProfessor}"
+							update=":formDadosProfessor:painelDadosProfessor">
+
+							<f:attribute name="linhaSelecionada" value="#{cursorProfessor}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+						<p:tooltip id="dados" for="botaoDados" value="Dados do Professor"
+							position="top" />
 
 					</p:column>
 
@@ -172,9 +188,9 @@
 						<p:ajax event="blur" update="@this" />
 					</p:selectOneRadio>
 
-					<p:outputLabel for="dataCadastro" value="Data de Cadastro: " />
-					<p:calendar id="dataCadastro" pattern="dd/MM/yyyy"
-						value="#{professorBean.professor.dataCadastro}" required="true"
+					<p:outputLabel for="dataadmissao" value="Data de Admissão: " />
+					<p:calendar id="dataadmissao" pattern="dd/MM/yyyy"
+						value="#{professorBean.professor.dataAdmissao}" required="true"
 						requiredMessage="O campo 'Data de Cadastro' é obrigatório" />
 
 					<p:outputLabel for="datanascimento" value="Data de Nascimento: " />
@@ -184,7 +200,7 @@
 						size="10" locale="pt_BR" timeZone="America/Recife" mask="true" />
 
 					<p:outputLabel for="cref" value="CREF:" />
-					<p:inputMask mask="999999-*/**" id="cref" size="15"
+					<p:inputMask mask="999999-a/aa" id="cref" size="15"
 						value="#{professorBean.professor.cref}" required="true"
 						requiredMessage="O campo 'CREF' é obrigatório"
 						converter="converterUpperCase">
@@ -207,6 +223,7 @@
 
 				<br />
 				<br />
+				<p:separator />
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"
@@ -215,6 +232,84 @@
 
 					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
 						oncomplete="PF('dialogo').hide();" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog widgetVar="dadosDialogo" header="Dados Pessoais do Aluno"
+			draggable="false" resizable="false" modal="true">
+
+			<h:form id="formDadosProfessor">
+
+				<h:panelGrid id="painelDadosProfessor" columns="2">
+
+					<h:outputLabel value="Código: " />
+					<h:outputText value="#{professorBean.professor.codigo}" />
+
+					<h:outputLabel value="Nome: " />
+					<h:outputText value="#{professorBean.professor.pessoa.nome}" />
+
+					<h:outputLabel value="CPF: " />
+					<h:outputText value="#{professorBean.professor.pessoa.cpf}" />
+
+					<h:outputLabel value="RG: " />
+					<h:outputText value="#{professorBean.professor.pessoa.rg}" />
+
+					<h:outputLabel value="Orgão Expeditor: " />
+					<h:outputText
+						value="#{professorBean.professor.pessoa.orgaoExpeditor}" />
+
+					<h:outputLabel value="Data de Admissão: " />
+					<h:outputText value="#{professorBean.professor.dataAdmissao}">
+
+						<f:convertDateTime locale="pt_BR" />
+
+					</h:outputText>
+
+					<h:outputLabel value="Data de Nascimento: " />
+					<h:outputText value="#{professorBean.professor.dataNascimento}">
+
+						<f:convertDateTime locale="pt_BR" />
+
+					</h:outputText>
+
+					<h:outputLabel value="Gênero: " />
+					<h:outputText value="#{professorBean.professor.genero}" />
+
+					<h:outputLabel value="Tel. Fixo: " />
+					<h:outputText value="#{professorBean.professor.pessoa.telFixo}" />
+
+					<h:outputLabel value="Tel. celular: " />
+					<h:outputText value="#{professorBean.professor.pessoa.telCelular}" />
+
+					<h:outputLabel value="E-mail: " />
+					<h:outputText value="#{professorBean.professor.pessoa.email}" />
+
+					<h:outputLabel value="Endereço: " />
+					<h:outputText
+						value="#{professorBean.professor.pessoa.endereco.logradouro.descricao} #{professorBean.professor.pessoa.endereco.nomeEnd}" />
+
+					<h:outputLabel value="Número: " />
+					<h:outputText
+						value="#{professorBean.professor.pessoa.endereco.numero}" />
+
+					<h:outputLabel value="Bairro: " />
+					<h:outputText
+						value="#{professorBean.professor.pessoa.endereco.bairro}" />
+
+					<h:outputLabel value="Cidade: " />
+					<h:outputText
+						value="#{professorBean.professor.pessoa.endereco.cidade.nome} - #{professorBean.professor.pessoa.endereco.cidade.estado.sigla}" />
+
+					<h:outputLabel value="CEP: " />
+					<h:outputText value="#{professorBean.professor.pessoa.endereco.cep}" />
+
+					<h:outputLabel value="Complemento: " />
+					<h:outputText
+						value="#{professorBean.professor.pessoa.endereco.complemento}" />
 
 				</h:panelGrid>
 

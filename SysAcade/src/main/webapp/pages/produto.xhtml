@@ -14,7 +14,7 @@
 		<!-- Tela de Listagem -->
 		<h:form id="formLista">
 
-			<p:toolbar style="margin-top: 5px">
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px">
 
 				<p:toolbarGroup>
 
@@ -59,7 +59,7 @@
 					</p:column>
 
 					<p:column headerText="Preço"
-						style="text-align: center; width: 120px">
+						style="text-align: center; width: 100px">
 						<h:outputText value="#{cursorProduto.preco}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2"
 								currencySymbol="R$" type="currency" />
@@ -116,7 +116,7 @@
 						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
 
 						<!-- Botão de Download -->
-						<p:commandButton id="botaoDownload" icon="ui-icon-arrowthick-1-s"
+						<p:commandButton id="botaoDownload" icon="ui-icon-arrowthickstop-1-s"
 							actionListener="#{produtoBean.download}" ajax="false">
 							<f:attribute name="linhaSelecionada" value="#{cursorProduto}" />
 							<p:fileDownload value="#{produtoBean.stream}" />
@@ -215,6 +215,7 @@
 
 				<br />
 				<br />
+				<p:separator/>
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"

@@ -116,6 +116,15 @@ public class ClienteBean implements Serializable {
 		}
 	}
 
+	public void mostrarDadosCliente(ActionEvent evento) {
+		try {
+			cliente = (Cliente) evento.getComponent().getAttributes().get("linhaSelecionada");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar mostrar dados do cliente!");
+			erro.printStackTrace();
+		}
+	}
+
 	/**
 	 * Método para excluir um registro do banco de dados
 	 * 

@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+body {
+	background: blue;
+	width: 0px;
+	height: 0px;
+}
+
+.ui-button {
+	width: 200px;
+	height: 30px;
+	border: 10px solid #00537C; /* borda branca em volta */
+	margin: auto; /* centraliza com bordas automáticas nas laterais */
+	text-align: center; /* centraliza o texto */
+	padding: 6px 0px 6px 0px; /* espaços top right bottom left */
+	font-family: Arial, Helvetica, sans-serif; /* fonte */
+	font-size: 18px; /* tamanho da fonte */
+	color: #808080; /* cor fonte */
+	font-weight: bold;
+	display: block;
+	background: blue;
+}
+
+
+
+.principal {
+	float: center;
+	width: 350px;
+	height: 320px;
+	border: 10px solid #408080;
+	padding-top: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	margin-top: 130px;
+	margin-right: 150px;
+	margin-left: 450px;
+	margin-bottom: 150px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 15px;
+	border-top-left-radius: 50px;
+}
+
+.msg1 {
+	float: center;
+	padding: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 21px;
+	color: #0000ff;
+	text-align: left;
+	font-weight: bold;
+}
+
+.msg2 {
+	float: center;
+	padding: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #0000ff;
+	font-size: 15px;
+	text-align: left;
+	font-weight: bold;
+}

@@ -30,6 +30,11 @@ public class CaixaBean implements Serializable {
 
 	private List<Funcionario> funcionarios;
 
+	/**
+	 * Getters e Setters
+	 * 
+	 * @return
+	 */
 	public ScheduleModel getListagemCaixas() {
 		return listagemCaixas;
 	}
@@ -53,32 +58,41 @@ public class CaixaBean implements Serializable {
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
 	}
-	
+
+	/**
+	 * Método novo
+	 */
 	public void novo(SelectEvent evento) {
 		caixa = new Caixa();
 		caixa.setDataAbertura((Date) evento.getObject());
-		
+
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 		funcionarios = funcionarioDAO.listar();
 	}
-
+	
+	/**
+	 * Método listar caixas
+	 */
 	@PostConstruct
 	public void listarCaixas() {
 		listagemCaixas = new DefaultScheduleModel();
 	}
-	
+
+	/**
+	 * Método salvar abertura de caixa
+	 */
 	public void salvar() {
 		Calendar calendario = Calendar.getInstance();
 		calendario.setTime(caixa.getDataAbertura());
 		calendario.add(Calendar.DATE, 1);
 		caixa.setDataAbertura(calendario.getTime());
-		
+
 		CaixaDAO caixaDAO = new CaixaDAO();
 		caixaDAO.salvar(caixa);
-		
+
 		Messages.addGlobalInfo("Caixa aberto com sucesso!");
 	}
-	
+
 	public void setCaixas(ScheduleModel listaCaixas) {
 		this.listagemCaixas = listaCaixas;
 	}

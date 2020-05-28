@@ -139,6 +139,15 @@ public class AlunoBean implements Serializable {
 		}
 	}
 
+	public void mostrarDadosAluno(ActionEvent evento) {
+		try {
+			aluno = (Aluno) evento.getComponent().getAttributes().get("linhaSelecionada");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar mostrar dados do cliente!");
+			erro.printStackTrace();
+		}
+	}
+
 	public void excluir(ActionEvent evento) {
 		try {
 			aluno = (Aluno) evento.getComponent().getAttributes().get("linhaSelecionada");

@@ -56,7 +56,7 @@ public class AutenticacaoBean implements Serializable {
 			usuarioLogado = usuarioDAO.autenticar(usuario.getPessoa().getCpf(), usuario.getSenha());
 
 			if (usuarioLogado == null) {
-				Messages.addGlobalError("CPF e/ou Senha incorretos!");
+				Messages.addGlobalError("Usuário e/ou Senha incorretos!");
 				return;
 			}
 

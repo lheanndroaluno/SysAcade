@@ -14,7 +14,7 @@
 		<!-- Tela de Listagem -->
 		<h:form id="formLista">
 
-			<p:toolbar style="margin-top: 5px">
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px">
 
 				<p:toolbarGroup>
 
@@ -64,9 +64,8 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Liberado"
-						sortBy="#{cursorCliente.liberadoFormatado}"
-						filterBy="#{cursorCliente.liberadoFormatado}"
+					<p:column headerText="Liberado" sortBy="#{cursorCliente.liberado}"
+						filterBy="#{cursorCliente.liberado}"
 						style="text-align: center; width: 180px">
 
 						<f:facet name="filter">
@@ -77,7 +76,7 @@
 							</p:selectOneButton>
 
 						</f:facet>
-						<h:outputText value="#{cursorCliente.liberadoFormatado}" />
+						<h:outputText value="#{cursorCliente.liberado}" />
 					</p:column>
 
 					<p:column headerText="Ações"
@@ -94,7 +93,8 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorCliente}" />
 
 						</p:commandButton>
-						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir" position="top"/>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
 
 						<!-- Botão editar -->
 						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
@@ -110,7 +110,21 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 						</p:commandButton>
-						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
+
+						<!-- Botão dados do cliente-->
+						<p:commandButton id="botaoDados" icon="ui-icon-search"
+							oncomplete="PF('dadosDialogo').show();"
+							actionListener="#{clienteBean.mostrarDadosCliente}" update=":formDadosCliente:painelDadosCliente">
+
+							<f:attribute name="linhaSelecionada" value="#{cursorCliente}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+						<p:tooltip id="dados" for="botaoDados" value="Dados do Cliente"
+							position="top" />
 
 					</p:column>
 
@@ -159,18 +173,22 @@
 						requiredMessage="O campo 'Data de Cadastro' é obrigatório" />
 
 					<p:outputLabel for="liberado" value="Liberado:" />
-					<p:selectBooleanCheckbox id="liberado"
+					<p:selectOneRadio id="liberado"
 						value="#{clienteBean.cliente.liberado}" required="true"
 						requiredMessage="O campo 'Liberado' é obrigatório"
 						converter="converterUpperCase">
 
+						<f:selectItem itemValue="SIM" itemLabel="Sim" />
+						<f:selectItem itemValue="NÂO" itemLabel="Não" />
+
 						<p:ajax event="blur" update="@this" />
-					</p:selectBooleanCheckbox>
+					</p:selectOneRadio>
 
 				</h:panelGrid>
 
 				<br />
 				<br />
+				<p:separator />
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"
@@ -180,6 +198,61 @@
 					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
 						oncomplete="PF('dialogo').hide();" />
 
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog widgetVar="dadosDialogo" header="Dados Pessoais do Cliente"
+			draggable="false" resizable="false" modal="true">
+
+			<h:form id="formDadosCliente">
+
+				<h:panelGrid id="painelDadosCliente" columns="2">
+
+					<h:outputLabel value="Código: " />
+					<h:outputText value="#{clienteBean.cliente.codigo}" />
+					
+					<h:outputLabel value="Nome: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.nome}" />
+					
+					<h:outputLabel value="CPF: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.cpf}" />
+					
+					<h:outputLabel value="RG: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.rg}" />
+					
+					<h:outputLabel value="Orgão Expeditor: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.orgaoExpeditor}" />
+					
+					<h:outputLabel value="Tel. Fixo: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.telFixo}" />
+					
+					<h:outputLabel value="Tel. celular: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.telCelular}" />
+					
+					<h:outputLabel value="E-mail: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.email}" />
+					
+					<h:outputLabel value="Endereço: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.endereco.logradouro.descricao} #{clienteBean.cliente.pessoa.endereco.nomeEnd}" />
+					
+					<h:outputLabel value="Número: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.endereco.numero}" />
+					
+					<h:outputLabel value="Bairro: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.endereco.bairro}" />
+					
+					<h:outputLabel value="Cidade: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.endereco.cidade.nome} - #{clienteBean.cliente.pessoa.endereco.cidade.estado.sigla}" />
+					
+					<h:outputLabel value="CEP: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.endereco.cep}" />
+					
+					<h:outputLabel value="Complemento: " />
+					<h:outputText value="#{clienteBean.cliente.pessoa.endereco.complemento}" />
+					
 				</h:panelGrid>
 
 			</h:form>

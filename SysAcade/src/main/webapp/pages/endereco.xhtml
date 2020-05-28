@@ -14,7 +14,7 @@
 		<!-- Tela de Listagem -->
 		<h:form id="formLista">
 
-			<p:toolbar style="margin-top: 5px">
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px">
 
 				<p:toolbarGroup>
 
@@ -196,8 +196,7 @@
 
 					<p:outputLabel for="complemento" value="Complemento" />
 					<p:inputText id="complemento" maxlength="100" size="30"
-						value="#{enderecoBean.endereco.complemento}" required="true"
-						requiredMessage="O campo 'Complemento' é obrigatório"
+						value="#{enderecoBean.endereco.complemento}" 
 						converter="converterUpperCase">
 
 						<p:ajax event="blur" update="@this" />
@@ -207,6 +206,7 @@
 
 				<br />
 				<br />
+				<p:separator/>
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"

@@ -8,20 +8,28 @@ import javax.persistence.ManyToOne;
 @SuppressWarnings("serial")
 @Entity
 public class Pessoa extends GenericDomain {
+	
 	@Column(length = 50, nullable = false)
 	private String nome;
+	
 	@Column(length = 14, nullable = false)
 	private String cpf;
+	
 	@Column(length = 15, nullable = false)
 	private String rg;
+	
 	@Column(length = 10, nullable = false)
 	private String orgaoExpeditor;
+	
 	@Column(length = 16, nullable = false)
 	private String telFixo;
+	
 	@Column(length = 16, nullable = false)
 	private String telCelular;
+	
 	@Column(length = 50, nullable = false)
 	private String email;
+	
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Endereco endereco;

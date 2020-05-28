@@ -13,11 +13,11 @@
 
 		<h:form id="formLista">
 
-			<p:toolbar style="margin-top: 5px">
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px">
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo Estado" icon="ui-icon-plusthick"
+					<p:commandButton value="Novo Estado"  icon="ui-icon-plusthick"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{estadoBean.novo}"
 						update=":formCadastro:panelGrid">
@@ -29,7 +29,7 @@
 
 					<p:separator />
 					<p:commandButton value="Imprimir" icon="ui-icon-print"
-						actionListener="#{estadoBean.imprimir}" />
+						actionListener="#{estadoBean.imprimir}" style="" />
 
 				</p:toolbarGroup>
 
@@ -65,9 +65,10 @@
 							<p:confirm header="Atenção"
 								message="Deseja excluir o registro selecionado?" />
 							<f:attribute name="linhaSelecionada" value="#{cursorEstado}" />
-							
+
 						</p:commandButton>
-						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir" position="top"/>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
 
 						<!-- Botão editar -->
 						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
@@ -80,9 +81,10 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorEstado}" />
 							<f:actionListener
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-								
+
 						</p:commandButton>
-						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
 
 					</p:column>
 
@@ -105,7 +107,7 @@
 		<p:dialog header="Cadastro de Estados" widgetVar="dialogo"
 			draggable="false" resizable="false" modal="true" closable="false">
 
-			<h:form id="formCadastro">
+			<h:form id="formCadastro" style="">
 
 				<h:panelGrid id="panelGrid" columns="2">
 
@@ -130,6 +132,7 @@
 
 				<br />
 				<br />
+				<p:separator/>
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"

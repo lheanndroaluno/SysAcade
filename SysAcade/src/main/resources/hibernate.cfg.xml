@@ -57,6 +57,8 @@
 		<mapping class="br.com.app.sysacade.domain.Menu" />
 		<mapping class="br.com.app.sysacade.domain.Personal" />
 		<mapping class="br.com.app.sysacade.domain.Professor" />
+		<mapping class="br.com.app.sysacade.domain.Teste" />
+		<mapping class="br.com.app.sysacade.domain.Evento" />
 
 	</session-factory>
 
