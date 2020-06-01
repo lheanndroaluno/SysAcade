@@ -119,8 +119,7 @@ public class FornecedorBean implements Serializable {
 			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.listarPorCampoOrdenacao("nome");
 
-			CidadeDAO cidadeDAO = new CidadeDAO();
-			cidades = cidadeDAO.listarPorCampoOrdenacao("nome");
+			cidades = new ArrayList<Cidade>();
 
 			enderecos = new ArrayList<>();
 
@@ -206,7 +205,7 @@ public class FornecedorBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
+
 	public void mostrarDadosFornecedor(ActionEvent evento) {
 		try {
 			fornecedor = (Fornecedor) evento.getComponent().getAttributes().get("linhaSelecionada");
@@ -257,6 +256,7 @@ public class FornecedorBean implements Serializable {
 			if (cidade != null) {
 				EnderecoDAO enderecoDAO = new EnderecoDAO();
 				enderecos = enderecoDAO.buscarPorCidade(cidade.getCodigo());
+
 			} else {
 				enderecos = new ArrayList<>();
 			}

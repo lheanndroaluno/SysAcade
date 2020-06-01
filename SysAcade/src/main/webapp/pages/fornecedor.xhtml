@@ -222,11 +222,12 @@
 						converter="omnifaces.SelectItemsConverter" required="true"
 						requiredMessage="O campo 'Endereço' é obrigatório">
 
-						<f:selectItem itemValue="" itemLabel="Selecione um endereço" />
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione um endereço" />
 
 						<f:selectItems value="#{fornecedorBean.enderecos}"
 							var="cursorEndereco" itemValue="#{cursorEndereco}"
-							itemLabel="#{cursorEndereco.logradouro.descricao} - #{cursorEndereco.nomeEnd} - #{cursorEndereco.numero} - #{cursorEndereco.bairro} - #{cursorEndereco.cep}" />
+							itemLabel="#{cursorEndereco.logradouro.descricao} #{cursorEndereco.nomeEnd} - #{cursorEndereco.numero} - #{cursorEndereco.bairro} - #{cursorEndereco.cep}" />
 
 					</p:selectOneMenu>
 
@@ -239,9 +240,8 @@
 						<f:selectItem noSelectionOption="true"
 							itemLabel="Selecione uma cidade" />
 
-						<f:selectItems value="#{fornecedorBean.cidades}"
-							var="cursorCidade" itemValue="#{cursorCidade}"
-							itemLabel="#{cursorCidade.nome}" />
+						<f:selectItems value="#{fornecedorBean.cidades}" var="cursorCidade"
+							itemValue="#{cursorCidade}" itemLabel="#{cursorCidade.nome}" />
 
 						<p:ajax listener="#{fornecedorBean.popularEndereco}"
 							update=":formCadastro:endereco" />
@@ -257,11 +257,11 @@
 						<f:selectItem noSelectionOption="true"
 							itemLabel="Selecione um estado" />
 
-						<f:selectItems value="#{fornecedorBean.estados}"
-							var="cursorEstado" itemValue="#{cursorEstado}"
+						<f:selectItems value="#{fornecedorBean.estados}" var="cursorEstado"
+							itemValue="#{cursorEstado}"
 							itemLabel="#{cursorEstado.nome} - #{cursorEstado.sigla}" />
 
-						<p:ajax listener="#{pessoaBean.popularCidade()}"
+						<p:ajax listener="#{fornecedorBean.popularCidade}"
 							update=":formCadastro:cidade" />
 
 					</p:selectOneMenu>
@@ -323,7 +323,7 @@
 
 					<h:outputLabel value="Status: " />
 					<h:outputText
-						value="#{fornecedorBean.fornecedor.ativo.booleanValue()}" />
+						value="#{fornecedorBean.fornecedor.status}" />
 
 					<h:outputLabel value="Tel. Fixo: " />
 					<h:outputText value="#{fornecedorBean.fornecedor.telFixo}" />

@@ -16,6 +16,7 @@ import br.com.app.sysacade.dao.TreinoDAO;
 import br.com.app.sysacade.domain.Aluno;
 import br.com.app.sysacade.domain.Professor;
 import br.com.app.sysacade.domain.Treino;
+import br.com.app.sysacade.enums.Abdominal;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -26,6 +27,7 @@ public class TreinoBean implements Serializable {
 	private List<Treino> treinos;
 	private List<Aluno> alunos;
 	private List<Professor> professores;
+	private List<Abdominal> listaDeExAbd;
 
 	/**
 	 * Métodos Getters e Setters
@@ -62,6 +64,14 @@ public class TreinoBean implements Serializable {
 
 	public void setProfessores(List<Professor> professores) {
 		this.professores = professores;
+	}
+	
+	public List<Abdominal> getListaDeExAbd() {
+		return listaDeExAbd;
+	}
+
+	public void setListaDeExAbd(List<Abdominal> listaDeExAbd) {
+		this.listaDeExAbd = listaDeExAbd;
 	}
 
 	public void novo() {

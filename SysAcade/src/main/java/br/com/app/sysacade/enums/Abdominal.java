@@ -1,29 +1,23 @@
 package br.com.app.sysacade.enums;
 
 public enum Abdominal {
-	PRANCHA, SUPRA_SOLO, OBLIQUO_SOLO, OBLIQUO_POLIA, CANIVETE, INFRA, BANCO_LOMBAR, PARALELA;
+	PRANCHA("Prancha"), 
+	SUPRA_SOLO("Supra Solo"), 
+	OBLIQUO_SOLO("Obliquo Solo"), 
+	OBLIQUO_POLIA("Obliquo Polia"), 
+	CANIVETE("Canivete"), 
+	INFRA("Infra"), 
+	BANCO_LOMBAR("Banco Lombar"), 
+	PARALELA("Paralela");
 
-	public String toString() {
-
-		switch (this) {
-		case PRANCHA:
-			return "Prancha";
-		case SUPRA_SOLO:
-			return "Supra Solo";
-		case OBLIQUO_SOLO:
-			return "Obliquo Solo";
-		case OBLIQUO_POLIA:
-			return "Obliquo Polia";
-		case CANIVETE:
-			return "Canivete";
-		case INFRA:
-			return "Infra";
-		case BANCO_LOMBAR:
-			return "Banco Lombar";
-		case PARALELA:
-			return "Paralela";
-		default:
-			return null;
-		}
+	private String descricao;
+	
+	Abdominal(String descricao) {
+		this.descricao = descricao;
 	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+	
 }

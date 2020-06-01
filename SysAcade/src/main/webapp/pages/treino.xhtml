@@ -56,21 +56,19 @@
 						style="text-align: center">
 						<h:outputText value="#{cursorTreino.aluno.pessoa.nome}" />
 					</p:column>
-					
-					<p:column headerText="Aeróbico"
-						filterBy="#{cursorTreino.aerobico}"
+
+					<p:column headerText="Aeróbico" filterBy="#{cursorTreino.aerobico}"
 						sortBy="#{cursorTreino.aerobico}"
 						style="text-align: center; width: 100px">
 						<h:outputText value="#{cursorTreino.aerobico}" />
 					</p:column>
-					
-					<p:column headerText="Objetivo"
-						filterBy="#{cursorTreino.objetivo}"
+
+					<p:column headerText="Objetivo" filterBy="#{cursorTreino.objetivo}"
 						sortBy="#{cursorTreino.objetivo}"
 						style="text-align: center; width: 100px">
 						<h:outputText value="#{cursorTreino.objetivo}" />
 					</p:column>
-					
+
 					<p:column headerText="Data de Início"
 						style="text-align: center; width: 120px">
 						<h:outputText value="#{cursorTreino.dataInicio}">
@@ -98,7 +96,8 @@
 							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton id="botaoEditar" icon="ui-icon-pencil" oncomplete="PF('dialogo').show();"
+						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+							oncomplete="PF('dialogo').show();"
 							actionListener="#{treinoBean.editar}"
 							update=":mensagem :formCadastro:painel">
 
@@ -138,7 +137,7 @@
 
 			<h:form id="formCadastro">
 
-				<h:panelGrid id="painel" columns="4">
+				<h:panelGrid id="painel" columns="4" cellpadding="5">
 
 					<p:outputLabel for="aluno" value="Aluno: " />
 					<p:selectOneMenu id="aluno" filter="true"
@@ -172,8 +171,6 @@
 						<p:ajax event="blur" update="@this" />
 					</p:selectOneRadio>
 
-
-
 					<p:outputLabel for="professor" value="Professor: " />
 					<p:selectOneMenu id="professor" filter="true"
 						value="#{treinoBean.treino.professor}"
@@ -193,16 +190,16 @@
 						value="#{treinoBean.treino.anamnese}" />
 
 					<h:outputLabel for="observacoes" value="Observaçoes: " />
-					<p:inputTextarea id="observacoes" rows="3" cols="40" autoResize="false"
-						value="#{treinoBean.treino.observacao}" />
-
-
+					<p:inputTextarea id="observacoes" rows="3" cols="40"
+						autoResize="false" value="#{treinoBean.treino.observacao}" />
 
 					<p:outputLabel for="objetivo" value="Objetivo do Treino: " />
-					<p:selectOneRadio id="objetivo"
-						value="#{treinoBean.treino.objetivo}" layout="grid" columns="3"
-						required="true"
+					<p:selectOneMenu id="objetivo" filter="true"
+						value="#{treinoBean.treino.objetivo}" required="true"
 						requiredMessage="O campo 'Objetivo do Treino' é obrigatório">
+
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione um objetivo" />
 
 						<f:selectItem itemValue="HIPERTROFIA" itemLabel="Hipertrofia" />
 						<f:selectItem itemValue="FORTALECIMENTO_MUSCULAR"
@@ -215,11 +212,56 @@
 						<f:selectItem itemValue="GRUPOS_ESPECIAIS"
 							itemLabel="Grupos Especiais" />
 
-
-						<p:ajax event="blur" update="@this" />
-					</p:selectOneRadio>
+					</p:selectOneMenu>
 
 				</h:panelGrid>
+
+				<p:tabView>
+
+					<p:tab title="Abdominal">
+
+						<h:panelGrid columns="2" cellpadding="5">
+
+							<h:outputLabel value="Abdominal: " />
+							<p:selectManyCheckbox value="#{treinoBean.treino.abdominal}"
+								converter="omnifaces.GenericEnumConverter">
+
+								<f:selectItems value="#{treinoBean.listaDeExAbd}"
+									itemValue="#{abdominal}" var="abdominal"
+									itemLabel="#{abdominal.descricao}" />
+
+								<f:selectItem itemValue="PRANCHA" itemLabel="Prancha" />
+								<f:selectItem itemValue="SUPRA_SOLO" itemLabel="Supra Solo" />
+								<f:selectItem itemValue="OBLIQUO_SOLO" itemLabel="Oblíquo Solo" />
+								<f:selectItem itemValue="OBLIQUO_POLIA"
+									itemLabel="Oblíquo Polia" />
+								<f:selectItem itemValue="CANIVETE" itemLabel="Canivete" />
+								<f:selectItem itemValue="INFRA" itemLabel="Infra" />
+								<f:selectItem itemValue="BANCO_LOMBAR" itemLabel="Banco Lombar" />
+								<f:selectItem itemValue="PARALELA" itemLabel="Paralela" />
+
+							</p:selectManyCheckbox>
+
+							<p:outputLabel for="@next" value="Peso Kg: " />
+							<p:spinner id="peso"
+								value="#{treinoBean.treino.pesoParaAbdominal}" size="5" min="1" />
+
+							<p:outputLabel for="@next" value="Nº Séries: " />
+							<p:spinner id="serie"
+								value="#{treinoBean.treino.serieParaAbdominal}" size="5" min="1"
+								max="20" />
+
+							<p:outputLabel for="@next" value="Nº Repetições: " />
+							<p:spinner id="repeticao"
+								value="#{treinoBean.treino.repeticaoParaAbdominal}" size="5"
+								min="1" />
+
+						</h:panelGrid>
+
+					</p:tab>
+
+
+				</p:tabView>
 
 				<br />
 				<br />
@@ -230,7 +272,7 @@
 						update=":mensagem :formCadastro:painel :formLista:tabela" />
 
 					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
-						oncomplete="PF('dialogo').hide();" />
+						process="@this" oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>
 

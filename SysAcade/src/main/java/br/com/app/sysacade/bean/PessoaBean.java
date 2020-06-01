@@ -119,8 +119,7 @@ public class PessoaBean implements Serializable {
 			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.listarPorCampoOrdenacao("nome");
 
-			CidadeDAO cidadeDAO = new CidadeDAO();
-			cidades = cidadeDAO.listarPorCampoOrdenacao("nome");
+			cidades = new ArrayList<Cidade>();
 
 			enderecos = new ArrayList<>();
 

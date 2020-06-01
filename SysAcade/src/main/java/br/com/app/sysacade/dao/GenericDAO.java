@@ -128,22 +128,6 @@ public class GenericDAO<Entidade> {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public Entidade buscarD(String descricao) {
-		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
-
-		try {
-			Criteria consulta = sessao.createCriteria(classe);
-			consulta.add(Restrictions.idEq(descricao));
-			Entidade resultado = (Entidade) consulta.uniqueResult();
-			return resultado;
-		} catch (RuntimeException erro) {
-			throw erro;
-		} finally {
-			sessao.close();
-		}
-	}
-
 	/**
 	 * Método para excluir um registro do banco de dados
 	 * 

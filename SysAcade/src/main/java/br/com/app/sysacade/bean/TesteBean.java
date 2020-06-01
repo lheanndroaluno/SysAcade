@@ -12,6 +12,7 @@ import org.omnifaces.util.Messages;
 
 import br.com.app.sysacade.dao.TesteDAO;
 import br.com.app.sysacade.domain.Teste;
+import br.com.app.sysacade.enums.TipoComida;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -20,6 +21,17 @@ public class TesteBean implements Serializable {
 
 	private Teste teste;
 	private List<Teste> testes;
+	private List<TipoComida> tipos;
+	
+	
+
+	public List<TipoComida> getTipos() {
+		return tipos;
+	}
+
+	public void setTipos(List<TipoComida> tipos) {
+		this.tipos = tipos;
+	}
 
 	public Teste getTeste() {
 		return teste;
