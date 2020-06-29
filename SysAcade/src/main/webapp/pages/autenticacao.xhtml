@@ -8,7 +8,7 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset= UTF-8" />
-	<title>Autênticação</title>
+	<title>Tela Login</title>
 	<h:outputStylesheet library="css" name="estiloLogin.css" />
 
 </h:head>
@@ -17,63 +17,53 @@
 
 	<p:growl id="mensagem" />
 
-	<div id="principal" class="principal">
-		
-		<h:form>
+	<h:form>
 
-			<p:layout style="width:350px; height:330px;">
+		<p:dialog modal="true" visible="true" width="370" height="440"
+			header="Acessar o Sistema" showHeader="false" resizable="false"
+			responsive="true">
 
-				<p:layoutUnit position="center" resizable="true">
+			<h:graphicImage library="images" name="login.png" styleClass="img" />
 
-					<div id="msg1" class="msg1">Bem Vindo ao Sistema de
-						Gerenciamento de Academia</div>
+			<h:panelGrid id="painel" columns="2" cellpadding="5">
+
+
+				<p:panel>
+
+					<h4>Tela de Login</h4>
+					
+					<h5>Informe usuário e senha para acesso ao sistema.</h5>
+
+					<p:inputMask placeholder="Usuário" id="cpf" mask="999.999.999-99"
+						size="25" required="true"
+						requiredMessage="O campo 'Usuário' é obrigatório"
+						value="#{autenticacaoBean.usuario.pessoa.cpf}">
+
+						<p:ajax event="blur" update="@this" />
+					</p:inputMask>
 
 					<br />
-
-					<div id="msg2" class="msg2">Identifique-se por favor para
-						utilizar o sistema.</div>
-
 					<br />
 
-					<h:form id="formulario">
+					<p:password placeholder="Senha" id="senha" maxlength="12" size="25"
+						required="true" requiredMessage="O campo 'Senha' é obrigatório"
+						value="#{autenticacaoBean.usuario.senha}">
 
-						<h:panelGrid id="painel" columns="2" cellpadding="5">
+					</p:password>
 
-							<p:outputLabel for="cpf" value="Usuário: " />
-							<p:inputMask placeholder="Usuário" id="cpf" mask="999.999.999-99"
-								size="20" required="true"
-								requiredMessage="O campo 'Usuário' é obrigatório"
-								value="#{autenticacaoBean.usuario.pessoa.cpf}">
+					<br />
+					<br />
 
-								<p:ajax event="blur" update="@this" />
-							</p:inputMask>
+					<p:commandButton value="Acessar" update=":mensagem"
+						actionListener="#{autenticacaoBean.autenticar}" />
 
-							<p:outputLabel for="senha" value="Senha: " />
-							<p:password placeholder="Senha" id="senha" maxlength="12"
-								size="20" required="true"
-								requiredMessage="O campo 'Senha' é obrigatório"
-								value="#{autenticacaoBean.usuario.senha}">
+				</p:panel>
 
-							</p:password>
+			</h:panelGrid>
 
-						</h:panelGrid>
+		</p:dialog>
 
-						<br />
-						<br />
-
-						<p:commandButton value="Entrar" icon="ui-icon-arrowthickstop-1-e"
-							update=":mensagem"
-							actionListener="#{autenticacaoBean.autenticar}" />
-
-					</h:form>
-
-				</p:layoutUnit>
-
-			</p:layout>
-
-		</h:form>
-
-	</div>
+	</h:form>
 
 </h:body>
 

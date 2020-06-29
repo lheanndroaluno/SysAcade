@@ -1,8 +1,10 @@
 package br.com.app.sysacade.util;
 
+import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+import javax.servlet.http.HttpSession;
 
 import org.omnifaces.util.Faces;
 
@@ -14,19 +16,24 @@ public class AutenticacaoListener implements PhaseListener {
 
 	@Override
 	public void afterPhase(PhaseEvent event) {
-		String paginaAtual = Faces.getViewId();
 
-		boolean ehPaginaDeAutenticacao = paginaAtual.contains("autenticacao.xhtml");
+		String paginaAtual = Faces.getViewId();// Faces.getViewId serve para pegar a página atual ou página corrente
 
-		if (!ehPaginaDeAutenticacao) {
+		boolean paginaDeAutenticacao = paginaAtual.contains("autenticacao.xhtml");
+		// ! não é página de autenticação
+		if (!paginaDeAutenticacao) {
+			// autenticaçaoBean é um objeto temporario
+			// Faces é um componente do omnifaces
 			AutenticacaoBean autenticacaoBean = Faces.getSessionAttribute("autenticacaoBean");
 
 			if (autenticacaoBean == null) {
+				// força o usuário a ir para a tela de autenticação
 				Faces.navigate("/pages/autenticacao.xhtml");
 				return;
 			}
 
 			Usuario usuario = autenticacaoBean.getUsuarioLogado();
+
 			if (usuario == null) {
 				Faces.navigate("/pages/autenticacao.xhtml");
 				return;
@@ -35,8 +42,17 @@ public class AutenticacaoListener implements PhaseListener {
 
 	}
 
+	public Object getAtributoSessao(String attributeName) {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		if (session != null) {
+			return session.getAttribute(attributeName);
+		}
+		return null;
+	}
+
 	@Override
 	public void beforePhase(PhaseEvent event) {
+
 	}
 
 	@Override

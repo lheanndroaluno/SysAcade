@@ -11,12 +11,11 @@ import javax.faces.event.ActionEvent;
 import org.omnifaces.util.Messages;
 
 import br.com.app.sysacade.dao.AlunoDAO;
-import br.com.app.sysacade.dao.ProfessorDAO;
+import br.com.app.sysacade.dao.PersonalDAO;
 import br.com.app.sysacade.dao.TreinoDAO;
 import br.com.app.sysacade.domain.Aluno;
-import br.com.app.sysacade.domain.Professor;
+import br.com.app.sysacade.domain.Personal;
 import br.com.app.sysacade.domain.Treino;
-import br.com.app.sysacade.enums.Abdominal;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -26,8 +25,7 @@ public class TreinoBean implements Serializable {
 	private Treino treino;
 	private List<Treino> treinos;
 	private List<Aluno> alunos;
-	private List<Professor> professores;
-	private List<Abdominal> listaDeExAbd;
+	private List<Personal> personals;
 
 	/**
 	 * Métodos Getters e Setters
@@ -58,20 +56,12 @@ public class TreinoBean implements Serializable {
 		this.alunos = alunos;
 	}
 
-	public List<Professor> getProfessores() {
-		return professores;
+	public List<Personal> getPersonals() {
+		return personals;
 	}
 
-	public void setProfessores(List<Professor> professores) {
-		this.professores = professores;
-	}
-	
-	public List<Abdominal> getListaDeExAbd() {
-		return listaDeExAbd;
-	}
-
-	public void setListaDeExAbd(List<Abdominal> listaDeExAbd) {
-		this.listaDeExAbd = listaDeExAbd;
+	public void setPersonals(List<Personal> personals) {
+		this.personals = personals;
 	}
 
 	public void novo() {
@@ -82,8 +72,8 @@ public class TreinoBean implements Serializable {
 			AlunoDAO alunoDAO = new AlunoDAO();
 			alunos = alunoDAO.listar();
 
-			ProfessorDAO professorDAO = new ProfessorDAO();
-			professores = professorDAO.listar();
+			PersonalDAO personalDAO = new PersonalDAO();
+			personals = personalDAO.listar();
 
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar criar um novo treino!");
@@ -101,8 +91,8 @@ public class TreinoBean implements Serializable {
 			AlunoDAO alunoDAO = new AlunoDAO();
 			alunos = alunoDAO.listar();
 
-			ProfessorDAO professorDAO = new ProfessorDAO();
-			professores = professorDAO.listar();
+			PersonalDAO personalDAO = new PersonalDAO();
+			personals = personalDAO.listar();
 
 			treinos = treinoDAO.listar();
 
@@ -118,6 +108,7 @@ public class TreinoBean implements Serializable {
 		try {
 			TreinoDAO treinoDAO = new TreinoDAO();
 			treinos = treinoDAO.listar();
+
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Erro ao tentar listar todos os treinos!");
 			erro.printStackTrace();
@@ -131,8 +122,9 @@ public class TreinoBean implements Serializable {
 			AlunoDAO alunoDAO = new AlunoDAO();
 			alunos = alunoDAO.listar();
 
-			ProfessorDAO professorDAO = new ProfessorDAO();
-			professores = professorDAO.listar();
+			PersonalDAO personalDAO = new PersonalDAO();
+			personals = personalDAO.listar();
+
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Erro ao tentar atualizar o treino!");
 			erro.printStackTrace();

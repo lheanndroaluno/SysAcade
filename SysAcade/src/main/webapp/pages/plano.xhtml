@@ -19,7 +19,7 @@
 
 					<h:panelGrid columns="2">
 
-						<p:commandButton value="Novo Plano" icon="ui-icon-plusthick"
+						<p:commandButton value="Novo" icon="ui-icon-plusthick"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{planoBean.novo}" update=":formCadastro:painel">
 
@@ -57,7 +57,7 @@
 					</p:column>
 
 					<p:column headerText="Valor Plano"
-						style="text-align: center; width: 120px">
+						style="text-align: left; width: 120px">
 						<h:outputText value="#{cursorPlano.valor}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2"
 								currencySymbol="R$" type="currency" />

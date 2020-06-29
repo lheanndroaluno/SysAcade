@@ -7,20 +7,26 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/templates/modelo.xhtml">
 
-
-
 	<ui:define name="conteudo">
 
 		<h:form>
 
-			<p:schedule value="#{caixaBean.listagemCaixas}" timeZone="GMT-3"
-				locale="pt_BR" view="agendaWeek" timeFormat="HH:mm" minTime="05:00"
-				maxTime="22:00" displayEventEnd="true">
+			<p:panel>
 
-				<p:ajax event="dateSelect" listener="#{caixaBean.novo}"
-					oncomplete="PF('dialogo').show();" update=":formulario:painel" />
+				<p:panelGrid columnClasses="value">
 
-			</p:schedule>
+					<p:schedule value="#{caixaBean.listagemCaixas}" timeZone="GMT-3"
+						locale="pt_BR" view="agendaWeek" timeFormat="HH:mm"
+						minTime="05:00" maxTime="22:00" displayEventEnd="true">
+
+						<p:ajax event="dateSelect" listener="#{caixaBean.novo}"
+							oncomplete="PF('dialogo').show();" update=":formulario:painel" />
+
+					</p:schedule>
+
+				</p:panelGrid>
+
+			</p:panel>
 
 		</h:form>
 
@@ -50,6 +56,7 @@
 					<p:outputLabel value="Funcionário: " />
 					<p:selectOneMenu value="#{caixaBean.caixa.funcionario}"
 						converter="omnifaces.SelectItemsConverter">
+						
 						<f:selectItem noSelectionOption="true"
 							itemLabel="Selecione um funcionário" />
 

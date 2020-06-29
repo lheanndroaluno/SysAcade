@@ -16,6 +16,12 @@
 
 	<h:outputStylesheet library="css" name="estilos.css" />
 
+	<h:outputStylesheet library="webjars"
+		name="font-awesome/5.12.0/css/all.min-jsf.css" />
+
+	<h:outputStylesheet library="webjars"
+		name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+
 	<h:outputScript library="js" name="scripts.js" />
 
 </h:head>
@@ -26,12 +32,7 @@
 
 	<div id="geral">
 
-		<div id="topo" class="divTopo">
-
-			<p:graphicImage library="images" name="logoR.png"
-				styleClass="imagemCentralizada" />
-
-		</div>
+		<div id="topo" class="divTopo"></div>
 
 		<div id="cabecalho" class="divCabecalho">
 
@@ -39,156 +40,179 @@
 
 				<p:menubar>
 
-					<p:submenu label="Arquivo" icon="ui-icon-document">
+					<p:submenu label="Arquivo" icon="fa fa-file">
 
-						<p:menuitem value="Página Inicial" url="/pages/principal.xhtml"
-							icon="ui-icon-home" />
+						<p:menuitem value="Página Inicial"
+							url="/pages/principal.xhtml" icon="fa fa-home" />
 
 						<p:separator />
 
 						<p:menuitem value="Sair" url="/pages/autenticacao.xhtml"
-							icon="ui-icon-closethick" />
+							icon="fa fa-close" action="#{autenticacaoBean.logOff()}" />
+
+						<p:separator />
 
 					</p:submenu>
 
-					<p:submenu label="Cadastros" icon="ui-icon-folder-open">
-
-						<p:menuitem value="Estado" url="/pages/estado.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+					<p:submenu label="Cadastros" icon="fa fa-folder-open">
 
 						<p:separator />
 
-						<p:menuitem value="Cidade" url="/pages/cidade.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Estado" url="/pages/estado.xhtml" />
 
 						<p:separator />
 
-						<p:menuitem value="Logradouro" url="/pages/logradouro.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Cidade" url="/pages/cidade.xhtml" />
 
 						<p:separator />
 
-						<p:menuitem value="Endereço" url="/pages/endereco.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Logradouro"
+							url="/pages/logradouro.xhtml" />
 
 						<p:separator />
 
-						<p:menuitem value="Fornecedor" url="/pages/fornecedor.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Endereço" url="/pages/endereco.xhtml" />
+
+						<p:separator />
+
+						<p:menuitem value="Fornecedor"
+							url="/pages/fornecedor.xhtml" />
 
 						<p:separator />
 
 						<p:submenu label="Pessoa" icon="ui-icon-arrowreturnthick-1-e">
 
-							<p:menuitem value="Pessoa" url="/pages/pessoa.xhtml"
-								icon="ui-icon-arrowreturnthick-1-e" />
+							<p:menuitem value="Pessoa" url="/pages/pessoa.xhtml" />
 
 							<p:separator />
 
-							<p:menuitem value="Cliente" url="/pages/cliente.xhtml"
-								icon="ui-icon-arrowreturnthick-1-e" />
+							<p:menuitem value="Cliente" url="/pages/cliente.xhtml" />
 
 							<p:separator />
 
-							<p:menuitem value="Funcionário" url="/pages/funcionario.xhtml"
-								icon="ui-icon-arrowreturnthick-1-e" />
+							<p:menuitem value="Funcionário"
+								url="/pages/funcionario.xhtml" />
 
 							<p:separator />
 
-							<p:menuitem value="Usuário" url="/pages/usuario.xhtml"
-								icon="ui-icon-arrowreturnthick-1-e" />
+							<p:menuitem value="Usuário" url="/pages/usuario.xhtml" />
 
 							<p:separator />
 
-							<p:menuitem value="Aluno" url="/pages/aluno.xhtml"
-								icon="ui-icon-arrowreturnthick-1-e" />
+							<p:menuitem value="Aluno" url="/pages/aluno.xhtml" />
 
 							<p:separator />
 
-							<p:menuitem value="Professor" url="/pages/professor.xhtml"
-								icon="ui-icon-arrowreturnthick-1-e" />
+							<p:menuitem value="Professor"
+								url="/pages/professor.xhtml" />
 
 							<p:separator />
 
-							<p:menuitem value="Personal" url="/pages/personal.xhtml"
-								icon="ui-icon-arrowreturnthick-1-e" />
+							<p:menuitem value="Personal" url="/pages/personal.xhtml" />
 
 						</p:submenu>
 
 						<p:separator />
 
-						<p:menuitem value="Produto" url="/pages/produto.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Produto" url="/pages/produto.xhtml" />
 
 						<p:separator />
 
-						<p:menuitem value="Plano" url="/pages/plano.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Plano" url="/pages/plano.xhtml" />
 
 						<p:separator />
 
-						<p:menuitem value="Treino" url="/pages/treino.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Treino" url="/pages/treino.xhtml" />
 
 						<p:separator />
 
-						<p:menuitem value="Exercício" url="/pages/exercicio.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Exercício"
+							url="/pages/exercicio.xhtml" />
+
+						<p:separator />
+
+						<p:menuitem value="Tipo de Treino"
+							url="/pages/tipodetreino.xhtml" />
+
+						<p:separator />
+
+						<p:menuitem value="Tipo de Músculo"
+							url="/pages/tipodemusculo.xhtml" />
 
 						<p:separator />
 
 					</p:submenu>
 
-					<p:submenu label="Consultas" icon="ui-icon-search">
+					<p:submenu label="Consultas" icon="fa fa-search">
 
 						<p:menuitem value="Lista de Vendas"
-							url="/pages/vendasListagem.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+							url="/pages/vendasListagem.xhtml" />
+
+						<p:separator />
 
 						<p:menuitem value="Lista de Pag. Mens."
-							url="/pages/pagamentoMensListagem.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+							url="/pages/pagamentoMensListagem.xhtml" />
+
+						<p:separator />
 
 					</p:submenu>
 
-					<p:submenu label="Venda" icon="ui-icon-cart">
+					<p:submenu label="Venda" icon="fa fa-shopping-cart">
 
-						<p:menuitem value="Nova Venda" url="/pages/venda.xhtml"
-							icon="ui-icon-plusthick" />
+						<p:menuitem value="Nova Venda" url="/pages/venda.xhtml" />
 
-					</p:submenu>
-
-					<p:submenu label="Pagamento Mensalidade" icon="ui-icon-dollar">
-
-						<p:menuitem value="Novo Pagamento" url="/pages/pagamento.xhtml"
-							icon="ui-icon-plusthick" />
+						<p:separator />
 
 					</p:submenu>
 
-					<p:submenu label="Movimentações" icon="ui-icon-transferthick-e-w">
+					<p:submenu label="Pagamento Mensalidade" icon="fa fa-money">
 
-						<p:menuitem value="Caixa" url="/pages/caixa.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Novo Pagamento"
+							url="/pages/pagamento.xhtml" />
 
-					</p:submenu>
-
-					<p:submenu label="Gráficos" icon="ui-icon-chart-bar">
+						<p:separator />
 
 					</p:submenu>
 
-					<p:submenu label="Agenda" icon="ui-icon-calendar">
+					<p:submenu label="Movimentações" icon="fa fa-exchange">
 
-						<p:menuitem value="Criar Evento" icon="ui-icon-plusthick"
+						<p:menuitem value="Caixa" url="/pages/caixa.xhtml" />
+
+						<p:separator />
+
+					</p:submenu>
+
+					<p:submenu label="Gráficos" icon="fa fa-chart-line">
+
+					</p:submenu>
+
+					<p:submenu label="Agenda" icon="fa fa-calendar">
+
+						<p:menuitem value="Criar Evento"
 							url="/pages/agenda.xhtml" />
 
-					</p:submenu>
-
-					<p:submenu label="Ajuda" icon="ui-icon-help">
-
-						<p:menuitem value="Sobre" url="/pages/agenda.xhtml"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:separator />
 
 					</p:submenu>
+
+					<p:submenu label="Avaliação" icon="fa fa-list-alt">
+
+						<p:menuitem value="Avaliação"
+							url="/pages/avaliacao.xhtml" />
+
+						<p:separator />
+
+					</p:submenu>
+
+					<p:submenu label="Ajuda" icon="fa fa-question">
+
+						<p:menuitem value="Sobre" url="/pages/agenda.xhtml" />
+
+						<p:separator />
+
+					</p:submenu>
+
+
 
 				</p:menubar>
 

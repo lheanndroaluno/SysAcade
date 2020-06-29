@@ -112,7 +112,7 @@ public class EventoBean implements Serializable {
 	/**
 	 * Método novo
 	 */
-	@SuppressWarnings("unused")
+
 	public void novo(SelectEvent selectEvento) {
 		evento = new Evento();
 

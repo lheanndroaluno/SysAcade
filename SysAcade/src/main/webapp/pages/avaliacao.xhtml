@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+
+
+	<ui:define name="conteudo">
+
+		<!-- Tela de Listagem -->
+		<h:form id="formLista">
+
+			<p:toolbar style="margin-top: 5px; margin-bottom: 5px;">
+
+				<p:toolbarGroup>
+
+					<p:commandButton value="Nova Avaliação" icon="ui-icon-plusthick"
+						oncomplete="PF('dialogo').show();"
+						actionListener="#{avaliacaoBean.novo}"
+						update=":mensagem :formCadastro:painel">
+
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+					</p:commandButton>
+
+					<p:separator />
+
+					<p:commandButton value="Imprimir" icon="ui-icon-print">
+
+
+					</p:commandButton>
+
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:panel header="Lista - Avaliações" style="text-align: center;">
+
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					paginator="true" value="#{avaliacaoBean.avaliacoes}"
+					var="cursorAvaliacao" rows="10">
+
+					<p:column headerText="Código" filterBy="#{cursorAvaliacao.codigo}"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorCliente.codigo}" />
+					</p:column>
+
+
+
+					<p:column headerText="Data da Avaliação"
+						style="text-align: center; width: 150px">
+						<h:outputText value="#{cursorAvaliacao.dataAvaliacao}">
+
+							<f:convertDateTime locale="pt_BR" />
+
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Idade"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorAvaliacao.idade}" />
+					</p:column>
+
+					<p:column headerText="Gênero"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorAvaliacao.genero}" />
+					</p:column>
+
+					<p:column headerText="Peso" style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorAvaliacao.peso}" />
+					</p:column>
+
+					<p:column headerText="Altura"
+						style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorAvaliacao.altura}" />
+					</p:column>
+
+					<p:column headerText="IMC" style="text-align: center; width: 80px">
+						<h:outputText value="#{cursorAvaliacao.imc}" />
+					</p:column>
+
+					<p:column headerText="Ações"
+						style="text-align: center; width: 180px">
+
+						<!-- Botão excluir -->
+						<p:commandButton form="botaoExcluir"
+							actionListener="#{avaliacaoBean.excluir}"
+							update=":mensagem :formLista:tabela" icon="fa fa-trash">
+
+							<p:confirm header="Atenção"
+								message="Deseja excluir o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorAvaliacao}" />
+
+						</p:commandButton>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
+
+						<!-- Botão editar -->
+						<p:commandButton id="botaoEditar" icon="fa fa-edit"
+							oncomplete="PF('dialogo').show();"
+							actionListener="#{avaliacaoBean.editar}"
+							update=":mensagem :formCadastro:painel">
+
+							<p:confirm header="Atenção"
+								message="Deseja atualizar o registro selecionado?" />
+
+							<f:attribute name="linhaSelecionada" value="#{cursorAvaliacao}" />
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+
+						</p:commandButton>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
+
+					</p:column>
+
+				</p:dataTable>
+
+				<!-- Janela de confirmação -->
+				<p:confirmDialog global="true">
+
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" ícone="fa fa-check" />
+
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" ícone="fa fa-times" />
+
+				</p:confirmDialog>
+
+			</p:panel>
+
+		</h:form>
+
+		<!-- Janela de flutuação -->
+		<p:dialog header="Avaliação Física" style="text-align: center;"
+			widgetVar="dialogo" draggable="false" resizable="false" modal="true"
+			closable="true" minimizable="true" maximizable="true">
+
+			<h:form id="formCadastro">
+
+				<p:panel header="ANAMNESE">
+
+					<p:panelGrid id="painel" columns="4">
+
+						<p:outputLabel for="aluno" value="Aluno: " />
+						<p:selectOneMenu id="aluno" filter="true"
+							value="#{avaliacaoBean.avaliacao.aluno}"
+							converter="omnifaces.SelectItemsConverter" required="true"
+							requiredMessage="O campo 'Aluno' é obrigatório!">
+
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione um aluno" />
+
+							<f:selectItems value="#{avaliacaoBean.alunos}" var="aluno"
+								itemValue="#{aluno}" itemLabel="#{aluno.pessoa.nome}" />
+
+						</p:selectOneMenu>
+
+						<p:outputLabel for="sexo" value="Gênero: " />
+						<p:selectOneRadio id="sexo"
+							value="#{avaliacaoBean.avaliacao.genero}" required="true"
+							requiredMessage="O campo 'Gênero' é obrigatório"
+							converter="converterUpperCase">
+
+							<f:selectItem itemValue="MASCULINO" itemLabel="Masculino" />
+							<f:selectItem itemValue="FEMININO" itemLabel="Feminino" />
+							<f:selectItem itemValue="OUTRO" itemLabel="Outro" />
+
+							<p:ajax event="blur" update="@this" />
+						</p:selectOneRadio>
+
+						<p:outputLabel for="dataavaliacao" value="Data da Avaliação:" />
+						<p:calendar id="dataavaliacao" pattern="dd/MM/yyyy"
+							value="#{avaliacaoBean.avaliacao.dataAvaliacao}" required="true"
+							requiredMessage="O campo 'Data da Avaliação' é obrigatório"
+							size="10" locale="pt_BR" timeZone="America/Recife" mask="true" />
+
+						<p:outputLabel for="idade" value="Idade: " />
+						<p:inputNumber id="idade" value="#{avaliacaoBean.avaliacao.idade}"
+							required="true" requiredMessage="O campo 'Idade' é obrigatório"
+							size="3" maxlength="3" minValue="0" maxValue="200" />
+
+						<p:outputLabel for="altura" value="Altura: " />
+						<p:inputNumber id="altura"
+							value="#{avaliacaoBean.avaliacao.altura}" required="true"
+							requiredMessage="O campo 'Altura' é obrigatório" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" cm" symbolPosition="s" />
+
+						<p:outputLabel for="peso" value="Peso: " />
+						<p:inputNumber id="peso" value="#{avaliacaoBean.avaliacao.peso}"
+							required="true" requiredMessage="O campo 'Peso' é obrigatório"
+							size="6" maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" kg" symbolPosition="s" />
+
+						<p:outputLabel for="imc" value="IMC: " />
+						<p:inputNumber id="imc" value="#{avaliacaoBean.avaliacao.imc}"
+							size="6" maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="." />
+
+						<p:outputLabel for="pressaoarterial"
+							value="Pressão Arterial (mmhg): " />
+						<p:inputNumber id="pressaoarterial"
+							value="#{avaliacaoBean.avaliacao.pressaoArterial}"
+							required="true"
+							requiredMessage="O campo 'Pressão Arterial' é obrigatório"
+							size="8" maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="2" decimalSeparator="," thousandSeparator="."
+							symbol=" mmhg" symbolPosition="s" />
+
+						<p:outputLabel for="da" value="Doenças Anteriores: " />
+						<p:selectOneRadio id="da"
+							value="#{avaliacaoBean.avaliacao.doencasAnteriores}"
+							required="true"
+							requiredMessage="O campo 'Doenças Anteriores' é obrigatório"
+							converter="converterUpperCase">
+
+							<f:selectItem itemValue="SIM" itemLabel="Sim" />
+							<f:selectItem itemValue="NAO" itemLabel="Não" />
+
+							<p:ajax event="blur" update="@this" />
+						</p:selectOneRadio>
+
+						<p:outputLabel for="qualda" value="Qual?" />
+						<p:inputText id="qualda" value="#{avaliacaoBean.avaliacao.qualDA}"
+							size="40" maxlength="50" />
+
+						<p:outputLabel for="medicacao" value="Medicação: " />
+						<p:selectOneRadio id="medicacao"
+							value="#{avaliacaoBean.avaliacao.usaMedicacao}" required="true"
+							requiredMessage="O campo 'Medicação' é obrigatório"
+							converter="converterUpperCase">
+
+							<f:selectItem itemValue="SIM" itemLabel="Sim" />
+							<f:selectItem itemValue="NAO" itemLabel="Não" />
+
+							<p:ajax event="blur" update="@this" />
+						</p:selectOneRadio>
+
+						<p:outputLabel for="qualm" value="Qual?" />
+						<p:inputText id="qualm" value="#{avaliacaoBean.avaliacao.qualM}"
+							size="40" maxlength="50" />
+
+						<p:outputLabel for="la" value="Lesões Anteriores: " />
+						<p:selectOneRadio id="la"
+							value="#{avaliacaoBean.avaliacao.lesoesAnteriores}"
+							required="true"
+							requiredMessage="O campo 'Lesões Anteriores' é obrigatório"
+							converter="converterUpperCase">
+
+							<f:selectItem itemValue="SIM" itemLabel="Sim" />
+							<f:selectItem itemValue="NAO" itemLabel="Não" />
+
+							<p:ajax event="blur" update="@this" />
+						</p:selectOneRadio>
+
+						<p:outputLabel for="qualla" value="Qual?" />
+						<p:inputText id="qualla" value="#{avaliacaoBean.avaliacao.qualLA}"
+							size="40" maxlength="50" />
+
+						<p:outputLabel for="fumante" value="Fumante: " />
+						<p:selectOneRadio id="fumante"
+							value="#{avaliacaoBean.avaliacao.fumante}" required="true"
+							requiredMessage="O campo 'Fumante' é obrigatório"
+							converter="converterUpperCase">
+
+							<f:selectItem itemValue="SIM" itemLabel="Sim" />
+							<f:selectItem itemValue="NAO" itemLabel="Não" />
+
+							<p:ajax event="blur" update="@this" />
+						</p:selectOneRadio>
+
+						<p:outputLabel for="alergia" value="Alergia: " />
+						<p:selectOneRadio id="alergia"
+							value="#{avaliacaoBean.avaliacao.alergias}" required="true"
+							requiredMessage="O campo 'Alergia' é obrigatório"
+							converter="converterUpperCase">
+
+							<f:selectItem itemValue="SIM" itemLabel="Sim" />
+							<f:selectItem itemValue="NAO" itemLabel="Não" />
+
+							<p:ajax event="blur" update="@this" />
+						</p:selectOneRadio>
+
+						<p:outputLabel for="cirurgia" value="Cirurgia: " />
+						<p:selectOneRadio id="cirurgia"
+							value="#{avaliacaoBean.avaliacao.cirurgia}" required="true"
+							requiredMessage="O campo 'Cirurgia' é obrigatório"
+							converter="converterUpperCase">
+
+							<f:selectItem itemValue="SIM" itemLabel="Sim" />
+							<f:selectItem itemValue="NAO" itemLabel="Não" />
+
+							<p:ajax event="blur" update="@this" />
+						</p:selectOneRadio>
+
+						<p:outputLabel for="ts" value="Tipo Sanguíneo: " />
+						<p:selectOneRadio id="ts"
+							value="#{avaliacaoBean.avaliacao.tipoSanguineo}"
+							converter="omnifaces.SelectItemsConverter" required="true"
+							requiredMessage="O campo 'Tipo Sanguíneo' é obrigatório">
+
+							
+							<f:selectItem itemValue="A_POSITIVO" itemLabel="A+" />
+							<f:selectItem itemValue="A_NEGATIVO" itemLabel="A-" />
+							<f:selectItem itemValue="B_POSITIVO" itemLabel="B+" />
+							<f:selectItem itemValue="B_NEGATIVO" itemLabel="B-" />
+							<f:selectItem itemValue="O_POSITIVO" itemLabel="O+" />
+							<f:selectItem itemValue="O_NEGATIVO" itemLabel="O-" />
+							<f:selectItem itemValue="AB_POSITIVO" itemLabel="AB+" />
+							<f:selectItem itemValue="AB_NEGATIVO" itemLabel="AB-" />
+
+							<p:ajax event="blur" update="@this" />
+							
+						</p:selectOneRadio>
+
+					</p:panelGrid>
+
+				</p:panel>
+
+				<p:panel header="ANTROPOMETRIA (Cm)">
+
+					<p:panelGrid id="painel1" columns="8">
+
+						<p:outputLabel for="torax" value="Torax: " />
+						<p:inputNumber id="torax" value="#{avaliacaoBean.avaliacao.torax}"
+							size="6" maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" cm" symbolPosition="s" />
+
+						<p:outputLabel for="cintura" value="Cintura: " />
+						<p:inputNumber id="cintura"
+							value="#{avaliacaoBean.avaliacao.cintura}" size="6" maxlength="6"
+							minValue="0000.0" maxValue="1000.0" decimalPlaces="1"
+							decimalSeparator="," thousandSeparator="." symbol=" cm"
+							symbolPosition="s" />
+
+						<p:outputLabel for="abdomen" value="Abdômen: " />
+						<p:inputNumber id="abdomen"
+							value="#{avaliacaoBean.avaliacao.abdomen}" size="6" maxlength="6"
+							minValue="0000.0" maxValue="1000.0" decimalPlaces="1"
+							decimalSeparator="," thousandSeparator="." symbol=" cm"
+							symbolPosition="s" />
+
+						<p:outputLabel for="quadril" value="Quadril: " />
+						<p:inputNumber id="quadril"
+							value="#{avaliacaoBean.avaliacao.quadril}" size="6" maxlength="6"
+							minValue="0000.0" maxValue="1000.0" decimalPlaces="1"
+							decimalSeparator="," thousandSeparator="." symbol=" cm"
+							symbolPosition="s" />
+
+						<p:outputLabel for="cpd" value="Coxa Proximal D: " />
+						<p:inputNumber id="cpd"
+							value="#{avaliacaoBean.avaliacao.coxaProximalDireito}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" cm" symbolPosition="s" />
+
+						<p:outputLabel for="cpe" value="Coxa Proximal E: " />
+						<p:inputNumber id="cpe"
+							value="#{avaliacaoBean.avaliacao.coxaProximalEsquerdo}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" cm" symbolPosition="s" />
+
+						<p:outputLabel for="pd" value="Panturrilha D: " />
+						<p:inputNumber id="pd"
+							value="#{avaliacaoBean.avaliacao.panturrilhaDireito}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" cm" symbolPosition="s" />
+
+						<p:outputLabel for="pane" value="Panturrilha E: " />
+						<p:inputNumber id="pane"
+							value="#{avaliacaoBean.avaliacao.panturrilhaesquerdo}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" cm" symbolPosition="s" />
+
+						<p:outputLabel for="bd" value="Braço D: " />
+						<p:inputNumber id="bd"
+							value="#{avaliacaoBean.avaliacao.bracoNormalDireito}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" cm" symbolPosition="s" />
+
+						<p:outputLabel for="be" value="Braço E: " />
+						<p:inputNumber id="be"
+							value="#{avaliacaoBean.avaliacao.bracoNormalEsquerdo}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" cm" symbolPosition="s" />
+
+						<p:outputLabel for="ad" value="Antebraço D: " />
+						<p:inputNumber id="ad"
+							value="#{avaliacaoBean.avaliacao.anteBracoDireito}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" cm" symbolPosition="s" />
+
+						<p:outputLabel for="ae" value="Antebraço E: " />
+						<p:inputNumber id="ae"
+							value="#{avaliacaoBean.avaliacao.anteBracoEsquerdo}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" cm" symbolPosition="s" />
+
+					</p:panelGrid>
+
+				</p:panel>
+
+				<p:panel header="COMPOSIÇÃO CORPORAL">
+
+					<p:panelGrid id="painel2" columns="8">
+
+						<p:outputLabel for="gabs" value="Gordura Absolut: " />
+						<p:inputNumber id="gabs"
+							value="#{avaliacaoBean.avaliacao.gorduraAbsolut}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" kg" symbolPosition="s" />
+
+						<p:outputLabel for="mm" value="Massa Magra: " />
+						<p:inputNumber id="mm"
+							value="#{avaliacaoBean.avaliacao.massaMagra}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" kg" symbolPosition="s" />
+
+						<p:outputLabel for="pi" value="Peso Ideal: " />
+						<p:inputNumber id="pi"
+							value="#{avaliacaoBean.avaliacao.pesoIdeal}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" kg" symbolPosition="s" />
+
+						<p:outputLabel for="pe" value="Peso Excesso: " />
+						<p:inputNumber id="pe"
+							value="#{avaliacaoBean.avaliacao.pesoExcesso}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" kg" symbolPosition="s" />
+
+						<p:outputLabel for="pr" value="Peso Residual: " />
+						<p:inputNumber id="pr"
+							value="#{avaliacaoBean.avaliacao.pesoResidual}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="."
+							symbol=" kg" symbolPosition="s" />
+
+						<p:outputLabel for="gordura" value="Gordura (%): " />
+						<p:inputNumber id="gordura"
+							value="#{avaliacaoBean.avaliacao.gordura}" size="6" maxlength="6"
+							minValue="0000.0" maxValue="1000.0" decimalPlaces="1"
+							decimalSeparator="," thousandSeparator="." />
+
+					</p:panelGrid>
+
+				</p:panel>
+
+				<p:panel header="AVALIAÇÃO POSTURAL">
+
+					<p:panelGrid id="painel3" columns="2">
+
+						<p:outputLabel for="postura" value="Tipo de Postura: " />
+						<p:selectOneRadio id="postura"
+							value="#{avaliacaoBean.avaliacao.tipoPostura}" required="true"
+							requiredMessage="O campo 'Tipo de Postura' é obrigatório"
+							converter="converterUpperCase">
+
+							<f:selectItem itemValue="ESCOLIOSE" itemLabel="Escoliose" />
+							<f:selectItem itemValue="LORDOSE" itemLabel="Lordese" />
+							<f:selectItem itemValue="CIFOSE" itemLabel="Cifose" />
+
+							<p:ajax event="blur" update="@this" />
+						</p:selectOneRadio>
+
+					</p:panelGrid>
+
+				</p:panel>
+
+				<p:panel header="TESTE DE RESISTÊNCIA">
+
+					<p:panelGrid id="painel4" columns="4">
+
+						<p:outputLabel for="rmla" value="RML Abdômen: " />
+						<p:inputNumber id="rmla"
+							value="#{avaliacaoBean.avaliacao.rmlAbdomen}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="." />
+
+						<p:outputLabel for="rmlb" value="RML Braço: " />
+						<p:inputNumber id="rmlb"
+							value="#{avaliacaoBean.avaliacao.rmlBraco}" size="6"
+							maxlength="6" minValue="0000.0" maxValue="1000.0"
+							decimalPlaces="1" decimalSeparator="," thousandSeparator="." />
+
+					</p:panelGrid>
+
+				</p:panel>
+
+
+				<br />
+				<br />
+				<p:separator />
+				<h:panelGrid columns="2">
+
+					<p:commandButton value="Salvar" icon="fa fa-floppy-o"
+						actionListener="#{clienteBean.salvar}"
+						update=":mensagem :formCadastro:painel :formLista:tabela" />
+
+					<p:commandButton value="Cancelar" icon="fa fa-ban"
+						oncomplete="PF('dialogo').hide();" />
+
+				</h:panelGrid>
+
+
+
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

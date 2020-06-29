@@ -18,7 +18,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo Produto"
+					<p:commandButton value="Novo"
 						icon="ui-icon-plusthick"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{produtoBean.novo}"
@@ -43,7 +43,7 @@
 
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 					paginator="true" value="#{produtoBean.produtos}"
-					var="cursorProduto" rows="10" tableStyleClass="">
+					var="cursorProduto" rows="5" tableStyleClass="">
 
 					<p:column headerText="Código" filterBy="#{cursorProduto.codigo}"
 						style="text-align: center; width: 80px">
@@ -59,7 +59,7 @@
 					</p:column>
 
 					<p:column headerText="Preço"
-						style="text-align: center; width: 100px">
+						style="text-align: left; width: 100px">
 						<h:outputText value="#{cursorProduto.preco}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2"
 								currencySymbol="R$" type="currency" />
@@ -144,7 +144,7 @@
 
 		<!-- Janela de flutuação -->
 		<p:dialog header="Cadastrar Produto" widgetVar="dialogo"
-			draggable="true" resizable="false" modal="true" closable="true">
+			draggable="true" resizable="false" modal="true" closable="true" minimizable="true" maximizable="true">
 
 			<h:form id="formCadastro" enctype="multipart/form-data">
 

@@ -35,8 +35,7 @@
 
 					</p:column>
 
-					<p:column headerText="Preço"
-						style="text-align: center; width: 120px">
+					<p:column headerText="Preço" style="text-align: left; width: 120px">
 						<h:outputText value="#{cursorProduto.preco}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2"
 								currencySymbol="R$" type="currency" />
@@ -59,7 +58,8 @@
 							<f:attribute name="linhaSelecionada" value="#{cursorProduto}" />
 
 						</p:commandButton>
-						<p:tooltip id="adicionar" for="botaoAdicionar" value="Adicionar" position="top"/>
+						<p:tooltip id="adicionar" for="botaoAdicionar" value="Adicionar"
+							position="top" />
 
 					</p:column>
 
@@ -71,7 +71,8 @@
 
 				<p:dataTable id="tabelaCompra"
 					emptyMessage="Nenhum registro encontrado." paginator="true"
-					value="#{vendaBean.itensDaVenda}" var="cursorItensDaVenda" rows="10">
+					value="#{vendaBean.itensDaVenda}" var="cursorItensDaVenda"
+					rows="10">
 
 					<p:column headerText="Descrição do Item">
 
@@ -80,7 +81,7 @@
 					</p:column>
 
 					<p:column headerText="Preço Unit."
-						style="text-align: center; width: 150px">
+						style="text-align: left; width: 150px">
 						<h:outputText value="#{cursorItensDaVenda.produto.preco}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2"
 								currencySymbol="R$" type="currency" />
@@ -93,7 +94,7 @@
 					</p:column>
 
 					<p:column headerText="Valor Parcial"
-						style="text-align: center; width: 150px">
+						style="text-align: left; width: 150px">
 						<h:outputText value="#{cursorItensDaVenda.valorUnitario}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2"
 								currencySymbol="R$" type="currency" />
@@ -111,7 +112,7 @@
 								value="#{cursorItensDaVenda}" />
 
 						</p:commandButton>
-						
+
 
 					</p:column>
 
@@ -189,10 +190,10 @@
 					</p:selectOneMenu>
 
 				</h:panelGrid>
-				
-				<br/>
-				<br/>
-				<p:separator/>
+
+				<br />
+				<br />
+				<p:separator />
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar" icon="ui-icon-disk"

@@ -18,7 +18,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo Fornecedor" icon="ui-icon-plusthick"
+					<p:commandButton value="Novo" icon="ui-icon-plusthick"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{fornecedorBean.novo}"
 						update=":mensagem :formCadastro:painel">
@@ -146,7 +146,7 @@
 
 			<h:form id="formCadastro">
 
-				<h:panelGrid id="painel" columns="2">
+				<h:panelGrid id="painel" columns="2" >
 
 					<p:outputLabel for="razaosocial" value="Razão Social:" />
 					<p:inputText id="razaosocial" maxlength="100" size="50"

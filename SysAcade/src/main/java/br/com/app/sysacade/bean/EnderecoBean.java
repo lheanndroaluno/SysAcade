@@ -77,7 +77,7 @@ public class EnderecoBean implements Serializable {
 			cidades = cidadeDAO.listarPorCampoOrdenacao("nome");
 			
 		} catch (RuntimeException erro) {
-			Messages.addFlashGlobalError("Ocorreu um erro ao tentar cadastrar um novo registro!");
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar cadastrar um novo endereço!");
 			erro.printStackTrace();
 		}
 	}
@@ -102,9 +102,9 @@ public class EnderecoBean implements Serializable {
 			enderecos = enderecoDAO.listar();
 
 			// usando o omnifaces
-			Messages.addGlobalInfo("Registro salvo com sucesso!");
+			Messages.addGlobalInfo("Endereço salvo com sucesso!");
 		} catch (RuntimeException erro) {
-			Messages.addGlobalError("Ocorreu um erro ao tentar salvar um novo registro!");
+			Messages.addGlobalError("Ocorreu um erro ao tentar salvar um novo endereço!");
 			erro.printStackTrace();
 		}
 
@@ -119,7 +119,7 @@ public class EnderecoBean implements Serializable {
 			EnderecoDAO enderecoDAO = new EnderecoDAO();
 			enderecos = enderecoDAO.listar();
 		} catch (RuntimeException erro) {
-			Messages.addFlashGlobalError("Ocorreu um erro ao tentar listar todos os registros!");
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar listar todos os endereços!");
 			erro.printStackTrace();
 		}
 	}
@@ -138,7 +138,7 @@ public class EnderecoBean implements Serializable {
 			cidades = cidadeDAO.listarPorCampoOrdenacao("nome");
 
 		} catch (RuntimeException erro) {
-			Messages.addGlobalError("Ocorreu um erro ao tentar atualizar o registro!");
+			Messages.addGlobalError("Ocorreu um erro ao tentar atualizar o endereço!");
 			erro.printStackTrace();
 		}
 	}
@@ -159,9 +159,9 @@ public class EnderecoBean implements Serializable {
 			enderecos = enderecoDAO.listar();
 
 			// usando o omnifaces
-			Messages.addGlobalInfo("Registro excluído com sucesso!");
+			Messages.addGlobalInfo("Endereço excluído com sucesso!");
 		} catch (RuntimeException erro) {
-			Messages.addFlashGlobalError("Ocorreu um erro ao tentar excluir o registro!");
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar excluir o endereço!");
 			erro.printStackTrace();
 		}
 	}

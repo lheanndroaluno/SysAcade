@@ -13,10 +13,19 @@
 
 		<h:form>
 
-			<p:panelGrid styleClass="panelgrid">
+			<p:panelGrid>
+			
+				<p:graphicImage library="images" name="Logo-ViniciusPersonal-1.png"
+					styleClass="imagemCentralizada1" />
 
-				<h:outputText
-					value="Bem Vindo #{autenticacaoBean.usuarioLogado.pessoa.nome}" />
+				<p:panel style="text-align: center;margin-bottom: 5px; margin-left: auto; margin-right: auto; font-size: 12px; color: white; background-color: #1e94d2; font-weight: bold;">
+
+					<h:outputText
+						value="Usuário Logado: #{autenticacaoBean.usuarioLogado.pessoa.nome}  #{autenticacaoBean.usuarioLogado.pessoa.cpf}" />
+
+				</p:panel>
+				
+				<h6 style="text-align: center;">Sistema de Gerenciamento de Academia - SysAcade / Desenvolvido por: Leandro Amorim / ©ArfaxTecnology</h6>
 
 			</p:panelGrid>
 

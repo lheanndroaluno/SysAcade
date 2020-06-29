@@ -2,26 +2,16 @@ package br.com.app.sysacade.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
-import br.com.app.sysacade.enums.TipoDeMusculo;
-import br.com.app.sysacade.enums.TipoDeTreino;
 
 @SuppressWarnings("serial")
 @Entity
 public class Exercicio extends GenericDomain {
 
-	@Column(length = 40, nullable = false)
+	@Column(length = 50, nullable = false)
+	private String grupoMuscular;
+
+	@Column(length = 50, nullable = false)
 	private String descricao;
-
-	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private TipoDeMusculo tipoDeMusculo;
-
-	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private TipoDeTreino tipoDeTreino;
 
 	@Column(length = 20, nullable = false)
 	private String peso;
@@ -30,37 +20,28 @@ public class Exercicio extends GenericDomain {
 	private String serie;
 
 	@Column(length = 20, nullable = false)
-	private String repeticoes;
-
-	
+	private String repeticao;
 
 	/**
 	 * Métodos Getters e Setters
 	 * 
 	 * @return
 	 */
+
+	public String getGrupoMuscular() {
+		return grupoMuscular;
+	}
+
+	public void setGrupoMuscular(String grupoMuscular) {
+		this.grupoMuscular = grupoMuscular;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public TipoDeMusculo getTipoDeMusculo() {
-		return tipoDeMusculo;
-	}
-
-	public void setTipoDeMusculo(TipoDeMusculo tipoDeMusculo) {
-		this.tipoDeMusculo = tipoDeMusculo;
-	}
-
-	public TipoDeTreino getTipoDeTreino() {
-		return tipoDeTreino;
-	}
-
-	public void setTipoDeTreino(TipoDeTreino tipoDeTreino) {
-		this.tipoDeTreino = tipoDeTreino;
 	}
 
 	public String getPeso() {
@@ -79,12 +60,12 @@ public class Exercicio extends GenericDomain {
 		this.serie = serie;
 	}
 
-	public String getRepeticoes() {
-		return repeticoes;
+	public String getRepeticao() {
+		return repeticao;
 	}
 
-	public void setRepeticoes(String repeticoes) {
-		this.repeticoes = repeticoes;
+	public void setRepeticao(String repeticao) {
+		this.repeticao = repeticao;
 	}
 
 }

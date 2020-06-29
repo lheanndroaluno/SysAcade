@@ -17,7 +17,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo Estado"  icon="ui-icon-plusthick"
+					<p:commandButton value="Novo"  icon="fa fa-plus"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{estadoBean.novo}"
 						update=":formCadastro:panelGrid">
@@ -28,14 +28,15 @@
 					</p:commandButton>
 
 					<p:separator />
-					<p:commandButton value="Imprimir" icon="ui-icon-print"
-						actionListener="#{estadoBean.imprimir}" style="" />
+					<p:commandButton value="Imprimir" icon="fa fa-print"
+						actionListener="#{estadoBean.imprimir}" />
 
 				</p:toolbarGroup>
 
 			</p:toolbar>
 
 			<p:panel header="Lista - Estados" style="text-align: center">
+			
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 					paginator="true" value="#{estadoBean.estados}" var="cursorEstado"
 					rows="10">
@@ -59,7 +60,7 @@
 						style="text-align: center; width: 120px">
 
 						<!-- Botão excluir -->
-						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
+						<p:commandButton id="botaoExcluir" icon="fa fa-trash"
 							actionListener="#{estadoBean.excluir}"
 							update=":mensagem :formLista:tabela">
 							<p:confirm header="Atenção"
@@ -71,7 +72,7 @@
 							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+						<p:commandButton id="botaoEditar" icon="fa fa-edit"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{estadoBean.editar}"
 							update=":formCadastro:panelGrid">
@@ -135,11 +136,11 @@
 				<p:separator/>
 				<h:panelGrid columns="2">
 
-					<p:commandButton value="Salvar" icon="ui-icon-disk"
+					<p:commandButton value="Salvar" icon="fa fa-floppy-o"
 						actionListener="#{estadoBean.salvar}"
 						update=":mensagem :formCadastro:panelGrid :formLista:tabela" />
 
-					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+					<p:commandButton value="Cancelar" icon="fa fa-ban"
 						oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>

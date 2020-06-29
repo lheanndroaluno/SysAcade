@@ -83,7 +83,7 @@ public class AlunoBean implements Serializable {
 			PlanoDAO planoDAO = new PlanoDAO();
 			planos = planoDAO.listar();
 		} catch (RuntimeException erro) {
-			Messages.addFlashGlobalError("Ocorreu um erro ao tentar cadastrar um novo registro!");
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar cadastrar um novo aluno!");
 			erro.printStackTrace();
 		}
 	}
@@ -103,9 +103,9 @@ public class AlunoBean implements Serializable {
 
 			alunos = alunoDAO.listar();
 
-			Messages.addGlobalInfo("Registro salvo com sucesso!");
+			Messages.addGlobalInfo("Aluno salvo com sucesso!");
 		} catch (RuntimeException erro) {
-			Messages.addGlobalError("Ocorreu um erro ao tentar salvar um novo registro!");
+			Messages.addGlobalError("Ocorreu um erro ao tentar salvar um novo aluno!");
 			erro.printStackTrace();
 		}
 	}
@@ -116,7 +116,7 @@ public class AlunoBean implements Serializable {
 			AlunoDAO alunoDAO = new AlunoDAO();
 			alunos = alunoDAO.listar();
 		} catch (RuntimeException erro) {
-			Messages.addFlashGlobalError("Ocorreu um erro ao tentar listar todos os registros!");
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar listar todos os alunos!");
 			erro.printStackTrace();
 		}
 	}
@@ -134,7 +134,7 @@ public class AlunoBean implements Serializable {
 			planos = planoDAO.listar();
 
 		} catch (RuntimeException erro) {
-			Messages.addGlobalError("Ocorreu um erro ao tentar atualizar o registro selecionado!");
+			Messages.addGlobalError("Ocorreu um erro ao tentar atualizar o aluno selecionado!");
 			erro.printStackTrace();
 		}
 	}
@@ -143,7 +143,7 @@ public class AlunoBean implements Serializable {
 		try {
 			aluno = (Aluno) evento.getComponent().getAttributes().get("linhaSelecionada");
 		} catch (RuntimeException erro) {
-			Messages.addFlashGlobalError("Ocorreu um erro ao tentar mostrar dados do cliente!");
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar mostrar dados do aluno!");
 			erro.printStackTrace();
 		}
 	}
@@ -158,9 +158,9 @@ public class AlunoBean implements Serializable {
 			// atualizando a lista depois da exclusão
 			alunos = alunoDAO.listar();
 
-			Messages.addGlobalInfo("Registro excluído com sucesso!");
+			Messages.addGlobalInfo("Aluno excluído com sucesso!");
 		} catch (RuntimeException erro) {
-			Messages.addFlashGlobalError("Ocorreu um erro ao tentar excluir o registro selecionado!");
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar excluir o aluno selecionado!");
 			erro.printStackTrace();
 		}
 	}
@@ -203,6 +203,10 @@ public class AlunoBean implements Serializable {
 		BigDecimal idade = qtdDias.divide(ano, 0, RoundingMode.DOWN);
 
 		return idade;
+	}
+	
+	public void calcularVencimento() {
+		
 	}
 
 }

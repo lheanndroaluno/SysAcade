@@ -18,6 +18,9 @@
 
 		<!-- SQL dialect -->
 		<property name="dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
+		
+		
+		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
 
 		<!-- Gerenciamento do Contexto das Sessões -->
 		<property name="current_session_context_class">thread</property>
@@ -56,9 +59,10 @@
 		<mapping class="br.com.app.sysacade.domain.Movimentacao" />
 		<mapping class="br.com.app.sysacade.domain.Menu" />
 		<mapping class="br.com.app.sysacade.domain.Personal" />
-		<mapping class="br.com.app.sysacade.domain.Professor" />
 		<mapping class="br.com.app.sysacade.domain.Teste" />
 		<mapping class="br.com.app.sysacade.domain.Evento" />
+		<mapping class="br.com.app.sysacade.domain.TipoDeTreino" />
+		<mapping class="br.com.app.sysacade.domain.TipoDeMusculo" />
 
 	</session-factory>
 

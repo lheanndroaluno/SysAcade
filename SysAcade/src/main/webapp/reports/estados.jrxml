@@ -41,14 +41,14 @@ ORDER BY estado.nome ASC]]>
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="130" y="19" width="420" height="60" uuid="d8710ea2-fea0-4534-af0b-d94bc1a27b7e"/>
+				<reportElement x="130" y="0" width="420" height="79" uuid="d8710ea2-fea0-4534-af0b-d94bc1a27b7e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Copperplate Gothic Bold" size="29" isBold="true"/>
+					<font fontName="Arial Black" size="37" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOP BOX CROSS
 ]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy HH:mm ">
+			<textField pattern="dd/MM/yyyy - HH:mm ">
 				<reportElement x="400" y="-10" width="150" height="30" uuid="df27c252-c32d-47e6-9c23-d3ed703a9177"/>
 				<textElement textAlignment="Right">
 					<font fontName="Consolas" size="12" isBold="true"/>
@@ -56,7 +56,7 @@ ORDER BY estado.nome ASC]]>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="11" y="0" width="119" height="79" uuid="e405ed85-defb-4a80-bbe2-227ae2a2e38b"/>
+				<reportElement x="0" y="0" width="180" height="79" uuid="e405ed85-defb-4a80-bbe2-227ae2a2e38b"/>
 				<imageExpression><![CDATA[$P{CAMINHO_BANNER}]]></imageExpression>
 			</image>
 		</band>

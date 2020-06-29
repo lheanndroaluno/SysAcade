@@ -1,121 +1,113 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
 
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset= UTF-8" />
-	<title>Teste PrimeFaces</title>
-	<h:outputScript library="js" name="scripts.js" />
-	<h:outputStylesheet library="css" name="estiloAgenda.css" />
-</h:head>
+	<ui:define name="conteudo">
 
-<h:body>
+		<h:form>
 
-	<p:growl id="mensagem" />
+			<p:panel header="Agenda de Eventos" style="text-align: center">
 
-	<h:form>
+				<p:panelGrid>
 
-		<p:toolbar style="margin-top: 5px; margin-bottom: 12px">
+					<p:schedule id="schedule" widgetVar="agenda"
+						value="#{eventoBean.eventoModelo}" timeZone="GMT-3" locale="pt_BR"
+						timeFormat="HH:mm" displayEventEnd="true">
 
-			<f:facet name="right">
+						<p:ajax event="eventSelect" listener="#{eventoBean.selecionado}"
+							oncomplete="PF('dialogo').show();" update="painel" />
 
-				<p:commandButton value="Página Inicial"
-					icon="ui-icon-arrowreturnthick-1-n" />
+						<p:ajax event="dateSelect" listener="#{eventoBean.novo}"
+							oncomplete="PF('dialogo').show();" update="painel" />
 
-			</f:facet>
+						<p:ajax event="eventMove" listener="#{eventoBean.movido}"
+							update="mensagem" />
 
-		</p:toolbar>
+						<p:ajax event="eventResize" listener="#{eventoBean.redimensionar}"
+							update="mensagem schedule" />
 
-			<p:panelGrid columnClasses="value">
+					</p:schedule>
 
-				<p:schedule id="schedule" widgetVar="agenda"
-					value="#{eventoBean.eventoModelo}" timeZone="GMT-3" locale="pt_BR"
-					timeFormat="HH:mm" displayEventEnd="true">
+				</p:panelGrid>
 
-					<p:ajax event="eventSelect" listener="#{eventoBean.selecionado}"
-						oncomplete="PF('dialogo').show();" update="painel" />
+			</p:panel>
 
-					<p:ajax event="dateSelect" listener="#{eventoBean.novo}"
-						oncomplete="PF('dialogo').show();" update="painel" />
+			<p:dialog header="Criar Evento" resizable="false" draggable="false"
+				modal="true" closable="false" widgetVar="dialogo">
 
-					<p:ajax event="eventMove" listener="#{eventoBean.movido}"
-						update="mensagem" />
+				<h:panelGrid id="painel" columns="2">
 
-					<p:ajax event="eventResize" listener="#{eventoBean.redimensionar}"
-						update="mensagem schedule" />
+					<p:outputLabel for="titulo" value="Título do Evento: " />
+					<p:inputText id="titulo" maxlength="30" size="30"
+						value="#{eventoBean.evento.titulo}" required="true"
+						requiredMessage="O campo 'Título do Evento' é obrigatório"
+						converter="converterUpperCase">
 
-				</p:schedule>
+					</p:inputText>
 
-			</p:panelGrid>
+					<p:outputLabel for="descricao" value="Descrição: " />
+					<p:inputTextarea id="descricao" maxlength="100"
+						value="#{eventoBean.evento.descricao}" required="true"
+						requiredMessage="O campo 'Descrição do Evento' é obrigatório"
+						rows="5" cols="50" autoResize="false"
+						converter="converterUpperCase">
 
-		<p:dialog header="Criar Evento" resizable="false" draggable="false"
-			modal="true" closable="false" widgetVar="dialogo">
+					</p:inputTextarea>
 
-			<h:panelGrid id="painel" columns="2">
+					<p:outputLabel value="Início do Evento: " />
+					<p:calendar value="#{eventoBean.evento.inicioEvento}" size="10"
+						locale="pt_BR" timeZone="America/Recife" mask="true" />
 
-				<p:outputLabel for="titulo" value="Título do Evento: " />
-				<p:inputText id="titulo" maxlength="30" size="30"
-					value="#{eventoBean.evento.titulo}" required="true"
-					requiredMessage="O campo 'Título do Evento' é obrigatório"
-					converter="converterUpperCase">
+					<p:outputLabel value="Fim do Evento: " />
+					<p:calendar value="#{eventoBean.evento.fimEvento}" size="10"
+						locale="pt_BR" timeZone="America/Recife" mask="true" />
 
+
+					<p:outputLabel value="Resolvido: " />
+					<p:selectOneRadio value="#{eventoBean.evento.status}">
 					
-				</p:inputText>
+						<f:selectItem itemValue="SIM" itemLabel="Sim" />
+						<f:selectItem itemValue="NAO" itemLabel="Não" />
+						
 
-				<p:outputLabel for="descricao" value="Descrição: " />
-				<p:inputTextarea id="descricao" maxlength="100"
-					value="#{eventoBean.evento.descricao}" required="true"
-					requiredMessage="O campo 'Descrição do Evento' é obrigatório"
-					rows="5" cols="50" autoResize="false"
-					converter="converterUpperCase">
+						<p:ajax event="blur" update="@this" />
+					</p:selectOneRadio>
 
-					
-				</p:inputTextarea>
-				
-				<p:outputLabel value="Início do Evento: " />
-				<p:calendar value="#{eventoBean.evento.inicioEvento}" 
-						size="10" locale="pt_BR" timeZone="America/Recife" mask="true"/>
-				
-				<p:outputLabel value="Fim do Evento: " />
-				<p:calendar value="#{eventoBean.evento.fimEvento}" 
-						size="10" locale="pt_BR" timeZone="America/Recife" mask="true"/>
-				
+					<p:outputLabel for="usuario" value="Usuário: " />
+					<p:selectOneMenu id="usuario" value="#{eventoBean.evento.usuario}"
+						converter="omnifaces.SelectItemsConverter" filter="true" required="true"
+						requiredMessage="O campo 'Usuário' é obrigatório">
 
-				<p:outputLabel value="Status: " />
-				<p:selectBooleanCheckbox value="#{eventoBean.evento.status}" />
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione um usuário" />
 
-				<p:outputLabel for="usuario" value="Usuário: " />
-				<p:selectOneMenu id="usuario" value="#{eventoBean.evento.usuario}"
-					converter="omnifaces.SelectItemsConverter" filter="true">
+						<f:selectItems value="#{eventoBean.usuarios}" var="usuario"
+							itemValue="#{usuario}" itemLabel="#{usuario.pessoa.nome}" />
+					</p:selectOneMenu>
 
-					<f:selectItem noSelectionOption="true"
-						itemLabel="Selecione um usuário" />
+				</h:panelGrid>
 
-					<f:selectItems value="#{eventoBean.usuarios}" var="usuario"
-						itemValue="#{usuario}" itemLabel="#{usuario.pessoa.nome}" />
-				</p:selectOneMenu>
+				<br />
+				<br />
+				<p:separator />
 
-			</h:panelGrid>
+				<p:commandButton value="Salvar"
+					actionListener="#{eventoBean.salvar}" icon="fa fa-floppy-o"
+					oncomplete="PF('agenda').update();PF('dialogo').hide();"
+					update="mensagem schedule" />
 
-			<br />
-			<br />
-			<p:separator />
+				<p:commandButton value="Cancelar" icon="fa fa-ban"
+					process="@this" oncomplete="PF('dialogo').hide();" />
 
-			<p:commandButton value="Salvar" actionListener="#{eventoBean.salvar}"
-				icon="ui-icon-disk"
-				oncomplete="PF('agenda').update();PF('dialogo').hide();"
-				update="mensagem schedule" />
+			</p:dialog>
 
-			<p:commandButton value="Cancelar" icon="ui-icon-cancel"
-				process="@this" oncomplete="PF('dialogo').hide();" />
+		</h:form>
 
-		</p:dialog>
-		
-	</h:form>
+	</ui:define>
 
-</h:body>
-
-</html>
+</ui:composition>

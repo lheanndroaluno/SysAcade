@@ -17,7 +17,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo Treino" icon="ui-icon-plusthick"
+					<p:commandButton value="Novo" icon="ui-icon-plusthick"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{treinoBean.novo}"
 						update=":mensagem :formCadastro:painel">
@@ -44,10 +44,10 @@
 					</p:column>
 
 					<p:column headerText="Professor"
-						filterBy="#{cursorTreino.professor.pessoa.nome}"
-						sortBy="#{cursorTreino.professor.pessoa.nome}"
+						filterBy="#{cursorTreino.personal.pessoa.nome}"
+						sortBy="#{cursorTreino.personal.pessoa.nome}"
 						style="text-align: center">
-						<h:outputText value="#{cursorTreino.professor.pessoa.nome}" />
+						<h:outputText value="#{cursorTreino.personal.pessoa.nome}" />
 					</p:column>
 
 					<p:column headerText="Aluno"
@@ -133,11 +133,11 @@
 
 		<!-- Janela de flutuação -->
 		<p:dialog header="Cadastro de Treinos" widgetVar="dialogo"
-			draggable="false" resizable="false" modal="true" closable="false">
+			draggable="false" resizable="false" modal="false" closable="false">
 
 			<h:form id="formCadastro">
 
-				<h:panelGrid id="painel" columns="4" cellpadding="5">
+				<h:panelGrid id="painel" columns="2" cellpadding="5">
 
 					<p:outputLabel for="aluno" value="Aluno: " />
 					<p:selectOneMenu id="aluno" filter="true"
@@ -173,15 +173,15 @@
 
 					<p:outputLabel for="professor" value="Professor: " />
 					<p:selectOneMenu id="professor" filter="true"
-						value="#{treinoBean.treino.professor}"
+						value="#{treinoBean.treino.personal}"
 						converter="omnifaces.SelectItemsConverter" required="true"
 						requiredMessage="O campo 'Professor' é obrigatório!">
 
 						<f:selectItem noSelectionOption="true"
 							itemLabel="Selecione um professor" />
 
-						<f:selectItems value="#{treinoBean.professores}" var="professor"
-							itemValue="#{professor}" itemLabel="#{professor.pessoa.nome}" />
+						<f:selectItems value="#{treinoBean.personals}" var="personal"
+							itemValue="#{personal}" itemLabel="#{personal.pessoa.nome}" />
 
 					</p:selectOneMenu>
 
@@ -192,6 +192,18 @@
 					<h:outputLabel for="observacoes" value="Observaçoes: " />
 					<p:inputTextarea id="observacoes" rows="3" cols="40"
 						autoResize="false" value="#{treinoBean.treino.observacao}" />
+
+					<p:outputLabel for="niveldetreino" value="Nível de treino " />
+					<p:selectOneRadio id="niveldetreino"
+						value="#{treinoBean.treino.nivelDeTreino}" required="true"
+						requiredMessage="O campo 'Nível de Treino' é obrigatório">
+
+						<f:selectItem itemValue="INICIANTE" itemLabel="Iniciante" />
+						<f:selectItem itemValue="INTERMEDIARIO" itemLabel="Intermediário" />
+						<f:selectItem itemValue="AVANCADO" itemLabel="Avançado" />
+
+						<p:ajax event="blur" update="@this" />
+					</p:selectOneRadio>
 
 					<p:outputLabel for="objetivo" value="Objetivo do Treino: " />
 					<p:selectOneMenu id="objetivo" filter="true"
@@ -214,54 +226,11 @@
 
 					</p:selectOneMenu>
 
+					
+
+					
+
 				</h:panelGrid>
-
-				<p:tabView>
-
-					<p:tab title="Abdominal">
-
-						<h:panelGrid columns="2" cellpadding="5">
-
-							<h:outputLabel value="Abdominal: " />
-							<p:selectManyCheckbox value="#{treinoBean.treino.abdominal}"
-								converter="omnifaces.GenericEnumConverter">
-
-								<f:selectItems value="#{treinoBean.listaDeExAbd}"
-									itemValue="#{abdominal}" var="abdominal"
-									itemLabel="#{abdominal.descricao}" />
-
-								<f:selectItem itemValue="PRANCHA" itemLabel="Prancha" />
-								<f:selectItem itemValue="SUPRA_SOLO" itemLabel="Supra Solo" />
-								<f:selectItem itemValue="OBLIQUO_SOLO" itemLabel="Oblíquo Solo" />
-								<f:selectItem itemValue="OBLIQUO_POLIA"
-									itemLabel="Oblíquo Polia" />
-								<f:selectItem itemValue="CANIVETE" itemLabel="Canivete" />
-								<f:selectItem itemValue="INFRA" itemLabel="Infra" />
-								<f:selectItem itemValue="BANCO_LOMBAR" itemLabel="Banco Lombar" />
-								<f:selectItem itemValue="PARALELA" itemLabel="Paralela" />
-
-							</p:selectManyCheckbox>
-
-							<p:outputLabel for="@next" value="Peso Kg: " />
-							<p:spinner id="peso"
-								value="#{treinoBean.treino.pesoParaAbdominal}" size="5" min="1" />
-
-							<p:outputLabel for="@next" value="Nº Séries: " />
-							<p:spinner id="serie"
-								value="#{treinoBean.treino.serieParaAbdominal}" size="5" min="1"
-								max="20" />
-
-							<p:outputLabel for="@next" value="Nº Repetições: " />
-							<p:spinner id="repeticao"
-								value="#{treinoBean.treino.repeticaoParaAbdominal}" size="5"
-								min="1" />
-
-						</h:panelGrid>
-
-					</p:tab>
-
-
-				</p:tabView>
 
 				<br />
 				<br />

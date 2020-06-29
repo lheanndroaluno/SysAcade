@@ -1,19 +1,29 @@
 package br.com.app.sysacade.bean;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
+import org.primefaces.component.datatable.DataTable;
 
 import br.com.app.sysacade.dao.ClienteDAO;
 import br.com.app.sysacade.dao.PessoaDAO;
 import br.com.app.sysacade.domain.Cliente;
 import br.com.app.sysacade.domain.Pessoa;
+import br.com.app.sysacade.util.HibernateUtil;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -147,4 +157,36 @@ public class ClienteBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
+	
+	public void imprimir() {
+		try {
+			DataTable tabela = (DataTable) Faces.getViewRoot().findComponent("formLista:tabela");
+
+			Map<String, Object> filtros = tabela.getFilters();
+
+			@SuppressWarnings("unused")
+			String nome = (String) filtros.get("nome");
+			
+			//caminho para o relatório
+			String caminho = Faces.getRealPath("/reports/clientes.jasper");
+			
+			//caminho do banner(logo) do relatório
+			String caminhoBanner = Faces.getRealPath("/resources/images/personal.png");
+			
+			Map<String, Object> parametros = new HashMap<>();
+			
+			parametros.put("CAMINHO_BANNER", caminhoBanner);
+			
+			Connection conexao = HibernateUtil.getConexao();
+
+			JasperPrint relatorio = JasperFillManager.fillReport(caminho, parametros, conexao);
+
+			// imprimindo o relatorio
+			JasperPrintManager.printReport(relatorio, true);
+		} catch (JRException erro) {
+			Messages.addFlashGlobalError("Erro ao tentar gerar relatório!");
+			erro.printStackTrace();
+		}
+	}
+
 }

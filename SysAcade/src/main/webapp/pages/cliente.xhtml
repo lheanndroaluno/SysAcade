@@ -18,7 +18,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo Cliente" icon="ui-icon-plusthick"
+					<p:commandButton value="Novo" icon="ui-icon-plusthick"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{clienteBean.novo}"
 						update=":mensagem :formCadastro:painel">
@@ -27,6 +27,9 @@
 							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 					</p:commandButton>
+					
+					<p:commandButton value="Imprimir" icon="ui-icon-print"
+						actionListener="#{clienteBean.imprimir()}"  />
 
 				</p:toolbarGroup>
 
@@ -51,7 +54,7 @@
 
 					<p:column headerText="CPF" sortBy="#{cliente.pessoa.cpf}"
 						filterBy="#{cliente.pessoa.cpf}"
-						style="text-align: center; width: 180px">
+						style="text-align: center; width: 140px">
 						<h:outputText value="#{cursorCliente.pessoa.cpf}" />
 					</p:column>
 
@@ -66,7 +69,7 @@
 
 					<p:column headerText="Liberado" sortBy="#{cursorCliente.liberado}"
 						filterBy="#{cursorCliente.liberado}"
-						style="text-align: center; width: 180px">
+						style="text-align: center; width: 200px">
 
 						<f:facet name="filter">
 							<p:selectOneButton onchange="PF('tabela').filter()">

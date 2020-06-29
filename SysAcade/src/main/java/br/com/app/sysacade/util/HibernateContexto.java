@@ -4,14 +4,18 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 public class HibernateContexto implements ServletContextListener {
-	@Override
-	public void contextInitialized(ServletContextEvent evento) {
-		HibernateUtil.getFabricaDeSessoes().openSession();
-	}
+	
+	@Override //quando desliga o tomcat
+    public void contextDestroyed(ServletContextEvent event) {
+        HibernateUtil.getFabricaDeSessoes().close();
+        
+    }
 
-	@Override
-	public void contextDestroyed(ServletContextEvent evento) {
-		HibernateUtil.getFabricaDeSessoes().close();
+    @Override //quando liga o tomcat
+    public void contextInitialized(ServletContextEvent event) {
+        HibernateUtil.getFabricaDeSessoes().openSession(); /*forçar criação da fabrica de sessões 
+        quando o tomcat for iniciado  */
+		
 	}
 
 }

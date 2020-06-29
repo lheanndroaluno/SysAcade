@@ -1,9 +1,13 @@
 @charset "UTF-8";
 
 .value{
-	width: auto;
-	height: auto;
-	
+	width: 1000px;
+	height: 1000px;
+}
+
+.ui-schedule {
+	border: 0px;
+	background-color: #0080ff !important;
 }
 
 .ui-widget, .ui-widget .ui-widget {
@@ -19,8 +23,8 @@
 }
 
 .ui-button {
-	background: #0000ff!important;
+	background: #0000ff !important;
 	font-weight: bold;
-	border-bottom-radius: 1px;
+	border-radius: 0px;
 }
 

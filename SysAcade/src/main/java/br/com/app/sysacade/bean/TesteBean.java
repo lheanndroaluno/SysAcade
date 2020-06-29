@@ -11,8 +11,9 @@ import javax.faces.event.ActionEvent;
 import org.omnifaces.util.Messages;
 
 import br.com.app.sysacade.dao.TesteDAO;
+import br.com.app.sysacade.dao.TipoDeMusculoDAO;
 import br.com.app.sysacade.domain.Teste;
-import br.com.app.sysacade.enums.TipoComida;
+import br.com.app.sysacade.domain.TipoDeMusculo;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -21,16 +22,23 @@ public class TesteBean implements Serializable {
 
 	private Teste teste;
 	private List<Teste> testes;
-	private List<TipoComida> tipos;
-	
-	
+	private List<TipoDeMusculo> musculos;
+	private TipoDeMusculo tipoDeMusculo;
 
-	public List<TipoComida> getTipos() {
-		return tipos;
+	public TipoDeMusculo getTipoDeMusculo() {
+		return tipoDeMusculo;
 	}
 
-	public void setTipos(List<TipoComida> tipos) {
-		this.tipos = tipos;
+	public void setTipoDeMusculo(TipoDeMusculo tipoDeMusculo) {
+		this.tipoDeMusculo = tipoDeMusculo;
+	}
+
+	public List<TipoDeMusculo> getMusculos() {
+		return musculos;
+	}
+
+	public void setMusculos(List<TipoDeMusculo> musculos) {
+		this.musculos = musculos;
 	}
 
 	public Teste getTeste() {
@@ -55,6 +63,11 @@ public class TesteBean implements Serializable {
 	public void novo() {
 		try {
 			teste = new Teste();
+			
+			tipoDeMusculo = new TipoDeMusculo();
+			
+			TipoDeMusculoDAO tipoDeMusculoDAO = new TipoDeMusculoDAO();
+			musculos = tipoDeMusculoDAO.listar();
 
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar cadastrar uma novo registro!");
@@ -70,7 +83,10 @@ public class TesteBean implements Serializable {
 			teste = new Teste();// limpando as dados de cidade
 
 			testes = testeDAO.listar();
-
+			
+			TipoDeMusculoDAO tipoDeMusculoDAO = new TipoDeMusculoDAO();
+			musculos = tipoDeMusculoDAO.listar();
+			
 			// usando o omnifaces
 			Messages.addGlobalInfo("Registro salvo com sucesso!");
 		} catch (RuntimeException erro) {

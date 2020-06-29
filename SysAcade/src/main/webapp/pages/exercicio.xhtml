@@ -17,7 +17,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo Exercício" icon="ui-icon-plusthick"
+					<p:commandButton value="Novo" icon="ui-icon-plusthick"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{exercicioBean.novo}"
 						update=":formCadastro:panelGrid">
@@ -40,19 +40,12 @@
 						style="text-align: center; width: 80px">
 						<h:outputText value="#{cursorExercicio.codigo}" />
 					</p:column>
-
-					<p:column headerText="Treino"
-						sortBy="#{cursorExercicio.tipoDeTreino.toString()}"
-						filterBy="#{cursorExercicio.tipoDeTreino.toString()}"
-						style="text-align: center; width: 100px">
-						<h:outputText value="#{cursorExercicio.tipoDeTreino.toString()}" />
-					</p:column>
-
-					<p:column headerText="Músculo"
-						sortBy="#{cursorExercicio.tipoDeMusculo.toString()}"
-						filterBy="#{cursorExercicio.tipoDeMusculo.toString()}"
-						style="text-align: center; width: 100px">
-						<h:outputText value="#{cursorExercicio.tipoDeMusculo.toString()}" />
+					
+					<p:column headerText="Grupo muscular"
+						sortBy="#{cursorExercicio.grupoMuscular}"
+						filterBy="#{cursorExercicio.grupoMuscular}"
+						style="text-align: center;">
+						<h:outputText value="#{cursorExercicio.grupoMuscular}" />
 					</p:column>
 
 					<p:column headerText="Descrição"
@@ -71,7 +64,7 @@
 					</p:column>
 
 					<p:column headerText="Repetição" style="text-align: center; width: 70px">
-						<h:outputText value="#{cursorExercicio.repeticoes}" />
+						<h:outputText value="#{cursorExercicio.repeticao}" />
 					</p:column>
 
 
@@ -131,36 +124,15 @@
 			<h:form id="formCadastro">
 
 				<h:panelGrid id="panelGrid" columns="2">
-
-					<p:outputLabel for="tipotreino" value="Tipo de Treino: " />
-					<p:selectOneRadio id="tipotreino" 
-						value="#{exercicioBean.exercicio.tipoDeTreino}" required="true"
-						requiredMessage="O campo 'Tipo de Treino' é obrigatório">
-
-						<f:selectItem itemValue="TREINO_A" itemLabel="TREINO - A" />
-						<f:selectItem itemValue="TREINO_B" itemLabel="TREINO - B" />
-						<f:selectItem itemValue="TREINO_C" itemLabel="TREINO - C" />
-						<f:selectItem itemValue="TREINO_D" itemLabel="TREINO - D" />
+				
+					<p:outputLabel for="grupomuscular" value="Grupo Muscular: " />
+					<p:inputText id="grupomuscular" size="40" maxlength="50"
+						value="#{exercicioBean.exercicio.grupoMuscular}" required="true"
+						requiredMessage="O campo 'Grupo Muscular' é obrigatório!"
+						converter="converterUpperCase">
 
 						<p:ajax event="blur" update="@this" />
-					</p:selectOneRadio>
-
-					<p:outputLabel for="tipomusculo" value="Músculo: " />
-					<p:selectOneRadio id="tipomusculo" 
-						value="#{exercicioBean.exercicio.tipoDeMusculo}" required="true"
-						requiredMessage="O campo 'Músculo' é obrigatório">
-
-						<f:selectItem itemValue="PEITO" itemLabel="Peito" />
-						<f:selectItem itemValue="OMBRO" itemLabel="Ombro" />
-						<f:selectItem itemValue="COSTAS" itemLabel="Costas" />
-						<f:selectItem itemValue="BICEPS" itemLabel="Bíceps" />
-						<f:selectItem itemValue="TRICEPS" itemLabel="Tríceps" />
-						<f:selectItem itemValue="ANTEBRACO" itemLabel="Antebraço" />
-						<f:selectItem itemValue="PERNAS" itemLabel="Pernas" />
-						<f:selectItem itemValue="TRAPEZIO" itemLabel="Trapézio" />
-
-						<p:ajax event="blur" update="@this" />
-					</p:selectOneRadio>
+					</p:inputText>
 
 					<p:outputLabel for="descricao" value="Descrição: " />
 					<p:inputText id="descricao" size="40" maxlength="40"
@@ -191,7 +163,7 @@
 
 					<p:outputLabel for="repeticao" value="Repetição: " />
 					<p:inputMask mask="99 - A - 99" id="repeticao" size="15"
-						value="#{exercicioBean.exercicio.repeticoes}" required="true"
+						value="#{exercicioBean.exercicio.repeticao}" required="true"
 						requiredMessage="O campo 'Nº de Repetições' é obrigatório"
 						converter="converterUpperCase">
 

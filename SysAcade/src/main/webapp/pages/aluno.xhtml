@@ -7,8 +7,6 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/templates/modelo.xhtml">
 
-
-
 	<ui:define name="conteudo">
 
 		<!-- Tela de Listagem -->
@@ -18,10 +16,13 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo Aluno" icon="ui-icon-plusthick"
+					<p:commandButton id="botaoNovo" value="Novo" icon="fa fa-plus"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{alunoBean.novo}"
 						update=":mensagem :formCadastro:painel">
+
+						<p:tooltip id="dados" for="botaoNovo" value="Adicionar Aluno"
+							position="top" />
 
 						<f:actionListener
 							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
@@ -82,7 +83,7 @@
 						style="text-align: center; width: 120px">
 
 						<!-- Botão excluir -->
-						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
+						<p:commandButton id="botaoExcluir" icon="fa fa-trash"
 							actionListener="#{alunoBean.excluir}"
 							update=":mensagem :formLista:tabela">
 
@@ -96,7 +97,7 @@
 							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+						<p:commandButton id="botaoEditar" icon="fa fa-edit"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{alunoBean.editar}"
 							update=":formCadastro:painel">
@@ -113,7 +114,7 @@
 							position="top" />
 
 						<!-- Botão dados do aluno-->
-						<p:commandButton id="botaoDados" icon="ui-icon-search"
+						<p:commandButton id="botaoDados" icon="fa fa-search"
 							oncomplete="PF('dadosDialogo').show();"
 							actionListener="#{alunoBean.mostrarDadosAluno}"
 							update=":formDadosAluno:painelDadosAluno">
@@ -134,10 +135,10 @@
 				<p:confirmDialog global="true">
 
 					<p:commandButton value="Sim" type="button"
-						styleClass="ui-confirmdialog-yes" ícone="ui-icon-check" />
+						styleClass="ui-confirmdialog-yes" ícone="fa fa-check" />
 
 					<p:commandButton value="Não" type="button"
-						styleClass="ui-confirmdialog-no" ícone="ui-icon-times" />
+						styleClass="ui-confirmdialog-no" ícone="fa fa-times" />
 
 				</p:confirmDialog>
 
@@ -200,7 +201,6 @@
 						requiredMessage="O campo 'Data de Nascimento' é obrigatório"
 						size="10" locale="pt_BR" timeZone="America/Recife" mask="true" />
 
-
 					<p:outputLabel for="horario" value="Horário do Treino: " />
 					<p:selectOneRadio id="horario" value="#{alunoBean.aluno.horario}"
 						required="true" requiredMessage="O campo 'Horário' é obrigatório">
@@ -250,14 +250,11 @@
 						<f:selectItem itemValue="MULATO" itemLabel="Mulato" />
 						<f:selectItem itemValue="CABOCLO" itemLabel="Caboclo" />
 
-
-
 					</p:selectOneMenu>
 
 					<p:outputLabel for="situacao" value="Situação: " />
 					<p:selectOneRadio id="situacao" value="#{alunoBean.aluno.situacao}"
-						required="true" requiredMessage="O campo 'Situação' é obrigatório"
-						converter="converterUpperCase">
+						required="true" requiredMessage="O campo 'Situação' é obrigatório">
 
 						<f:selectItem itemValue="ADIMPLENTE" itemLabel="Adimplente" />
 						<f:selectItem itemValue="INADIMPLENTE" itemLabel="Inadimplente" />
@@ -288,11 +285,11 @@
 				<p:separator />
 				<h:panelGrid columns="2">
 
-					<p:commandButton value="Salvar" icon="ui-icon-disk"
+					<p:commandButton value="Salvar" icon="fa fa-floppy-o"
 						actionListener="#{alunoBean.salvar}"
 						update=":mensagem :formCadastro:painel :formLista:tabela" />
 
-					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+					<p:commandButton value="Cancelar" icon="fa fa-ban"
 						oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>
@@ -341,8 +338,6 @@
 
 					<h:outputLabel value="E-mail: " />
 					<h:outputText value="#{alunoBean.aluno.pessoa.email}" />
-
-
 
 					<h:outputLabel value="Endereço: " />
 					<h:outputText

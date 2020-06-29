@@ -27,6 +27,7 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 @ManagedBean // responsavel pelo controle
 @ViewScoped // tempo de vida dele é view, fica ativa enquanto a tela estiver aberta
 public class EstadoBean implements Serializable {
+	
 	private Estado estado;
 	private List<Estado> estados;
 
@@ -114,7 +115,7 @@ public class EstadoBean implements Serializable {
 			String caminho = Faces.getRealPath("/reports/estados.jasper");
 			
 			//caminho do banner(logo) do relatório
-			String caminhoBanner = Faces.getRealPath("/resources/images/logoR.png");
+			String caminhoBanner = Faces.getRealPath("/resources/images/personal.png");
 			
 			Map<String, Object> parametros = new HashMap<>();
 			

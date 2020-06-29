@@ -22,7 +22,7 @@
 		<!-- Tela de Listagem -->
 		<h:form id="formLista">
 
-			<p:panel header="Lista - Vendas">
+			<p:panel header="Lista - Vendas" style="text-align: center">
 
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 					paginator="true" value="#{vendaBean.vendas}" var="cursorVenda"
@@ -48,7 +48,7 @@
 					</p:column>
 
 					<p:column headerText="Preço Total"
-						style="text-align: center; width: 140px">
+						style="text-align: left; width: 140px">
 						<h:outputText value="#{cursorVenda.valorTotal}">
 							<f:convertNumber locale="pt_BR" minFractionDigits="2"
 								currencySymbol="R$" type="currency" />
@@ -101,7 +101,7 @@
 							</p:column>
 
 							<p:column headerText="Preço Unitário"
-								style="text-align: center; width: 140px">
+								style="text-align: left; width: 140px">
 								<h:outputText value="#{cursorItemVenda.produto.preco}">
 									<f:convertNumber locale="pt_BR" minFractionDigits="2"
 										currencySymbol="R$" type="currency" />
@@ -114,7 +114,7 @@
 							</p:column>
 
 							<p:column headerText="Valor Total"
-								style="text-align: center; width: 160px">
+								style="text-align: left; width: 160px">
 								<h:outputText value="#{cursorItemVenda.valorUnitario}">
 									<f:convertNumber locale="pt_BR" minFractionDigits="2"
 										currencySymbol="R$" type="currency" />
