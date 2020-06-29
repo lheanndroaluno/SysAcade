@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vendas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="97934806-84d2-4542-8701-09da47280295">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[aXRlbXZlbmRhIEFTICwzMTAsNSxhYWNjMWZhZS00OTNlLTQyMDEtYmFmZi01ZmRhMzk5YWJkMjU7
+ZnVuY2lvbmFyaW8gQVMgLDM2MSwyMzgsNjFhMzI1ODAtOWE5ZS00YjkwLTlhZGMtY2U1MjVhYmYw
+MzMwO3Byb2R1dG8gQVMgLDU1MywtMTIsMGMzNDMxMWQtZTRiZS00YTdmLWE3MmMtZmU1Y2MzMzc4
+Mjc2O3Blc3NvYSBBUyAsMTY3LDQyNyxjNTBjNWQyNi05ZmYwLTQwZDctODE2ZS05YTNlZTM4Njdi
+NDU7dmVuZGEgQVMgLDUxLDEsNzVkOWVmODEtNTdkNC00MGU4LTlmOWUtZTI4NTYzNjNmNmExO2Ns
+aWVudGUgQVMgLDk5LDIyNCw3NDljODdlZS04NzQ1LTQ3N2MtYjk0MS1jZjcyYzdiNzEyNjc7]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="157"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="837"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SysAcade Data Adapter "/>
+	<queryString language="SQL">
+		<![CDATA[SELECT venda.codigo,
+	venda.horariovenda,
+	venda.valortotal,
+	itemvenda.codigo,
+	itemvenda.quantidade,
+	itemvenda.valorunitario,
+	produto.descricao,
+	pessoa.nome,
+	pessoa.cpf
+FROM itemvenda
+	INNER JOIN venda ON 
+	 itemvenda.venda_codigo = venda.codigo 
+	INNER JOIN cliente ON 
+	 venda.cliente_codigo = cliente.codigo 
+	INNER JOIN produto ON 
+	 itemvenda.produto_codigo = produto.codigo 
+	INNER JOIN funcionario ON 
+	 venda.funcionario_codigo = funcionario.codigo 
+	INNER JOIN pessoa ON 
+	 cliente.pessoa_codigo = pessoa.codigo 
+	 AND funcionario.pessoa_codigo = pessoa.codigo]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="horariovenda" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="horariovenda"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="valortotal" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="valortotal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="quantidade" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="quantidade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="itemvenda"/>
+	</field>
+	<field name="valorunitario" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="valorunitario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="itemvenda"/>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descricao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="produto"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cpf"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+	</field>
+	<group name="codigo">
+		<groupExpression><![CDATA[$F{codigo}]]></groupExpression>
+	</group>
+	<group name="horariovenda">
+		<groupExpression><![CDATA[$F{horariovenda}]]></groupExpression>
+	</group>
+	<group name="valortotal">
+		<groupExpression><![CDATA[$F{valortotal}]]></groupExpression>
+	</group>
+	<group name="COLUMN_4">
+		<groupExpression><![CDATA[$F{COLUMN_4}]]></groupExpression>
+	</group>
+	<group name="quantidade">
+		<groupExpression><![CDATA[$F{quantidade}]]></groupExpression>
+	</group>
+	<group name="valorunitario">
+		<groupExpression><![CDATA[$F{valorunitario}]]></groupExpression>
+	</group>
+	<group name="descricao">
+		<groupExpression><![CDATA[$F{descricao}]]></groupExpression>
+	</group>
+	<group name="nome">
+		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
+	</group>
+	<group name="cpf">
+		<groupExpression><![CDATA[$F{cpf}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="-20" width="595" height="81" backcolor="#0066FF" uuid="ad8ba157-a590-4cf6-b69b-7be2b4b99933"/>
+			</rectangle>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
