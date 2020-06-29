@@ -18,7 +18,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Nova Avaliação" icon="ui-icon-plusthick"
+					<p:commandButton value="Nova Avaliação" icon="fa fa-plus"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{avaliacaoBean.novo}"
 						update=":mensagem :formCadastro:painel">
@@ -28,12 +28,7 @@
 
 					</p:commandButton>
 
-					<p:separator />
-
-					<p:commandButton value="Imprimir" icon="ui-icon-print">
-
-
-					</p:commandButton>
+					<p:commandButton value="Imprimir" icon="fa fa-print" />
 
 				</p:toolbarGroup>
 
@@ -49,8 +44,6 @@
 						style="text-align: center; width: 80px">
 						<h:outputText value="#{cursorCliente.codigo}" />
 					</p:column>
-
-
 
 					<p:column headerText="Data da Avaliação"
 						style="text-align: center; width: 150px">
@@ -308,7 +301,7 @@
 							converter="omnifaces.SelectItemsConverter" required="true"
 							requiredMessage="O campo 'Tipo Sanguíneo' é obrigatório">
 
-							
+
 							<f:selectItem itemValue="A_POSITIVO" itemLabel="A+" />
 							<f:selectItem itemValue="A_NEGATIVO" itemLabel="A-" />
 							<f:selectItem itemValue="B_POSITIVO" itemLabel="B+" />
@@ -319,7 +312,7 @@
 							<f:selectItem itemValue="AB_NEGATIVO" itemLabel="AB-" />
 
 							<p:ajax event="blur" update="@this" />
-							
+
 						</p:selectOneRadio>
 
 					</p:panelGrid>
@@ -511,9 +504,10 @@
 				<br />
 				<br />
 				<p:separator />
+
 				<h:panelGrid columns="2">
 
-					<p:commandButton value="Salvar" icon="fa fa-floppy-o"
+					<p:commandButton value="Salvar" icon="fa fa-save"
 						actionListener="#{clienteBean.salvar}"
 						update=":mensagem :formCadastro:painel :formLista:tabela" />
 

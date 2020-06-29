@@ -18,7 +18,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo" icon="ui-icon-plusthick"
+					<p:commandButton value="Novo" icon="fa fa-plus"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{clienteBean.novo}"
 						update=":mensagem :formCadastro:painel">
@@ -28,7 +28,7 @@
 
 					</p:commandButton>
 					
-					<p:commandButton value="Imprimir" icon="ui-icon-print"
+					<p:commandButton value="Imprimir" icon="fa fa-print"
 						actionListener="#{clienteBean.imprimir()}"  />
 
 				</p:toolbarGroup>
@@ -86,7 +86,7 @@
 						style="text-align: center; width: 120px">
 
 						<!-- Botão excluir -->
-						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
+						<p:commandButton id="botaoExcluir" icon="fa fa-trash"
 							actionListener="#{clienteBean.excluir}"
 							update=":mensagem :formLista:tabela">
 
@@ -100,7 +100,7 @@
 							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+						<p:commandButton id="botaoEditar" icon="fa fa-edit"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{clienteBean.editar}"
 							update=":mensagem :formCadastro:painel">
@@ -117,7 +117,7 @@
 							position="top" />
 
 						<!-- Botão dados do cliente-->
-						<p:commandButton id="botaoDados" icon="ui-icon-search"
+						<p:commandButton id="botaoDados" icon=" fa fa-search"
 							oncomplete="PF('dadosDialogo').show();"
 							actionListener="#{clienteBean.mostrarDadosCliente}" update=":formDadosCliente:painelDadosCliente">
 
@@ -194,11 +194,11 @@
 				<p:separator />
 				<h:panelGrid columns="2">
 
-					<p:commandButton value="Salvar" icon="ui-icon-disk"
+					<p:commandButton value="Salvar" icon="fa fa-save"
 						actionListener="#{clienteBean.salvar}"
 						update=":mensagem :formCadastro:painel :formLista:tabela" />
 
-					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+					<p:commandButton value="Cancelar" icon="fa fa-ban"
 						oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>

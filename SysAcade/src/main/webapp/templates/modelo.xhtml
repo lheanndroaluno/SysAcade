@@ -43,11 +43,11 @@
 					<p:submenu label="Arquivo" icon="fa fa-file">
 
 						<p:menuitem value="Página Inicial"
-							url="/pages/principal.xhtml" icon="fa fa-home" />
+							url="/SysAcade/pages/principal.xhtml" icon="fa fa-home" />
 
 						<p:separator />
 
-						<p:menuitem value="Sair" url="/pages/autenticacao.xhtml"
+						<p:menuitem value="Sair" url="/SysAcade/pages/autenticacao.xhtml"
 							icon="fa fa-close" action="#{autenticacaoBean.logOff()}" />
 
 						<p:separator />
@@ -58,86 +58,76 @@
 
 						<p:separator />
 
-						<p:menuitem value="Estado" url="/pages/estado.xhtml" />
+						<p:menuitem value="Estado" url="/SysAcade/pages/estado.xhtml" />
 
 						<p:separator />
 
-						<p:menuitem value="Cidade" url="/pages/cidade.xhtml" />
+						<p:menuitem value="Cidade" url="/SysAcade/pages/cidade.xhtml" />
 
 						<p:separator />
 
 						<p:menuitem value="Logradouro"
-							url="/pages/logradouro.xhtml" />
+							url="/SysAcade/pages/logradouro.xhtml" />
 
 						<p:separator />
 
-						<p:menuitem value="Endereço" url="/pages/endereco.xhtml" />
+						<p:menuitem value="Endereço" url="/SysAcade/pages/endereco.xhtml" />
 
 						<p:separator />
 
 						<p:menuitem value="Fornecedor"
-							url="/pages/fornecedor.xhtml" />
+							url="/SysAcade/pages/fornecedor.xhtml" />
 
 						<p:separator />
 
 						<p:submenu label="Pessoa" icon="ui-icon-arrowreturnthick-1-e">
 
-							<p:menuitem value="Pessoa" url="/pages/pessoa.xhtml" />
+							<p:menuitem value="Pessoa" url="/SysAcade/pages/pessoa.xhtml" />
 
 							<p:separator />
 
-							<p:menuitem value="Cliente" url="/pages/cliente.xhtml" />
+							<p:menuitem value="Cliente" url="/SysAcade/pages/cliente.xhtml" />
 
 							<p:separator />
 
 							<p:menuitem value="Funcionário"
-								url="/pages/funcionario.xhtml" />
+								url="/SysAcade/pages/funcionario.xhtml" />
 
 							<p:separator />
 
-							<p:menuitem value="Usuário" url="/pages/usuario.xhtml" />
+							<p:menuitem value="Usuário" url="/SysAcade/pages/usuario.xhtml" />
 
 							<p:separator />
 
-							<p:menuitem value="Aluno" url="/pages/aluno.xhtml" />
+							<p:menuitem value="Aluno" url="/SysAcade/pages/aluno.xhtml" />
 
 							<p:separator />
 
-							<p:menuitem value="Professor"
-								url="/pages/professor.xhtml" />
-
-							<p:separator />
-
-							<p:menuitem value="Personal" url="/pages/personal.xhtml" />
+							<p:menuitem value="Personal" url="/SysAcade/pages/personal.xhtml" />
 
 						</p:submenu>
 
 						<p:separator />
 
-						<p:menuitem value="Produto" url="/pages/produto.xhtml" />
+						<p:menuitem value="Produto" url="/SysAcade/pages/produto.xhtml" />
 
 						<p:separator />
 
-						<p:menuitem value="Plano" url="/pages/plano.xhtml" />
+						<p:menuitem value="Plano" url="/SysAcade/pages/plano.xhtml" />
 
 						<p:separator />
 
-						<p:menuitem value="Treino" url="/pages/treino.xhtml" />
+						<p:menuitem value="Treino" url="/SysAcade/pages/treino.xhtml" />
 
 						<p:separator />
 
 						<p:menuitem value="Exercício"
-							url="/pages/exercicio.xhtml" />
+							url="/SysAcade/pages/exercicio.xhtml" />
 
 						<p:separator />
 
 						<p:menuitem value="Tipo de Treino"
-							url="/pages/tipodetreino.xhtml" />
-
-						<p:separator />
-
-						<p:menuitem value="Tipo de Músculo"
-							url="/pages/tipodemusculo.xhtml" />
+							url="/SysAcade/pages/tipodetreino.xhtml" />
 
 						<p:separator />
 
@@ -145,13 +135,18 @@
 
 					<p:submenu label="Consultas" icon="fa fa-search">
 
+						<p:menuitem value="Histórico do produto"
+							url="/SysAcade/pages/historico.xhtml" />
+
+						<p:separator />
+
 						<p:menuitem value="Lista de Vendas"
-							url="/pages/vendasListagem.xhtml" />
+							url="/SysAcade/pages/vendasListagem.xhtml" />
 
 						<p:separator />
 
 						<p:menuitem value="Lista de Pag. Mens."
-							url="/pages/pagamentoMensListagem.xhtml" />
+							url="/SysAcade/pages/pagamentoMensListagem.xhtml" />
 
 						<p:separator />
 
@@ -159,7 +154,7 @@
 
 					<p:submenu label="Venda" icon="fa fa-shopping-cart">
 
-						<p:menuitem value="Nova Venda" url="/pages/venda.xhtml" />
+						<p:menuitem value="Nova Venda" url="/SysAcade/pages/venda.xhtml" />
 
 						<p:separator />
 
@@ -168,7 +163,7 @@
 					<p:submenu label="Pagamento Mensalidade" icon="fa fa-money">
 
 						<p:menuitem value="Novo Pagamento"
-							url="/pages/pagamento.xhtml" />
+							url="/SysAcade/pages/pagamento.xhtml" />
 
 						<p:separator />
 
@@ -176,7 +171,7 @@
 
 					<p:submenu label="Movimentações" icon="fa fa-exchange">
 
-						<p:menuitem value="Caixa" url="/pages/caixa.xhtml" />
+						<p:menuitem value="Caixa" url="/SysAcade/pages/caixa.xhtml" />
 
 						<p:separator />
 
@@ -189,7 +184,7 @@
 					<p:submenu label="Agenda" icon="fa fa-calendar">
 
 						<p:menuitem value="Criar Evento"
-							url="/pages/agenda.xhtml" />
+							url="/SysAcade/pages/agenda.xhtml" />
 
 						<p:separator />
 
@@ -198,7 +193,7 @@
 					<p:submenu label="Avaliação" icon="fa fa-list-alt">
 
 						<p:menuitem value="Avaliação"
-							url="/pages/avaliacao.xhtml" />
+							url="/SysAcade/pages/avaliacao.xhtml" />
 
 						<p:separator />
 
@@ -206,13 +201,11 @@
 
 					<p:submenu label="Ajuda" icon="fa fa-question">
 
-						<p:menuitem value="Sobre" url="/pages/agenda.xhtml" />
+						<p:menuitem value="Sobre" url="/SysAcade/pages/agenda.xhtml" />
 
 						<p:separator />
 
 					</p:submenu>
-
-
 
 				</p:menubar>
 

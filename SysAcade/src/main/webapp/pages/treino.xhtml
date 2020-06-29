@@ -17,7 +17,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo" icon="ui-icon-plusthick"
+					<p:commandButton value="Novo" icon="fa fa-plus"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{treinoBean.novo}"
 						update=":mensagem :formCadastro:painel">
@@ -82,7 +82,7 @@
 						style="text-align: center; width: 120px">
 
 						<!-- Botão excluir -->
-						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
+						<p:commandButton id="botaoExcluir" icon="fa fa-trash"
 							actionListener="#{treinoBean.excluir}"
 							update=":mensagem :formLista:tabela">
 
@@ -96,7 +96,7 @@
 							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+						<p:commandButton id="botaoEditar" icon="fa fa-edit"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{treinoBean.editar}"
 							update=":mensagem :formCadastro:painel">
@@ -132,12 +132,12 @@
 		</h:form>
 
 		<!-- Janela de flutuação -->
-		<p:dialog header="Cadastro de Treinos" widgetVar="dialogo"
-			draggable="false" resizable="false" modal="false" closable="false">
+		<p:dialog header="Criar Treino" widgetVar="dialogo" draggable="false"
+			resizable="false" modal="false" closable="false">
 
 			<h:form id="formCadastro">
 
-				<h:panelGrid id="painel" columns="2" cellpadding="5">
+				<p:panelGrid id="painel" columns="4" cellpadding="5">
 
 					<p:outputLabel for="aluno" value="Aluno: " />
 					<p:selectOneMenu id="aluno" filter="true"
@@ -226,22 +226,18 @@
 
 					</p:selectOneMenu>
 
-					
-
-					
-
-				</h:panelGrid>
+				</p:panelGrid>
 
 				<br />
 				<br />
 				<h:panelGrid columns="2">
 
-					<p:commandButton value="Salvar" icon="ui-icon-disk"
+					<p:commandButton value="Salvar" icon="fa fa-save"
 						actionListener="#{treinoBean.salvar}"
 						update=":mensagem :formCadastro:painel :formLista:tabela" />
 
-					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
-						process="@this" oncomplete="PF('dialogo').hide();" />
+					<p:commandButton value="Cancelar" icon="fa fa-ban" process="@this"
+						oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>
 

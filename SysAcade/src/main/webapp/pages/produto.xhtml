@@ -19,7 +19,7 @@
 				<p:toolbarGroup>
 
 					<p:commandButton value="Novo"
-						icon="ui-icon-plusthick"
+						icon="fa fa-plus"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{produtoBean.novo}"
 						update=":mensagem :formCadastro:painel">
@@ -29,8 +29,7 @@
 
 					</p:commandButton>
 
-					<p:separator />
-					<p:commandButton value="Imprimir" icon="ui-icon-print"
+					<p:commandButton value="Imprimir" icon="fa fa-print"
 						actionListener="#{produtoBean.imprimir}">
 
 					</p:commandButton>
@@ -39,7 +38,7 @@
 
 			</p:toolbar>
 
-			<p:panel header="Lista - Produtos" style="text-align: center">
+			<p:panel header="Lista - Produtos" style="text-align: center" >
 
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 					paginator="true" value="#{produtoBean.produtos}"
@@ -79,7 +78,7 @@
 
 					<p:column headerText="Foto" style="text-align: center; width: 80px">
 						<p:graphicImage cache="false" height="50" width="50"
-							url="http://localhost:8081/UploadsProdutos/#{cursorProduto.codigo}.jpg" />
+							url="http://localhost:8081/UploadsProdutos/#{cursorProduto.codigo}.*" />
 
 					</p:column>
 
@@ -87,7 +86,7 @@
 						style="text-align: center; width: 150px">
 
 						<!-- Botão excluir -->
-						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
+						<p:commandButton id="botaoExcluir" icon="fa fa-trash"
 							actionListener="#{produtoBean.excluir}"
 							update=":mensagem :formLista:tabela">
 
@@ -100,7 +99,7 @@
 						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir" position="top"/>
 
 						<!-- Botão editar -->
-						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+						<p:commandButton id="botaoEditar" icon="fa fa-edit"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{produtoBean.editar}"
 							update=":formCadastro:painel">
@@ -116,7 +115,7 @@
 						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
 
 						<!-- Botão de Download -->
-						<p:commandButton id="botaoDownload" icon="ui-icon-arrowthickstop-1-s"
+						<p:commandButton id="botaoDownload" icon="fa fa-download"
 							actionListener="#{produtoBean.download}" ajax="false">
 							<f:attribute name="linhaSelecionada" value="#{cursorProduto}" />
 							<p:fileDownload value="#{produtoBean.stream}" />
@@ -218,11 +217,11 @@
 				<p:separator/>
 				<h:panelGrid columns="2">
 
-					<p:commandButton value="Salvar" icon="ui-icon-disk"
+					<p:commandButton value="Salvar" icon="fa fa-floppy-o"
 						actionListener="#{produtoBean.salvar}"
 						update=":mensagem :formCadastro:painel :formLista:tabela" />
 
-					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+					<p:commandButton value="Cancelar" icon="fa fa-ban"
 						oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>

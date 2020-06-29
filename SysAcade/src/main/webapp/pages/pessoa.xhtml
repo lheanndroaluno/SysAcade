@@ -18,7 +18,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo" icon="ui-icon-plusthick"
+					<p:commandButton value="Novo" icon="fa fa-plus"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{pessoaBean.novo}"
 						update=":mensagem :formCadastro:painel">
@@ -66,7 +66,7 @@
 						style="text-align: center; width: 120px">
 
 						<!-- Botão excluir -->
-						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
+						<p:commandButton id="botaoExcluir" icon="fa fa-trash"
 							actionListener="#{pessoaBean.excluir}"
 							update=":mensagem :formLista:tabela">
 
@@ -80,7 +80,7 @@
 							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+						<p:commandButton id="botaoEditar" icon="fa fa-edit"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{pessoaBean.editar}"
 							update=":formCadastro:painel">
@@ -226,11 +226,11 @@
 				<p:separator/>
 				<h:panelGrid columns="2">
 
-					<p:commandButton value="Salvar" icon="ui-icon-disk"
+					<p:commandButton value="Salvar" icon="fa fa-save"
 						actionListener="#{pessoaBean.salvar}"
 						update=":mensagem :formCadastro:painel :formLista:tabela" />
 
-					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+					<p:commandButton value="Cancelar" icon="fa fa-ban"
 						oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>

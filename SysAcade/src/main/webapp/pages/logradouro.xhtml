@@ -17,7 +17,7 @@
 
 				<p:toolbarGroup>
 
-					<p:commandButton value="Novo" icon="ui-icon-plusthick"
+					<p:commandButton value="Novo" icon="fa fa-plus"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{logradouroBean.novo}"
 						update=":formCadastro:painel" />
@@ -49,7 +49,7 @@
 						style="text-align: center; width: 120px">
 
 						<!-- Botão excluir -->
-						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
+						<p:commandButton id="botaoExcluir" icon="fa fa-trash"
 							actionListener="#{logradouroBean.excluir}"
 							update=":mensagem :formLista:tabela">
 
@@ -63,7 +63,7 @@
 							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+						<p:commandButton id="botaoEditar" icon="fa fa-edit"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{logradouroBean.editar}"
 							update=":formCadastro:painel">
@@ -84,10 +84,10 @@
 				<!-- Janela de confirmação -->
 				<p:confirmDialog global="true">
 					<p:commandButton value="Sim" type="button"
-						styleClass="ui-confirmdialog-yes" ícone="ui-icon-check" />
+						styleClass="ui-confirmdialog-yes" ícone="fa fa-check" />
 
 					<p:commandButton value="Não" type="button"
-						styleClass="ui-confirmdialog-no" ícone="ui-icon-times" />
+						styleClass="ui-confirmdialog-no" ícone="fa fa-times" />
 
 				</p:confirmDialog>
 
@@ -120,10 +120,10 @@
 				<h:panelGrid columns="2">
 
 					<p:commandButton value="Salvar"
-						actionListener="#{logradouroBean.salvar}" icon="ui-icon-disk"
+						actionListener="#{logradouroBean.salvar}" icon="fa fa-floppy-o"
 						update=":mensagem :formCadastro:painel :formLista:tabela" />
 
-					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+					<p:commandButton value="Cancelar" icon="fa fa-ban"
 						oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>

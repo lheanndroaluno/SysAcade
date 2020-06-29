@@ -19,7 +19,7 @@
 
 					<h:panelGrid columns="2">
 
-						<p:commandButton value="Novo" icon="ui-icon-plusthick"
+						<p:commandButton value="Novo" icon="fa fa-plus"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{planoBean.novo}" update=":formCadastro:painel">
 
@@ -68,7 +68,7 @@
 						style="text-align: center; width: 120px">
 
 						<!-- Botão excluir -->
-						<p:commandButton id="botaoExcluir" icon="ui-icon-trash"
+						<p:commandButton id="botaoExcluir" icon="fa fa-trash"
 							actionListener="#{planoBean.excluir}"
 							update=":mensagem :formLista:tabela">
 
@@ -77,10 +77,11 @@
 
 							<f:attribute name="linhaSelecionada" value="#{cursorPlano}" />
 						</p:commandButton>
-						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir" position="top"/>
+						<p:tooltip id="excluir" for="botaoExcluir" value="Excluir"
+							position="top" />
 
 						<!-- Botão editar -->
-						<p:commandButton id="botaoEditar" icon="ui-icon-pencil"
+						<p:commandButton id="botaoEditar" icon="fa fa-edit"
 							oncomplete="PF('dialogo').show();"
 							actionListener="#{planoBean.editar}"
 							update=":formCadastro:painel">
@@ -92,7 +93,8 @@
 								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 						</p:commandButton>
-						<p:tooltip id="editar" for="botaoEditar" value="Editar" position="top"/>
+						<p:tooltip id="editar" for="botaoEditar" value="Editar"
+							position="top" />
 
 					</p:column>
 
@@ -168,13 +170,13 @@
 
 				<br />
 				<br />
-				<p:separator/>
+				<p:separator />
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" icon="ui-icon-disk"
+					<p:commandButton value="Salvar" icon="fa fa-save"
 						actionListener="#{planoBean.salvar}"
 						update=":mensagem :formCadastro:painel :formLista:tabela" />
 
-					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+					<p:commandButton value="Cancelar" icon="fa fa-ban"
 						oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>

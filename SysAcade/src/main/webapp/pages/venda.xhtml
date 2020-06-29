@@ -51,7 +51,7 @@
 					<p:column headerText="Ações"
 						style="text-align: center; width: 80px">
 
-						<p:commandButton id="botaoAdicionar" icon="ui-icon-plusthick"
+						<p:commandButton id="botaoAdicionar" icon="fa fa-plus"
 							actionListener="#{vendaBean.adicionar}"
 							update=":formulario:tabelaCompra :formulario:painelFinalizacao">
 
@@ -104,7 +104,7 @@
 					<p:column headerText="Ações"
 						style="text-align: center; width: 80px">
 
-						<p:commandButton id="botaoRetirar" icon="ui-icon-minusthick"
+						<p:commandButton id="botaoRetirar" icon="fa fa-minus"
 							actionListener="#{vendaBean.remover}"
 							update=":formulario:tabelaCompra :formulario:painelFinalizacao">
 
@@ -130,7 +130,7 @@
 							currencySymbol="R$" type="currency" />
 					</h:outputText>
 
-					<p:commandButton value="Finalizar" icon="ui-icon-check"
+					<p:commandButton value="Finalizar" icon="fa fa-check"
 						oncomplete="PF('dialogo').show();"
 						actionListener="#{vendaBean.finalizar}"
 						update=":mensagem :formFinalizarVenda:painelFinalizarVenda">
@@ -196,12 +196,12 @@
 				<p:separator />
 				<h:panelGrid columns="2">
 
-					<p:commandButton value="Salvar" icon="ui-icon-disk"
+					<p:commandButton value="Salvar" icon="fa fa-save"
 						actionListener="#{vendaBean.salvar()}"
 						update=":mensagem :formulario:tabelaProduto :formulario:tabelaCompra :formulario:painelFinalizacao"
 						oncomplete="PF('dialogo').hide();" />
 
-					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+					<p:commandButton value="Cancelar" icon="fa fa-ban"
 						oncomplete="PF('dialogo').hide();" />
 
 				</h:panelGrid>
