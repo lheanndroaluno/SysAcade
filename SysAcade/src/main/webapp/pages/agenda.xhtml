@@ -70,18 +70,18 @@
 
 					<p:outputLabel value="Resolvido: " />
 					<p:selectOneRadio value="#{eventoBean.evento.status}">
-					
+
 						<f:selectItem itemValue="SIM" itemLabel="Sim" />
 						<f:selectItem itemValue="NAO" itemLabel="Não" />
-						
+
 
 						<p:ajax event="blur" update="@this" />
 					</p:selectOneRadio>
 
 					<p:outputLabel for="usuario" value="Usuário: " />
 					<p:selectOneMenu id="usuario" value="#{eventoBean.evento.usuario}"
-						converter="omnifaces.SelectItemsConverter" filter="true" required="true"
-						requiredMessage="O campo 'Usuário' é obrigatório">
+						converter="omnifaces.SelectItemsConverter" filter="true"
+						required="true" requiredMessage="O campo 'Usuário' é obrigatório">
 
 						<f:selectItem noSelectionOption="true"
 							itemLabel="Selecione um usuário" />
@@ -95,14 +95,17 @@
 				<br />
 				<br />
 				<p:separator />
+				<h:panelGrid columns="2">
 
-				<p:commandButton value="Salvar"
-					actionListener="#{eventoBean.salvar}" icon="fa fa-save"
-					oncomplete="PF('agenda').update();PF('dialogo').hide();"
-					update="mensagem schedule" />
+					<p:commandButton value="Salvar"
+						actionListener="#{eventoBean.salvar}" icon="fa fa-save"
+						oncomplete="PF('agenda').update();PF('dialogo').hide();"
+						update="mensagem schedule" />
 
-				<p:commandButton value="Cancelar" icon="fa fa-ban"
-					process="@this" oncomplete="PF('dialogo').hide();" />
+					<p:commandButton value="Cancelar" icon="fa fa-ban" process="@this"
+						oncomplete="PF('dialogo').hide();" />
+						
+				</h:panelGrid>
 
 			</p:dialog>
 

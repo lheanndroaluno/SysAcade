@@ -70,12 +70,14 @@
 				<br />
 				<p:separator />
 				<h:panelGrid columns="2">
+				
 					<p:commandButton value="Salvar"
 						actionListener="#{caixaBean.salvar}" icon="fa fa-save"
 						oncomplete="PF('dialogo').hide();" update=":mensagem" />
 
 					<p:commandButton value="Cancelar" icon="fa fa-ban"
 						oncomplete="PF('dialogo').hide();" />
+						
 				</h:panelGrid>
 
 			</h:form>

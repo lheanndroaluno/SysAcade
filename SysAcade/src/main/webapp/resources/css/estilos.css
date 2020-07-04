@@ -127,7 +127,7 @@ ul li.ui-menuitem-active>a { /*     Background Menu Hover Topo   */
 }
 
 .ui-menu { /*     Background Menu Topo    */
-	background: #CFCFCF; 
+	background: blue; 
 	font-weight: bold;
 	display: block;
 	font-family: monospace;
